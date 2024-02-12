@@ -1,0 +1,19 @@
+@import "../vars";
+
+/* ==========================================================================
+ Colors
+
+ text-primary, text-success, bg-secondary, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/colors/
+ ========================================================================= */
+
+@each $key, $color in $colors {
+  .text-#{$key} {
+    color: #{$color} !important;
+  }
+
+  .bg-#{$key} {
+    background-color: #{$color} !important;
+  }
+}

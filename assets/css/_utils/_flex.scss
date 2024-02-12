@@ -1,0 +1,116 @@
+@import "../vars";
+
+/* ==========================================================================
+ Flex
+
+ align-items-center, justify-content-center, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/flex/
+ ========================================================================= */
+
+$align-types: (
+  "start":    "flex-start",
+  "end":      "flex-end",
+  "center":   "center",
+  "baseline": "baseline",
+  "stretch":  "stretch"
+);
+
+$justify-types: (
+  "start":   "flex-start",
+  "end":     "flex-end",
+  "center":  "center",
+  "between": "space-between",
+  "around":  "space-around",
+  "evenly":  "space-evenly"
+);
+
+$wrap-types: "nowrap", "wrap", "wrap-reverse";
+
+// align-items-stretch, align-self-center, align-content-center
+@each $label, $type in $align-types {
+  .align-items-#{$label} {
+    align-items: #{$type} !important;
+  }
+  .align-content-#{$label} {
+    align-content: #{$type} !important;
+  }
+  .align-self-#{$label} {
+    align-self: #{$type} !important;
+  }
+}
+
+// justify-content-center, justify-content-end
+@each $label, $type in $justify-types {
+  .justify-content-#{$label} {
+    justify-content: #{$type} !important;
+  }
+}
+
+// flex-wrap, flex-nowrap, flex-wrap-reverse
+@each $type in $wrap-types {
+  .flex-#{$type} {
+    flex-wrap: #{$type} !important;
+  }
+}
+
+@include create-breakpoints {
+  // align-items-xl-stretch, align-self-sm-start, align-content-lg-center
+  @each $label, $type in $align-types {
+    .align-items-#{$create-breakpoints-size}-#{$label} {
+      align-items: #{$type} !important;
+    }
+    .align-content-#{$create-breakpoints-size}-#{$label} {
+      align-content: #{$type} !important;
+    }
+    .align-self-#{$create-breakpoints-size}-#{$label} {
+      align-self: #{$type} !important;
+    }
+  }
+
+  // justify-content-xl-center, justify-content-sm-end
+  @each $label, $type in $justify-types {
+    .justify-content-#{$create-breakpoints-size}-#{$label} {
+      justify-content: #{$type} !important;
+    }
+  }
+
+  // flex-sm-wrap, flex-xl-nowrap
+  @each $type in $wrap-types {
+    .flex-#{$create-breakpoints-size}-#{$type} {
+      flex-wrap: #{$type} !important;
+    }
+  }
+}
+
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.flex-no-wrap {
+  flex-wrap: nowrap !important;
+}
+
+.flex-grow-1 {
+  flex-grow: 1 !important;
+}
+
+.flex-grow-2 {
+  flex-grow: 2 !important;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+.flex-basis-0 {
+  flex-basis: 0 !important;
+}

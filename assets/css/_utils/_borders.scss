@@ -1,0 +1,43 @@
+@import "../vars";
+
+/* ==========================================================================
+ Borders
+
+ border-top, border-primary, border-top, rounded-sm, rounded-normal-top, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/borders/
+ ========================================================================= */
+
+$sides: "", "-top", "-right", "-bottom", "-left";
+
+// rounded-normal, rounded-sm
+@each $key, $size in $radiuses {
+  .rounded-#{$key} {
+    border-radius: #{$size} !important;
+  }
+}
+
+@each $side in $sides {
+  // border, border-top, border-left, border-top-0
+  .border#{$side} {
+    border#{$side}: 1px solid $color-border !important;
+  }
+
+  .border#{$side}-0 {
+    border#{$side}: 0 !important;
+  }
+
+  // rounded-top-normal, rounded-left-sm
+  @each $key, $size in $radiuses {
+    .rounded#{$side}-#{$key} {
+      border-radius: #{$size} !important;
+    }
+  }
+}
+
+// border-primary, border-secondary
+@each $key, $color in $colors {
+  .border-#{$key} {
+    border-color: #{$color} !important;
+  }
+}

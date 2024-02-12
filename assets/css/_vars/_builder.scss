@@ -1,0 +1,22 @@
+/* ==========================================================================
+ Builder colors
+ ========================================================================= */
+$color-block-grid: #d0d0d0;
+$color-block-hover: #0ca7a2;
+$color-block-active: $color-block-hover;
+$color-b-edit-hover: $color-block-hover;
+$color-b-edit-active: $color-block-active;
+$color-b-section-hover: #1297be;
+$color-b-section-active: darken($color-b-section-hover, 10%);
+$color-b-region-hover: #0ca7a2;
+$color-b-region-active: darken($color-b-region-hover, 5%);
+$color-b-component-hover: $color-b-section-hover;
+$color-b-component-active: $color-b-section-active;
+$color-drop-zone-section: #1297be;
+$color-drop-zone-section-active: #1297be;
+$color-drop-zone-component: transparent;
+$color-drop-zone-component-active: #0cb2ad;
+$color-modal: #414141;
+$color-modal-bg: #FFF;
+$color-modal-hover: lighten($color-modal-bg, 5%);
+$color-modal-select: #0b6fbd;

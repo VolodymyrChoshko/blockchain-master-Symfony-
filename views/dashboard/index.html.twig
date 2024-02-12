@@ -1,0 +1,73 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {#{% if isOrgOwner %}
+    {% if billingPlan.isDeclined and not billingPlan.isPaused %}
+      {% include "layout/blocks/alerts/billing-card-declined.html.twig" %}
+    {% endif %}
+    {% if billingPlan.isPaused %}
+      {% include "layout/blocks/alerts/billing-is-paused.html.twig" %}
+    {% endif %}
+    {% if billingPlan.isTrial and not billingCreditCard %}
+      {% include "layout/blocks/alerts/billing-is-trial.html.twig" %}
+    {% endif %}
+    {% if billingPlan.isTrialIntegration and not billingCreditCard %}
+      {% include "layout/blocks/alerts/billing-is-trial-integration.html.twig" %}
+    {% endif %}
+    {% if billingPlan.isSolo and billingPlan.isTrialComplete and not billingCreditCard and not billingPlan.isDowngraded and hasTeamMembers %}
+      {% include "layout/blocks/alerts/billing-trial-complete.html.twig" %}
+    {% endif %}
+  {% elseif not canTeamEdit %}
+    {% include "layout/blocks/alerts/billing-contact-owner.html.twig" %}
+  {% endif %}#}
+
+  {# Editors cannot import templates. #}
+  {#
+  {% if (access == 1 or access == 2) %}
+    {% include "dashboard/blocks/template-import.html.twig" %}
+  {% endif %}
+  #}
+
+  {# Templates! #}
+  {#
+  {% include "dashboard/blocks/templates.html.twig" %}
+  #}
+
+  {# These will be cloned by dashboard.js when creating a new email/folder. #}
+  {#
+  {% include "dashboard/blocks/template/empty-template.html.twig" %}
+  {% include "dashboard/blocks/template/empty-folder.html.twig" %}
+  {% include "dashboard/blocks/template/empty-email.html.twig" %}
+  #}
+
+  {# Used by the template settings modal. #}
+  {#
+  <div id="lightbox"></div>
+  #}
+
+  {# Used while uploading a template. #}
+  {#
+  <div class="db-template-loading fancybox-loading" style="display: none;"></div>
+  #}
+
+  {# Modals created in react are mounted here. #}
+  <script>
+    window.assetManifest = {{ assetManifest()|json_encode|raw }};
+  </script>
+  <div id="mount"></div>
+
+  <script src="{{ asset('build/dashboard.js') }}"></script>
+  {% if user|default and user.usr_timezone == "" %}
+    <script>
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (timezone) {
+        $.ajax({
+          url: '/timezone',
+          type: 'POST',
+          data: {
+            timezone: timezone
+          }
+        });
+      }
+    </script>
+  {% endif %}
+{% endblock %}

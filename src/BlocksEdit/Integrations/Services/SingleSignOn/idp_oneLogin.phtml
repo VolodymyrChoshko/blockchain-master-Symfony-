@@ -1,0 +1,54 @@
+<h2>
+    Service Provider SAML
+</h2>
+<div>
+    <p class="text-muted">
+        Provide these values to OneLogin. See
+        the <a href="https://blocksedit.com/help/integrations/onelogin-setup/" target="_blank">setup instructions</a> for
+        more information.
+    </p>
+    <?php $copyBox(
+        'Audience',
+        'oneLogin-input-sp-entity-id',
+        $this->form['sp_entity_id']['value']
+    ); ?>
+
+    <?php $copyBox(
+        'Recipient',
+        'oneLogin-input-sp-acs',
+        $this->form['sp_acs']['value']
+    ); ?>
+
+    <?php $copyBox(
+        'ACS (Consumer) URL Validator',
+        'oneLogin-input-sp-acs-2',
+        $this->form['sp_acs']['value']
+    ); ?>
+
+    <?php $copyBox(
+        'ACS (Consumer) URL',
+        'oneLogin-input-sp-acs-3',
+        $this->form['sp_acs']['value']);
+    ?>
+</div>
+
+<h2 >
+    OneLogin SAML
+</h2>
+<div>
+    <p class="text-muted">
+        Get this value from OneLogin.
+    </p>
+    <?=formWidget(
+        'idp_metadata_url_oneLogin',
+        array_merge($this->form['idp_metadata_url_oneLogin'], ['id_suffix' => 'oneLogin']),
+        ['class' => 'form-control'],
+        $this->errors
+    )?>
+    <?=formWidget(
+        'idp_metadata_file_oneLogin',
+        array_merge($this->form['idp_metadata_file_oneLogin'], ['id_suffix' => 'oneLogin']),
+        ['class' => 'form-control'],
+        $this->errors
+    )?>
+</div>

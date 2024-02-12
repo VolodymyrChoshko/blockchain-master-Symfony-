@@ -1,0 +1,88 @@
+@import "../vars";
+
+.builder-header {
+  width: 100%;
+  padding: 0 $gutter-2;
+  height: $height-header;
+  min-height: $height-header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $color-muted-line;
+
+  .btn-transparent,
+  .btn-icon {
+    @include icon-color($color-muted);
+  }
+}
+
+.builder-header-brand-info {
+  display: flex;
+  align-items: center;
+
+  img,
+  a {
+    font-size: 0;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.builder-header-brand {
+  img {
+    height: 40px;
+  }
+}
+
+.builder-header-info {
+  padding-left: $gutter-3;
+  text-align: left;
+
+  a {
+    display: block;
+    margin-bottom: 4px;
+    line-height: 1;
+    font-size: 13px;
+  }
+}
+
+.builder-header-title {
+  font-size: 18px;
+  text-align: left;
+  line-height: 1.2;
+  word-break: break-all;
+  height: 24px;
+  overflow: hidden;
+}
+
+.builder-header-buttons {
+  .btn-edit, .btn-save {
+    text-transform: uppercase;
+  }
+
+  .btn {
+    font-size: $font-size;
+  }
+}
+
+.builder-header-help-button {
+  // position: absolute;
+  display: inline-block;
+  // right: 70px;
+  // top: 20px;
+
+  a,
+  .btn-icon,
+  .icon {
+    @include icon-color($color-muted);
+    font-size: 1.5rem;
+  }
+}
+
+.builder-header-icon {
+  @include icon-color($color-muted);
+}
+
+.builder-header-others-editing {
+  color: #FFF;
+}

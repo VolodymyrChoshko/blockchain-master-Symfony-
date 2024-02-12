@@ -1,0 +1,21 @@
+{
+    "presets": [
+        ["@babel/env", {
+            "useBuiltIns": "usage",
+            "corejs": "2.5.7",
+            "targets": "> 0.25%, not dead"
+        }],
+        "@babel/react"
+    ],
+    "plugins": [
+        ["module-resolver", {
+            "root": ["./assets/js"],
+            "extensions": [".js", ".jsx"]
+        }],
+        ["@babel/plugin-proposal-decorators", {
+            "legacy": true
+        }],
+        ["@babel/plugin-syntax-dynamic-import"],
+        ["@babel/plugin-proposal-class-properties"]
+    ]
+}

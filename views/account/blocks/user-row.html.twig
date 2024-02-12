@@ -1,0 +1,29 @@
+<tr>
+  <td class="p-2 border-bottom" style="width: 25%;">
+    {{ owner|avatar(60, { 'style': 'margin-top: -2px; margin-bottom: 0; width: 30px; height: 30px;' }) }}
+    {{ owner.usr_name }}
+  </td>
+  <td class="p-2 border-bottom" style="width: 33%;">
+    {% if owner.usr_job %}{{ owner.usr_job }}, {% endif %}
+    {{ owner.usr_organization }}
+  </td>
+  <td class="p-2 border-bottom text-right" style="width: 25%;">
+    {% if canRevokePowers %}
+      <a
+        href="#"
+        data-id="{{ owner.usr_id }}"
+        class="btn-icon remove revoke-powers"
+      >
+        Revoke powers
+      </a>
+    {% else %}
+      <a
+        href="mailto:{{ owner.usr_email }}"
+        data-id="{{ owner.usr_id }}"
+        class="btn-icon email"
+      >
+        Email owner
+      </a>
+    {% endif %}
+  </td>
+</tr>

@@ -1,0 +1,21 @@
+{% import "dashboard/blocks/template/macros.html.twig" as macros %}
+<div class="db-template-head-info d-flex flex-column flex-grow-2 p-2">
+  <div class="h-50 pt-1">
+    {{ macros.renameableTitle(template.tmp_title, template.tmp_id, "build_template", { id: template.tmp_id }) }}
+  </div>
+  <div class="h-50 d-flex align-items-end">
+    <ul class="db-template-head-info-people d-flex flex-row align-items-center">
+      {% for u in template.users %}
+        <li>
+          {{ u|avatar }}
+        </li>
+      {% endfor %}
+      <li>
+        <a href="{{ path('people', { id: template.tmp_id }) }}" class="text-dark font-size-lg">
+          <span class="btn-icon btn-icon-add mr-1"></span>
+          Add/Remove
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

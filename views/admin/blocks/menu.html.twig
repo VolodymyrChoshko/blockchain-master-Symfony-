@@ -1,0 +1,58 @@
+{% set route = request.route.name %}
+<nav class="admin-menu mt-4">
+  <ul class="admin-menu-buttons">
+    <li>
+      <a href="{{ path('admin_dashboard_index') }}"{% if route starts with "admin_dashboard" %} class="active"{% endif %}>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="{{ path('admin_templates_index') }}"{% if route starts with "admin_templates" %} class="active"{% endif %}>
+        Templates
+      </a>
+    </li>
+    <li>
+      <a href="{{ path('admin_users_index') }}"{% if route starts with "admin_users" %} class="active"{% endif %}>
+        Users
+      </a>
+    </li>
+    <li>
+      <a href="{{ path('admin_orgs_index') }}"{% if route starts with "admin_orgs" %} class="active"{% endif %}>
+        Organizations
+      </a>
+      <ul class="admin-menu-dropdown">
+        <li>
+          <a href="{{ path('admin_orgs_create') }}">Create</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{ path('admin_billing_index') }}"{% if route starts with "admin_billing" or route starts with "admin_promos" %} class="active"{% endif %}>
+        Billing
+      </a>
+      <ul class="admin-menu-dropdown">
+        <li>
+          <a href="{{ path('admin_billing_settings') }}">Settings</a>
+        </li>
+        {#<li>
+          <a href="{{ path('admin_promos_index') }}">Promotions</a>
+        </li>#}
+      </ul>
+    </li>
+    <li>
+      <a href="{{ path('admin_email_index') }}"{% if route starts with "admin_email" %} class="active"{% endif %}>
+        Emails
+      </a>
+      <ul class="admin-menu-dropdown">
+        <li>
+          <a href="{{ path('admin_email_templates') }}">Templates</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{ path('admin_logs_index') }}"{% if route starts with "admin_logs" %} class="active"{% endif %}>
+        Logs
+      </a>
+    </li>
+  </ul>
+</nav>

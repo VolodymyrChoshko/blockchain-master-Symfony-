@@ -1,0 +1,43 @@
+{% set username = '' %}
+{% if email.ema_updated_at|default %}
+  {% for u in template.users %}
+    {% if u.usr_id == email.ema_updated_usr_id %}
+      {% set username = u.usr_name %}
+      {% set names = username|split(' ') %}
+      {% if names|length == 2 %}
+        {% set username = names[0] ~ " " ~ names[1] %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% for u in template.users %}
+    {% if u.usr_id == email.ema_created_usr_id %}
+      {% set username = u.usr_name %}
+      {% set names = username|split(' ') %}
+      {% if names|length == 2 %}
+        {% set username = names[0] ~ " " ~ names[1] %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+<div class="db-template-author text-left ml-auto">
+  {% if email.ema_updated_at|default %}
+    Updated
+    <span class="month-day-year">{{ email.ema_updated_at|date('n/j/Y') }}</span>
+    <span>
+      at <span class="hour-minute">{{ email.ema_updated_at|date('g:ia') }}</span>
+    </span>
+    <div>
+      by {{ username }}
+    </div>
+  {% else %}
+    Created
+    <span class="month-day-year">{{ email.ema_created_at|date('n/j/Y') }}</span>
+    <span>
+      at <span class="hour-minute">{{ email.ema_created_at|date('g:ia') }}</span>
+    </span>
+    <div>
+      by {{ username }}
+    </div>
+  {% endif %}
+</div>

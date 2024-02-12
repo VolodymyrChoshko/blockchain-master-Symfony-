@@ -1,0 +1,243 @@
+@import "vars";
+
+.db-templates {
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.db-template,
+.db-template-email,
+.db-template-folder {
+  color: $color-text;
+  background-color: $color-light;
+
+  &.ui-draggable-dragging {
+    width: $width-container-wide;
+  }
+}
+
+.db-template {
+  width: $width-container-wide;
+  overflow: hidden;
+
+  .btn-icon {
+    color: $color-dark;
+    font-size: $font-size;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .btn-icon-add::before {
+    display: inline-block;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  .icon-folder {
+    font-size: $font-size-lg;
+    line-height: $font-size-lg;
+  }
+}
+
+.db-template-head {
+  background-color: #f6f6f6;
+}
+
+.db-template-head-thumb {
+  width: 90px;
+  height: 124px;
+  overflow: hidden;
+  border-right: 1px solid $color-border;
+
+  img {
+    width: 100%;
+  }
+
+  iframe {
+    width: 900px;
+    height: 900px;
+    border: none;
+    pointer-events: none;
+    transform: scale(0.1);
+    transform-origin: 0 0;
+  }
+}
+
+.db-template-head-info-people {
+  list-style-type: none;
+  display: inline-block;
+  max-width: 700px;
+  text-align: left;
+
+  li {
+    display: inline-block;
+    margin-bottom: 5px;
+
+    .avatar {
+      margin-right: 0;
+    }
+
+    img {
+      margin-right: 0;
+    }
+  }
+}
+
+.db-template-actions {
+  width: 150px;
+  text-align: right;
+
+  .btn-icon-settings,
+  .btn-icon-copy,
+  .btn-icon-share,
+  .btn-icon-export {
+    font-size: $font-size-lg;
+  }
+
+  .btn-icon-newfolder {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+  }
+}
+
+.db-template-renameable {
+  .db-template-renameable-btn-rename {
+    opacity: 0;
+    color: $color-muted;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    transition: opacity 50ms ease-in;
+  }
+
+  &:hover {
+    .db-template-renameable-btn-rename {
+      opacity: 1;
+    }
+  }
+}
+
+.db-template-title {
+  font-size: 24px;
+  line-height: 20px;
+  color: #139cee;
+  font-weight: 400;
+  display: inline-block;
+  width: 520px;
+  max-width: 100%;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.db-template-email .db-template-title,
+.db-template-folder .db-template-title {
+  font-size: 18px;
+  color: $color-dark;
+}
+
+.db-template-author {
+  font-size: $font-size-sm;
+  color: $color-muted;
+  width: 250px;
+}
+
+.db-template-email-empty,
+.db-template-folder-empty {
+  .db-template-renameable-wrap {
+    width: 75%;
+  }
+}
+
+.db-template-renameable-wrap h3 {
+  width: 520px;
+}
+
+.db-template-email {
+  &.ui-state-highlight {
+    background-color: #DDD;
+    border-color: $color-border !important;
+  }
+
+  &.ui-draggable-dragging {
+    z-index: 1000;
+    opacity: 0.8;
+  }
+}
+
+.db-template-folder {
+  &.ui-state-highlight {
+    background-color: #DDD;
+    border-color: $color-border !important;
+  }
+}
+
+.db-template-emails,
+.db-template-folders {
+  &.ui-state-highlight {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+  }
+}
+
+$indentation: 34px;
+
+.db-template-email[data-indentation="1"] {
+  .db-template-renameable {
+    margin-left: $indentation;
+  }
+
+  .db-template-renameable-wrap h3 {
+    width: 520px - $indentation;
+  }
+}
+
+.db-template-email[data-indentation="2"] {
+  .db-template-renameable {
+    margin-left: $indentation * 2;
+  }
+
+  .db-template-renameable-wrap h3 {
+    width: 520px - ($indentation * 2);
+  }
+}
+
+.db-template-email[data-indentation="3"] {
+  .db-template-renameable {
+    margin-left: $indentation * 3;
+  }
+
+  .db-template-renameable-wrap h3 {
+    width: 520px - ($indentation * 3);
+  }
+}
+
+.db-template-folder[data-indentation="2"] {
+  .icon-folder {
+    margin-left: $indentation;
+  }
+}
+
+.db-template-folder[data-indentation="3"] {
+  .icon-folder {
+    margin-left: $indentation * 2;
+  }
+}
+
+.db-template-import {
+  background-color: transparent !important;
+
+  input {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+}

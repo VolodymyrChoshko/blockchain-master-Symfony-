@@ -1,0 +1,34 @@
+/* ==========================================================================
+ Colors
+ ========================================================================= */
+$color-dark: #343434;
+$color-light: #FFFFFF;
+$color-link: #0096c4;
+$color-muted: #666666;
+$color-primary: #596acc;
+$color-secondary: #222;
+$color-success: #08e708;
+$color-danger: #c50f0f;
+$colors: (
+  "primary":   $color-primary,
+  "secondary": $color-secondary,
+  "success":   $color-success,
+  "danger":    $color-danger,
+  "muted":     $color-muted,
+  "dark":      $color-dark,
+  "light":     $color-light,
+  "link":      $color-link
+);
+
+/* ==========================================================================
+ Misc colors
+ ========================================================================= */
+$color-text: $color-dark;
+$color-dark2: #222;
+$color-dark3: #333;
+$color-editor: #1297be;
+$color-editor-alt: #0ca7a2;
+$color-border: #e9e9e9;
+$color-header: #FFF;
+$color-muted-line: #DFDFDF;
+$color-panel: #F6F6F6;

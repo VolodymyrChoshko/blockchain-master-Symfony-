@@ -1,0 +1,46 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+  <tr>
+    <th style="width: 75px">ID</th>
+    <th>Title</th>
+    <th>Owner</th>
+    <th>Organization</th>
+    <th>Date Created</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for template in templates %}
+    <tr class="tr-template" data-template-id="{{ template.tmp_id }}" style="cursor: pointer">
+      <td>{{ template.tmp_id }}</td>
+      <td>
+        <div class="text-truncate" style="max-width: 200px">
+          {{ template.tmp_title }}
+        </div>
+      </td>
+      <td>
+        <div class="text-truncate" style="max-width: 250px">
+          {% if users[template.tmp_usr_id] is defined %}
+            {{ users[template.tmp_usr_id].usr_name }} ({{ users[template.tmp_usr_id].usr_email }})
+          {% endif %}
+        </div>
+      </td>
+      <td>
+        <div class="text-truncate" style="max-width: 200px">
+          {% if orgs[template.tmp_org_id] is defined %}
+            #{{ orgs[template.tmp_org_id].org_id }} &middot; {{ orgs[template.tmp_org_id].org_name }}
+          {% endif %}
+        </div>
+      </td>
+      <td>{{ template.tmp_created_at|date('F j, Y') }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<script>
+  $(function() {
+    $('.tr-template').on('click', function(e) {
+      let tid = e.currentTarget.getAttribute('data-template-id');
+      document.location.href = '/admin/templates/' + tid;
+    });
+  });
+</script>

@@ -1,0 +1,241 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% set canRevokePowers = true %}
+  <div
+    class="container container-billing-plan card p-0 mt-4 mb-4"
+    data-billing-plan-type="{{ billingPlan.type }}"
+    data-billing-plan-is-trial-complete="{{ billingPlan.isTrialComplete ? 1 : 0 }}"
+  >
+    <header class="border-bottom">
+      {% if isOwner %}
+        <h1>
+          You are an account owner for {{ organization.org_name }}
+        </h1>
+        <p class="m-0">
+          Owners can view everything on the account.
+        </p>
+      {% endif %}
+      {% if isAdmin %}
+        <h1>
+          You are an admin for {{ organization.org_name }}
+        </h1>
+        <p class="m-0">
+          Admins can view everything on the account.
+        </p>
+      {% endif %}
+      {% if isEditor %}
+        <h1>
+          You are an editor for {{ organization.org_name }}
+        </h1>
+        <p class="m-0">
+          Editors can add and update emails.
+        </p>
+      {% endif %}
+    </header>
+
+    {% if isOwner %}
+      <div class="card-footer border-bottom p-3">
+        <form action="{{ path('profile') }}" method="post">
+          <input type="hidden" class="org-id" value="{{ organization.org_id }}">
+          <h2>
+            Change account name
+          </h2>
+          <p>
+            This name is shown to anyone invited to templates under your account.
+          </p>
+          <div class="form-widget form-widget-flex">
+            <label for="input-org-name" class="sr-only">Name</label>
+            <input
+              type="text"
+              class="org-name form-control"
+              id="input-org-name"
+              value="{{ organization.org_name }}"
+              placeholder="Name"
+              style="width: 200px;"
+            />
+            <button type="submit" class="btn-main change-org-name">
+              Change Name
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="card-body">
+        <h2>
+          <a href="{{ path('index') }}">
+            View all templates &rarr;
+          </a>
+        </h2>
+        <h2>
+          <a href="{{ path('billing') }}">
+            View billing and invoices &rarr;
+          </a>
+        </h2>
+      </div>
+    {% endif %}
+
+    {% if isOwner or isAdmin %}
+      <div class="card-header-sm border-bottom border-top">
+        <h2>Other owners on this account</h2>
+      </div>
+      <div class="card-body p-0">
+        <table class="w-100" cellpadding="0" cellspacing="0">
+          <tbody>
+            {% set canRevokePowers = isOwner %}
+            {% for owner in owners %}
+              {% if user.usr_id != owner.usr_id %}
+                {% include "account/blocks/user-row.html.twig" %}
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if isOwner %}
+        <div class="card-footer border-bottom p-3">
+          <form class="form-add-members" method="post">
+            <input type="hidden" name="access" value="1" />
+            <div class="form-widget">
+              <label>
+                Add another owner:
+              </label>
+              <div class="form-widget form-widget-flex">
+                <div>
+                  <label for="input-owner-name" class="sr-only">
+                    Name
+                  </label>
+                  <input
+                    id="input-owner-name"
+                    name="name"
+                    class="form-control"
+                    placeholder="Name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="input-owner-email" class="sr-only">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="input-owner-email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn-main btn-grant-powers grant-powers" data-id="1">
+                  Invite and grant powers
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% if isOwner or isAdmin %}
+      <div class="card-header-sm border-bottom">
+        <h2>Admins on this account</h2>
+      </div>
+      <div class="card-body p-0">
+        <table class="w-100" cellpadding="0" cellspacing="0">
+          <tbody>
+            {% set canRevokePowers = (isAdmin or isOwner) %}
+            {% for owner in admins %}
+              {% if user.usr_id != owner.usr_id %}
+                {% include "account/blocks/user-row.html.twig" %}
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer border-bottom p-3">
+        <form class="form-add-members" method="post">
+          <input type="hidden" name="access" value="2" />
+          <div class="form-widget">
+            <label>
+              Add another admin:
+            </label>
+            <div class="form-widget form-widget-flex">
+              <div>
+                <label for="input-admin-name" class="sr-only">
+                  Name
+                </label>
+                <input
+                  id="input-admin-name"
+                  name="name"
+                  class="form-control"
+                  placeholder="Name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="input-admin-email" class="sr-only">
+                  Name
+                </label>
+                <input
+                  type="email"
+                  id="input-admin-email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn-main btn-grant-powers grant-powers" data-id="2">
+                Invite and grant powers
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    {% endif %}
+
+    {% if isEditor and owners|length > 0 %}
+      <div class="card-header-sm">
+        <h2>Account owners on this account</h2>
+      </div>
+      <div class="card-body p-0">
+        <table class="table-users" cellpadding="0" cellspacing="0">
+          <tbody>
+          {% set canRevokePowers = false %}
+          {% for owner in owners %}
+            {% if user.usr_id != owner.usr_id %}
+              {% include "account/blocks/user-row.html.twig" %}
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if isEditor and admins|length > 0 %}
+      <div class="card-header-sm mb-4">
+        <h2>Admins on this account</h2>
+      </div>
+      <div class="card-body p-0">
+        <table class="table-users" cellpadding="0" cellspacing="0">
+          <tbody>
+            {% set canRevokePowers = false %}
+            {% for owner in admins %}
+              {% if user.usr_id != owner.usr_id %}
+                {% include "account/blocks/user-row.html.twig" %}
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    <div class="card mb-0" style="box-shadow: none;">
+      <div class="card-body">
+        <h2>
+          <a href="{{ path('cancel') }}">
+            Cancel this account &rarr;
+          </a>
+        </h2>
+      </div>
+    </div>
+  </div>
+{% endblock %}

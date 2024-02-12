@@ -1,0 +1,55 @@
+$icons: (
+  "notify": "t",
+  "pin": "p",
+  "add": "+",
+  "remove": "x",
+  "check": "y",
+  "new": "d",
+  "copy": "c",
+  "edit": "e",
+  "link": "l",
+  "export": "d",
+  "share": "u",
+  "help": "h",
+  "settings": "r",
+  "guide": "q",
+  "newfolder": "1",
+  "sources": "S",
+  "folder": "n",
+  "openfolder": "w",
+  "mobile": "]",
+  "desktop": "D",
+  "sections": "Q",
+  "components": "C",
+  "layout": "R",
+  "view": "v",
+  "email": "m"
+);
+
+.btn-icon {
+  font-weight: 400;
+  color: #222;
+
+  &:before {
+    font-family: 'Blocks Edit';
+  }
+
+  @each $key, $content in $icons {
+    &.#{$key}:before,
+    &.btn-icon-#{$key}:before {
+      content: '#{$content}';
+    }
+  }
+}
+
+.be-symbols {
+  display: none;
+}
+
+svg.icon {
+  vertical-align: middle;
+}
+
+.be-symbols path {
+  fill: currentColor;
+}

@@ -1,0 +1,120 @@
+parameters:
+    uri: https://dev.blocksedit.com
+    chromeServiceUrl: http://127.0.0.1:9111
+    integrations:
+        - BlocksEdit\Integrations\Services\FTPIntegration
+        - BlocksEdit\Integrations\Services\AWSIntegration
+        - BlocksEdit\Integrations\Services\SalesForceIntegration
+        - BlocksEdit\Integrations\Services\SingleSignOnIntegration
+        - BlocksEdit\Integrations\Services\GoogleStorageIntegration
+        - BlocksEdit\Integrations\Services\KlaviyoIntegration
+        - BlocksEdit\Integrations\Services\ActiveCampaignIntegration
+        - BlocksEdit\Integrations\Services\IterableIntegration
+    pdo:
+        adapter: mysql
+        port: 9306
+        host: 127.0.0.1
+        name: blocksedit_dev
+        username: blocksedit
+        password: b0N7m48Z1CR3Vr
+    redis:
+        host: 127.0.0.1
+        port: 9379
+    certs:
+        public: "%be.projectDir%/config/public_key.pem"
+        private: ''
+    stripe:
+        public: xxx
+        secret: xxx
+    email:
+        host: email-smtp.us-east-1.amazonaws.com
+        port: 587
+        user: xxx
+        pass: xxx
+        encryption: tls
+        from: support@blocksedit.com
+        from_name: Blocks Edit
+    aws:
+        credentials:
+            key: xxx
+            secret: xxx
+        version: latest
+        region: us-east-1
+    cdn:
+        images:
+            s3:
+                folder:       'images'
+                bucket:       'assets.blocksedit.com'
+                cacheControl: 'max-age=31536000'
+            cloudfront:
+                id:  'xxxx'
+                url: 'assets.blocksedit.com'
+        screenshots:
+            s3:
+                folder:       'screenshots'
+                bucket:       'assets.blocksedit.com'
+                cacheControl: 'max-age=31536000'
+            cloudfront:
+                id:  'xxxx'
+                url: 'assets.blocksedit.com'
+        avatars:
+            s3:
+                folder:       'avatars'
+                bucket:       'assets.blocksedit.com'
+                cacheControl: 'max-age=31536000'
+            cloudfront:
+                id:  'xxxx'
+                url: 'assets.blocksedit.com'
+        testing:
+            s3:
+                folder:       'testing'
+                bucket:       'assets.blocksedit.com'
+                cacheControl: 'max-age=31536000'
+            cloudfront:
+                id:  'xxxx'
+                url: 'assets.blocksedit.com'
+    sqs:
+        queues:
+            layoutsUpgrade:
+                url: https://sqs.us-east-2.amazonaws.com/xxxx/layouts_upgrade_localhost.fifo
+                group: upgrade
+            libraryThumbnails:
+                url: https://sqs.us-east-2.amazonaws.com/xxxx/LibraryThumbnails.fifo
+                group: thumbnails
+            notifications:
+                url: https://sqs.us-east-2.amazonaws.com/783209329702/notifications_sean
+                group: notifications
+    socket:
+        url: ws://localhost:8088
+        path: /socket.io
+    assetsManifest: "%be.projectDir%/public/assets/build/manifest.json"
+    starterTemplate: 744
+    starterEmails:
+        - 10333
+        - 10335
+        - 10336
+        - 10337
+    dirs:
+        root: "%be.projectDir%/"
+        routes: "%be.projectDir%/config/routes/"
+        templates: "%be.projectDir%/templates/"
+        screenshots: "%be.projectDir%/public/screenshots/"
+        avatars: "%be.projectDir%/public/avatars/"
+        downloads: "%be.projectDir%/public/downloads"
+        tmpUploads: "%be.projectDir%/public/tmp-uploads/"
+        invoices: "%be.projectDir%/public/invoices/"
+        views: "%be.projectDir%/views/"
+        commands: "%be.projectDir%/src/Command/"
+        assets: "%be.projectDir%/assets/"
+        logs: "%be.projectDir%/var/logs/"
+        cache: "%be.projectDir%/var/cache/"
+    uris:
+        screenshot: "/screenshot-take"
+        avatars: "/avatars"
+        screenshots: "/screenshots"
+        downloads: "/downloads"
+        assets: "/assets"
+        certs: http://certs.blocksedit.com
+    namespaces:
+        repositories: Repository
+        entities: Entity

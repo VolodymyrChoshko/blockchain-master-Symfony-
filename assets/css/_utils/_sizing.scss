@@ -1,0 +1,44 @@
+@import "../vars";
+
+/* ==========================================================================
+ Sizing
+
+ w-25, w-100, h-25, h-50, mw-25, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/sizing/
+ ========================================================================= */
+
+$sizes: (
+  "25": "25%",
+  "33": "33%",
+  "50": "50%",
+  "75": "75%",
+  "100": "100%"
+);
+
+// w-25, w-100, h-25, h-50, mw-25
+@each $size, $width in $sizes {
+  .w-#{$size} {
+    width: #{$width} !important;
+  }
+  .mw-#{$size} {
+    max-width: #{$width} !important;
+  }
+  .h-#{$size} {
+    height: #{$width} !important;
+  }
+}
+
+.min-vw-100 {
+  min-width: 100vw !important;
+}
+.min-vh-100 {
+  min-height: 100vh !important;
+}
+
+.vw-100 {
+  width: 100vw !important;
+}
+.vh-100 {
+  height: 100vh !important;
+}

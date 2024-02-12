@@ -1,0 +1,259 @@
+<html>
+<head>
+  <title>Blocks Edit invoice</title>
+</head>
+<body>
+<style>
+  /* RESET */
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4,
+  h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del,
+  dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+  b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+  caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+  embed, figure, figcaption, footer, header, hgroup, menu, nav, output,
+  ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
+  }
+
+  /* HTML5 display-role reset for older browsers */
+
+  article, aside,
+  details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+
+  /* Global */
+
+  @font-face {
+    font-family: 'Blocks Edit';
+    src: url("Blocks-Edit.ttf") format("truetype");
+  }
+
+  * {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body {
+    padding: 100px 80px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: .4px;
+    line-height: 1.2em;
+    cursor: default;
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+  a {
+    color: #2895d9;
+    text-decoration: none;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  p {
+    margin-bottom: 30px;
+  }
+  table {
+    border-collapse: collapse;
+  }
+
+  header {
+    float: left;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  header .logo {
+    margin-bottom: 20px;
+  }
+  header .title {
+    float: left;
+    width: 50%;
+  }
+  header .contact {
+    float: right;
+    width: 50%;
+    text-align: right;
+  }
+
+  section#overview {
+    float: left;
+    margin-bottom: 60px;
+    width: 100%;
+  }
+  section#overview table {
+    width: 100%;
+  }
+  section#overview table th {
+    width: 20%;
+    padding: 3px 0;
+    text-align: left;
+    font-weight: 400;
+  }
+  section#overview table td {
+    width: 80%;
+    padding: 3px 0;
+  }
+
+  section#charges {
+    float: left;
+    margin-bottom: 80px;
+    width: 100%;
+  }
+  section#charges table {
+    width: 100%;
+  }
+  section#charges table th {
+    border-bottom: #ccc 1px solid;
+    width: 80%;
+    padding: 20px 0;
+    text-align: left;
+    font-weight: 300;
+  }
+  section#charges table tr:first-child th {
+    padding-top: 0;
+  }
+  section#charges table td {
+    border-bottom: #ccc 1px solid;
+    width: 20%;
+    padding: 20px 0;
+    font-weight: 400;
+    text-align: right;
+  }
+  section#charges table tr:first-child td {
+    padding-top: 0;
+  }
+  section#charges table .total th {
+    border-bottom: 0;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  section#charges table .total td {
+    border-bottom: 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  section#charges table .total td .paid {
+    float: right;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #333;
+    padding: 5px 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  footer {
+    float: left;
+    width: 100%;
+    text-align: center;
+  }
+</style>
+<header>
+  <div class="title">
+    <img src="https://blocksedit.com/img/email/Blocks-Edit-Logo.png" width="142" class="logo" /><br/>
+    <h1>Invoice #{{ invoice.id }}</h1>
+  </div>
+  <div class="contact">
+    <p>
+      <strong>Blocks Edit, LLC</strong><br/>
+      13415 N 20th St #9<br/>
+      Phoenix, AZ 85022<br/>
+      United States<br/>
+      <a href="mailto:support@blocksedit.com">support@blocksedit.com</a>
+    </p>
+  </div>
+</header>
+
+<section id="overview">
+  <table>
+    {% if invoice.status == 'paid' %}
+      <tr>
+        <th>Paid on</th>
+        <td>{{ invoice.dateCreated|date('F j, Y') }}</td>
+      </tr>
+    {% endif %}
+    <!--    <tr>
+          <th>Account</th>
+          <td>Focus</td>
+        </tr>-->
+    <tr>
+      <th>Organization</th>
+      <td>{{ org.org_name }}</td>
+    </tr>
+    {% if invoice.status == 'paid' and creditCard %}
+      <tr>
+        <th>Payment</th>
+        <td>{{ creditCard.brand }} ending in {{ creditCard.number4 }}</td>
+      </tr>
+    {% endif %}
+  </table>
+</section>
+
+<section id="charges">
+  <h2>Billing period</h2>
+  <p>{{ invoice.datePeriodStart|date('F j, Y') }} - {{ invoice.datePeriodEnd|date('F j, Y') }}</p>
+
+  <h2>Summary of charges</h2>
+  <table>
+    {% for invoiceItem in invoiceItems %}
+      <tr>
+        <th>{{ invoiceItem.description }}</th>
+        <td>
+          {% if invoiceItem.type == 'discount' %}
+            -${{ (invoiceItem.amountCents / 100)|replace({ '-': '' })|number_format(2) }}
+          {% else %}
+            ${{ (invoiceItem.amountCents / 100)|number_format(2) }}
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    <tr class="total">
+      <th>Total</th>
+      <td>
+        {% if invoice.amountCents < 0 %}
+          -${{ (invoice.amountCents / 100)|replace({ '-': '' })|number_format(2) }}<br/>
+        {% else %}
+          ${{ (invoice.amountCents / 100)|number_format(2) }}<br/>
+        {% endif %}
+        <span class="paid">{% if invoice.status == 'paid' %}PAID{% else %}UNPAID{% endif %}</span>
+      </td>
+    </tr>
+  </table>
+  {% if invoice.notes %}
+    <p>{{ invoice.notes }}</p>
+  {% endif %}
+</section>
+
+<footer>
+  <p>This bill will appear on your credit card statement as 'BLOCKSEDIT.COM'.</p>
+</footer>
+
+</body>
+</html>

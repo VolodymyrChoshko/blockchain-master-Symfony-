@@ -1,0 +1,40 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+  <tr>
+    <th>Date Created</th>
+    <th>Level</th>
+    <th>Channel</th>
+    <th>Message</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for log in logs %}
+    <tr class="tr-log-record" data-log-record-id="{{ log.id }}" style="cursor: pointer">
+      <td style="width: 180px">
+        {{ log.dateCreated|date('Y-m-d H:i:s') }}
+      </td>
+      <td style="width: 120px">
+        {{ log.level|logLevelName }}
+      </td>
+      <td style="width: 10%;">
+        <div class="text-truncate" style="max-width: 100px">
+          {{ log.channel }}
+        </div>
+      </td>
+      <td>
+        <div class="text-truncate" style="max-width: 450px">
+          {{ log.message }}
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<script>
+  $(function() {
+    $('.tr-log-record').on('click', function(e) {
+      let id = e.currentTarget.getAttribute('data-log-record-id');
+      document.location.href = '/admin/logs/' + id;
+    });
+  });
+</script>

@@ -1,0 +1,86 @@
+{# This partial template is rendered by Dashboard/IndexController. Do not remove. #}
+<div id="settings-lightbox" class="lightboxwindow integrations-lightboxwindow">
+  <section class="modal-lightbox">
+    <form
+      method="post"
+      class="integrations-templates-form mb-2"
+      action="{{ path('integrations_template_settings') }}"
+      data-tmp-id="{{ template.tmp_id }}"
+    >
+      <input type="hidden" name="tid" value="{{ template.tmp_id }}" />
+      <ul class="integration-templates-list">
+        {% for source in template.sources %}
+          <li class="integration-templates-list-item" data-sid="{{ source.id }}">
+            <img
+              alt="Icon"
+              class="integration-icon"
+              src="{{ source.integration.iconURL }}"
+            />
+            <h2 style="display: inline-block;">
+              {{ source.name }}
+            </h2>
+            <div class="onoffswitch">
+              <input type="hidden" name="__enabled[{{ source.id }}]" value="0" />
+              <input
+                value="1"
+                type="checkbox"
+                class="onoffswitch-checkbox"
+                name="enabled[{{ source.id }}]"
+                id="integration-onoffswitch-{{ template.tmp_id }}-{{ source.id }}"
+                {% if source.isEnabled %}checked="checked"{% endif %}
+              />
+              <label
+                class="onoffswitch-label"
+                for="integration-onoffswitch-{{ template.tmp_id }}-{{ source.id }}"
+              >
+                <div class="onoffswitch-inner"></div>
+                <div class="onoffswitch-switch"></div>
+              </label>
+            </div>
+            {% if source.integration.homeDirectoryPlaceholder %}
+            <div
+              class="integration-templates-options"
+              {% if not source.isEnabled %}style="display: none;"{% endif %}
+            >
+              <input
+                type="text"
+                name="home[{{ source.id }}]"
+                value="{{ source.homeDir }}"
+                class="integration-templates-options-home-dir"
+                id="integration-home-{{ template.tmp_id }}-{{ source.id }}"
+                placeholder="{{ source.integration.homeDirectoryPlaceholder }}"
+              />
+              <button
+                type="button"
+                data-sid="{{ source.id }}"
+                class="btn-alt integration-templates-options-browse-btn mr-2"
+              >
+                Browse
+              </button>
+            </div>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      <button type="submit" class="btn-main btn-template-save">
+        Save changes
+      </button>
+    </form>
+    <div class="integrations-lightboxwindow-footer d-flex justify-content-between align-items-center">
+      <button type="button" class="btn btn-transparent btn-icon trash btn-template-delete" data-tid="{{ template.tmp_id }}">
+        Delete this template
+      </button>
+      {% if isGranted("SITE_ADMIN") %}
+        <button
+          type="button"
+          title="Move Template"
+          class="btn-alt btn-template-move"
+          style="float: right;"
+          data-tid="{{ template.tmp_id }}"
+        >
+          Move Template
+        </button>
+      {% endif %}
+    </div>
+  </section>
+</div>

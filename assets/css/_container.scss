@@ -1,0 +1,39 @@
+@import "vars";
+
+.container {
+  margin: 0 auto;
+  width: $width-container;
+  text-align: left;
+  // overflow: hidden;
+  padding: $gutter-3;
+  box-shadow: $box-shadow;
+
+  header {
+    width: 100%;
+    position: relative;
+    padding: $gutter-3;
+    overflow: hidden;
+  }
+
+  &.white {
+    color: $color-text;
+    background-color: $color-light;
+    border-radius: $border-radius;
+  }
+}
+
+.container-wide {
+  width: $width-container-wide;
+}
+
+.container-fluid {
+  width: $width-container-fluid;
+}
+
+.container-narrow {
+  width: $width-container-narrow;
+}
+
+.container-shadow {
+  box-shadow: $box-shadow;
+}

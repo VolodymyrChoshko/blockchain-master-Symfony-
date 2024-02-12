@@ -1,0 +1,98 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% if billingPlan.isDeclined and not billingPlan.isPaused %}
+    {% include "layout/blocks/alerts/billing-card-declined.html.twig" %}
+  {% endif %}
+  {% if billingPlan.isPaused %}
+    {% include "layout/blocks/alerts/billing-is-paused.html.twig" %}
+  {% endif %}
+  <div class="card card-account mt-4">
+    <div class="card-header{% if nextInvoice.amountCents == 0 %} mb-2{% endif %}">
+      Billing and Invoices
+    </div>
+    <div class="card-body pt-1">
+      {% if nextInvoice.amountCents != 0 %}
+        <h2 class="mb-2">
+          Your next bill is for ${{ (nextInvoice.amountCents / 100)|number_format(2) }},
+          due {{ billingPlan.nextBillingDate(billingPlan.isTrial ? 1 : 0)|date('F j, Y') }}.
+        </h2>
+      {% endif %}
+
+      {% if billingPlan.isSolo %}
+        <a
+          href="{{ path("billing_upgrade") }}?n={{ nonce }}"
+          class="btn btn-main btn-billing-upgrade mb-3"
+          data-has-card="{% if creditCard %}1{% else %}0{% endif %}"
+        >
+          Upgrade to Blocks Edit Team
+        </a>
+      {% endif %}
+
+      {# Features #}
+      <table class="table table-bordered table-striped mb-4">
+        {% for item in nextInvoice.items %}
+          <tr>
+            <td>{{ item.description }}</td>
+            <td class="text-right">
+              {% if item.type == "discount" %}
+                -${{ (item.amountCents / 100)|replace({ '-': '' })|number_format(2) }}
+              {% else %}
+                ${{ (item.amountCents / 100)|number_format(2) }}/month
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+
+      {# Add card #}
+      {% if creditCard %}
+        <p>
+          To be charged on your credit card: {{ creditCard.brand }} ending in {{ creditCard.number4 }}
+          &ndash; <a href="#" class="show-stripe">Update card</a>
+          &ndash; <a href="{{ path("billing_cards_remove") }}?n={{ nonce }}" class="btn-remove-credit-card">Remove card</a>
+        </p>
+      {% else %}
+        <p>
+          You don't have a credit card on file
+          &ndash; <a href="#" class="show-stripe">Add card</a>
+        </p>
+      {% endif %}
+
+      {# Lump sum #}
+      <p class="font-size-sm">
+        To make a lump sum payment towards a yearly payment, or just to simplify your
+        billing, <a href="https://blocksedit.com/support/" target="_blank">contact us</a>.
+      </p>
+
+      {# invoices #}
+      {% if invoices|length > 0 %}
+        <h2 class="mb-2">Invoices</h2>
+        <table class="table table-bordered table-striped mb-4">
+          {% for invoice in invoices %}
+            <tr>
+              <td>#{{ invoice.id }}</td>
+              <td>
+                <a href="{{ invoice.fileUrl }}" target="_blank" rel="noopener noreferrer">
+                  ${{ (invoice.amountCents / 100)|number_format(2) }} for {{ invoice.description }}
+                </a>
+              </td>
+              <td class="text-right">
+                {{ invoice.dateCreated|date('F j, Y') }}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+
+      {# Downgrade #}
+      {% if billingPlan.isTeam %}
+        <a
+          href="{{ path("billing_downgrade") }}?n={{ nonce }}"
+          class="btn btn-alt btn-billing-downgrade"
+        >
+          Downgrade to Blocks Edit Solo
+        </a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

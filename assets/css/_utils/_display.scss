@@ -1,0 +1,27 @@
+@import "../vars";
+
+/* ==========================================================================
+ Display
+
+ d-block, d-inline, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/display/
+ ========================================================================= */
+
+$display-types: "none", "block", "flex", "inline", "inline-block", "inline-flex", "table", "table-row";
+
+// d-none, d-block, d-flex
+@each $type in $display-types {
+  .d-#{$type} {
+    display: #{$type} !important;
+  }
+}
+
+// d-sm-none, d-xl-flex
+@include create-breakpoints {
+  @each $type in $display-types {
+    .d-#{$create-breakpoints-size}-#{$type} {
+      display: #{$type} !important;
+    }
+  }
+}

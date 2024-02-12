@@ -1,0 +1,409 @@
+@import "../vars";
+
+.builder-menu {
+  position: absolute;
+  color: #FFF;
+  background-color: $color-block-active;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: $z-index-menus + 1;
+  border-radius: $border-radius;
+  animation: builder-pop-upwards 160ms forwards linear;
+
+  .btn,
+  label {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 0;
+    height: $height-block-menu !important;
+    padding: $gutter-2;
+
+    &:last-child {
+      margin-bottom: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    &.btn-active {
+      background-color: darken($color-block-active, 10%);
+      backdrop-filter: saturate(130%);
+
+      &:first-child {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+
+      &:last-child {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+  }
+
+  label {
+    font-size: 15px;
+  }
+}
+
+.builder-menu-top, .builder-menu-right, .builder-menu-bottom, .builder-menu-left {
+  &:after {
+    content: '';
+    position: absolute;
+  }
+}
+
+.builder-menu-top {
+  &:after {
+    bottom: -8px;
+    border-top: 8px solid $color-block-active;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+  }
+}
+
+.builder-menu-right {
+  &:after {
+    left: -8px;
+    border-top: 8px solid transparent;
+    border-right: 8px solid $color-block-active;
+    border-bottom: 8px solid transparent;
+  }
+}
+
+.builder-menu-bottom {
+  &:after {
+    top: -8px;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid $color-block-active;
+    border-left: 8px solid transparent;
+  }
+}
+
+.builder-menu-left {
+  &:after {
+    right: -8px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid $color-block-active;
+  }
+}
+
+.builder-menu-btn {
+  cursor: pointer;
+  transition: opacity 50ms;
+  font-size: $font-size-lg;
+  display: inline-flex !important;
+  align-items: center;
+  padding: 0.5rem !important;
+
+  &:active {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .icon {
+    @include icon-color(#FFF);
+  }
+}
+
+.builder-menu-toolbar {
+  position: absolute;
+  pointer-events: none;
+
+  &.position-left {
+    width: $height-block-menu + 6 !important;
+  }
+
+  .btn {
+    z-index: 2;
+    position: relative;
+  }
+}
+
+.builder-menu-toolbar-b-component,
+.builder-menu-toolbar-b-section {
+  z-index: $z-index-menus - 2;
+}
+
+.builder-menu-toolbar-b-region {
+  z-index: $z-index-menus - 1;
+}
+
+.builder-canvas-flyout {
+  position: fixed;
+  z-index: 1;
+}
+
+.builder-menu-common {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: stretch;
+  z-index: $z-index-menus;
+  width: 100%;
+  // transition: opacity #{$duration-menus}ms, background-color #{$duration-menus}ms;
+
+  .position-top &,
+  .position-center & {
+    margin-bottom: -1px;
+    // height: $height-block-menu;
+    padding: 0;
+    flex-direction: row;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  .position-center-bottom & {
+    margin-top: -1px;
+    height: $height-block-menu;
+    padding: 0;
+    flex-direction: row;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+
+    .btn:first-child {
+      border-bottom-left-radius: $border-radius;
+    }
+
+    .btn:last-child {
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  .position-left & {
+    margin-right: -1px;
+    width: $height-block-menu + 6;
+    padding: 0;
+    flex-direction: column;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+
+    .btn:last-child {
+      border-bottom-left-radius: $border-radius;
+    }
+
+    .builder-menu-btn {
+      width: $height-block-menu + 6;
+    }
+  }
+
+  .btn-active {
+    background-color: darken($color-block-hover, 10%);
+  }
+
+  .btn {
+    margin-right: 0;
+    background-color: transparent;
+    padding: 0 $gutter-2;
+    border-radius: 0;
+    line-height: 30px;
+
+    &:active {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .icon {
+      font-size: 1rem;
+    }
+
+    strong {
+      padding: 0 0.25rem;
+    }
+  }
+}
+
+.builder-menu-command-btns {
+  color: #FFF;
+  // overflow: hidden;
+  pointer-events: auto;
+  display: flex;
+  align-items: stretch;
+  // transform: translateZ(0);
+
+  .position-top &,
+  .position-center & {
+    // border-top-left-radius: $border-radius;
+    // border-top-right-radius: $border-radius;
+
+    .builder-menu-btn:first-of-type {
+      border-top-left-radius: $border-radius;
+      // border-top-right-radius: $border-radius;
+      // border-bottom-left-radius: 0;
+      // border-bottom-right-radius: 0;
+    }
+
+    .builder-menu-btn:last-of-type {
+      border-top-right-radius: $border-radius;
+    }
+  }
+
+  .position-bottom &,
+  .position-top-bottom & {
+    // border-bottom-left-radius: $border-radius;
+    // border-bottom-right-radius: $border-radius;
+
+    .builder-menu-btn:first-of-type {
+      border-bottom-left-radius: $border-radius;
+      // border-bottom-right-radius: $border-radius;
+      // border-top-left-radius: 0;
+      // border-top-right-radius: 0;
+    }
+
+    .builder-menu-btn:last-of-type {
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+
+  .builder-menu-btn {
+    // height: $height-block-menu;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.builder-menu-common-b-edit {
+  z-index: $z-index-menus - 2;
+
+  .builder-menu-command-btns {
+    z-index: $z-index-menus - 2;
+
+    .builder-menu-btn {
+      background-color: $color-b-region-hover;
+      // border-radius: $border-radius;
+    }
+  }
+}
+
+.builder-menu-common-b-section,
+.builder-menu-common-b-component {
+  z-index: $z-index-menus - 2;
+
+  .builder-menu-command-btns {
+    z-index: $z-index-menus - 2;
+
+    .builder-menu-btn {
+      background-color: $color-b-section-hover;
+      // border-radius: $border-radius;
+    }
+
+    &.active {
+      background-color: $color-b-section-active;
+
+      .btn-active {
+        background-color: darken($color-b-section-active, 10%);
+      }
+    }
+
+    .btn-active {
+      background-color: darken($color-b-section-hover, 10%);
+    }
+  }
+}
+
+.builder-menu-common-b-region {
+  z-index: $z-index-menus - 1;
+  min-width: 33px;
+  min-height: 34px;
+
+  .builder-menu-command-btns {
+    .builder-menu-btn {
+      background-color: $color-b-region-hover;
+      // border-radius: $border-radius;
+
+      &.btn-active {
+        background-color: darken($color-b-region-hover, 10%);
+      }
+    }
+
+    &.active {
+      background-color: $color-b-region-active;
+
+      .btn {
+        background-color: $color-b-region-active;
+
+        &.btn-active {
+          background-color: darken($color-b-region-active, 10%);
+        }
+      }
+    }
+
+    .btn {
+      background-color: $color-b-region-hover;
+
+      &.btn-active {
+        background-color: darken($color-b-region-hover, 10%);
+      }
+    }
+  }
+}
+
+$height-prompt: $height-block-menu * 2;
+
+.builder-menu-prompt {
+  width: 400px;
+  max-width: 100%;
+  // height: $height-prompt !important;
+  padding: 10px;
+  z-index: $z-index-mask + 1;
+
+  &.error {
+    animation: shake 0.5s both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+
+    .form-control-url {
+      border: 1px solid red;
+    }
+  }
+
+  .btn {
+    line-height: 17px;
+    background-color: lighten($color-block-active, 5%);
+
+    &:hover {
+      background-color: lighten($color-block-active, 10%);
+    }
+
+    &.btn-active {
+      background-color: darken($color-block-active, 5%);
+
+      &:hover {
+        background-color: darken($color-block-active, 3%);
+      }
+    }
+  }
+}
+
+.builder-menu-prompt-error {
+  width: 100%;
+  height: 1.4rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.builder-menu-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

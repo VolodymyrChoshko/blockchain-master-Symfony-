@@ -1,0 +1,30 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide">
+    <div class="container container-narrow card pt-0 pb-0 border rounded-normal pt-2 pb-3">
+      <h2 class="mb-2">
+        Two-factor Auth Login
+      </h2>
+      <form action="{{ path("admin_auth_login_verify") }}" method="post">
+        <div class="form-widget">
+          <label for="input-code" class="sr-only">
+            6 digit code
+          </label>
+          <input
+            type="search"
+            name="code"
+            id="input-code"
+            class="form-control"
+            placeholder="6 digit code"
+            autocomplete="off"
+            autofocus
+          />
+        </div>
+        <button class="btn btn-main">
+          Authenticate
+        </button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

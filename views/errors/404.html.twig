@@ -1,0 +1,26 @@
+{% extends "layout/guest.html.twig" %}
+    {% block head %}
+      {{ parent() }}
+      <style>
+        html,
+        body,
+        .container-status-box {
+          min-height: 100vh;
+        }
+
+        .container-status-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #606060;
+        }
+      </style>
+    {% endblock %}
+{% block body %}
+  <section class="container-status-box">
+    <div class="container container-narrow" style="width: 400px; text-align: center;">
+      <h1 style="font-size: 5rem; font-weight: 700;">404</h1>
+      <h2>Page Not Found</h2>
+    </div>
+  </section>
+{% endblock %}

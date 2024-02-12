@@ -1,0 +1,53 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <div class="container text-center">
+      <div class="card-header mb-2 p-0">
+        <h2 class="font-size">
+          Setting 2FA for {{ user.usr_name }} ({{ user.usr_email }})
+        </h2>
+      </div>
+
+      <form method="post" class="d-flex flex-column align-items-center">
+        <input type="hidden" name="secret" value="{{ secret }}" />
+        <img
+          src="{{ qrCodeUrl }}"
+          alt=""
+          class="d-block mb-4 mt-4"
+          style="width: 250px; height: 250px"
+        />
+        <div class="form-widget w-50">
+          <label for="input-qr-code-url">
+            QR Code
+          </label>
+          <input
+            type="text"
+            name="qrCodeUrl"
+            class="form-control"
+            id="input-qr-code-url"
+            value="{{ qrCodeUrl }}"
+          />
+          <div class="form-help">
+            Secret set after submitting this form.
+          </div>
+        </div>
+        <div class="d-flex">
+          <button type="submit" class="btn btn-main mr-2">
+            Submit
+          </button>
+          <a href="{{ path("admin_users_edit", { id: user.usr_id }) }}" class="btn btn-alt">
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    $(function() {
+      $('#input-qr-code-url').on('focus', function(e) {
+        e.target.select();
+      });
+    })
+  </script>
+{% endblock %}

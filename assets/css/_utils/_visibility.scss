@@ -1,0 +1,21 @@
+/* ==========================================================================
+ Visibility
+
+ @see https://getbootstrap.com/docs/4.0/utilities/visibility/
+ ========================================================================= */
+
+.shown {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}

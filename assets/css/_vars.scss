@@ -1,0 +1,60 @@
+@import "_vars/breakpoints";
+@import "_vars/builder";
+@import "_vars/gutters";
+@import "_vars/colors";
+@import "_vars/borders";
+@import "_vars/sizes";
+@import "_vars/fonts";
+@import "_vars/misc";
+@import "_vars/mixins";
+
+// =============================================
+// Exported to JavaScript
+// =============================================
+:export {
+  colorPrimary: $color-primary;
+  colorSecondary: $color-secondary;
+  colorSuccess: $color-success;
+  colorDanger: $color-danger;
+  colorMuted: $color-muted;
+  colorDark: $color-dark;
+  colorLight: $color-light;
+  colorLink: $color-link;
+  colorBorder: $color-border;
+  colorSection: $color-b-section-hover;
+  colorText: $color-text;
+  bColorGrid: $color-block-grid;
+  bColorEditHover: $color-b-edit-hover;
+  bColorEditActive: $color-b-edit-active;
+  bColorSectionHover: $color-b-section-hover;
+  bColorSectionActive: $color-b-section-active;
+  bColorRegionHover: $color-b-region-hover;
+  bColorRegionActive: $color-b-region-active;
+  bColorComponentHover: $color-b-component-hover;
+  bColorComponentActive: $color-b-component-active;
+  durationMenus: $duration-menus;
+  durationSidebar: $duration-sidebar;
+  headerHeight: $height-header;
+  menuBarHeight: $height-block-menu;
+  menuWidth: $height-block-menu;
+  menuOffset: $offset-menu;
+  widthToolbar: $width-toolbar;
+  widthSidebar: $width-sidebar;
+  breakpointsMobile: map-get($breakpoints, "xs");
+  breakpointsHandheld: map-get($breakpoints, "sm");
+  breakpointsTablet: map-get($breakpoints, "md");
+  breakpointsLaptop: map-get($breakpoints, "lg");
+  breakpointsDesktop: map-get($breakpoints, "xl");
+  gutter1: $gutter-1;
+  gutter2: $gutter-2;
+  gutter3: $gutter-3;
+  gutter4: $gutter-4;
+  gutter5: $gutter-5;
+  fontSizeSm: $font-size-sm;
+  fontSizeMd: $font-size;
+  fontSizeLg: $font-size-lg;
+  borderRadiusSm: $border-radius-sm;
+  borderRadiusMd: $border-radius-md;
+  borderRadiusLg: $border-radius-lg;
+  boxShadow: $box-shadow;
+}

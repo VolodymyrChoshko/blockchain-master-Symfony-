@@ -1,0 +1,48 @@
+@import "vars";
+
+.card {
+  width: 720px;
+  text-align: left;
+  margin: 0 auto $gutter-3 auto;
+  border-radius: $border-radius-lg;
+  background-color: #FFF;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  hr {
+    border-top: 1px solid #ccc;
+    border-left: 0;
+  }
+}
+
+.card-header {
+  padding: $gutter-3 $gutter-3 0 $gutter-3;
+  font-size: 24px;
+  color: $color-primary;
+  font-weight: 400;
+}
+
+.card-header-sm {
+  font-size: $font-size-lg;
+  color: #555;
+  font-weight: 400;
+  line-height: 30px;
+  padding: $gutter-3;
+}
+
+.card-body {
+  padding: $gutter-3;
+
+  &.gutter-none {
+    padding: 0;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: $color-text;
+  }
+}
+
+.card-footer {
+  background-color: #f9f9f9;
+}

@@ -1,0 +1,90 @@
+<?php
+/**
+ * @param string $label
+ * @param string $id
+ * @param string $value
+ */
+$copyBox = function($label, $id, $value) {
+    ?>
+    <div class="form-copy-box">
+        <label for="<?=$id?>">
+            <?=esc($label)?>
+        </label>
+        <div class="form-copy-box-value">
+            <input
+                id="<?=$id?>"
+                value="<?=esc($value)?>"
+                readonly
+            />
+            <button
+                type="button"
+                title="Copy"
+                class="btn-icon copy btn-copy"
+                data-clipboard-target="#<?=$id?>"
+            ></button>
+        </div>
+    </div>
+    <?php
+};
+?>
+    <!-- Settings -->
+    <div class="" style="padding-bottom: 0;">
+        <div class="form-widget">
+            <label for="input-name">
+                Name
+            </label>
+            <input
+                id="input-name"
+                name="name"
+                class="form-control"
+                value="<?=esc($this->source->getName())?>"
+            />
+        </div>
+        <?=formWidget(
+            'idp',
+            $this->form['idp'],
+            ['class' => 'form-control'],
+            $this->errors
+        )?>
+    </div>
+
+    <!-- Okta -->
+    <div id="panel-okta" class="card-panel">
+        <?php include(__DIR__ . '/idp_okta.phtml'); ?>
+    </div>
+
+    <!-- OneLogin -->
+    <div id="panel-oneLogin" class="card-panel">
+        <?php include(__DIR__ . '/idp_oneLogin.phtml'); ?>
+    </div>
+
+    <!-- Custom -->
+    <div id="panel-custom" class="card-panel">
+        <?php include(__DIR__ . '/idp_custom.phtml'); ?>
+    </div>
+
+    <div class="card-body">
+        <button type="submit" class="btn btn-main btn-block">
+            Save Settings
+        </button>
+    </div>
+<script>
+    new Clipboard('.btn-copy');
+
+    $(function() {
+        var $idp = $('#form-item-idp');
+
+        function togglePanels(e) {
+            if (!e) {
+                $('.card-panel').hide();
+                $('#panel-' + $idp.val()).show();
+            } else {
+                $('.card-panel').slideUp();
+                $('#panel-' + $idp.val()).slideDown();
+            }
+        }
+
+        $idp.on('change', togglePanels);
+        togglePanels();
+    });
+</script>

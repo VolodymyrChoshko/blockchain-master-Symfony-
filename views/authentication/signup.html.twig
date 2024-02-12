@@ -1,0 +1,54 @@
+{% extends "layout/guest.html.twig" %}
+{% block body %}
+  <section class="container container-narrow card mt-5 mb-5">
+    {{ form_start(form) }}
+      <h1 class="mb-3">Sign up for free</h1>
+      {{ form_row(form.name) }}
+      {{ form_row(form.email) }}
+      {{ form_row(form.password) }}
+      {{ form_row(form.job) }}
+      {{ form_row(form.organization) }}
+      {{ form_row(form.timezone) }}
+      <p class="pt-2" style="line-height: 1.3em; color: #444;">
+        <input
+          id="input-terms"
+          type="checkbox"
+          name="terms"
+          style="display: block; position: relative; top: 1px; float: left; margin-right: 7px; margin-bottom: 30px; font-size: 20px;"
+        />
+        <label for="input-terms">
+          I agree to the <a href="https://blocksedit.com/about/terms/" target="_blank">Terms of Service</a> and
+          the <a href="https://blocksedit.com/about/privacy/" target="_blank">Privacy Policy</a>
+        </label>
+      </p>
+      <p class="mb-3" style="line-height: 1.3em; color: #444;">
+        <input
+          id="input-newsletter"
+          type="checkbox"
+          name="newsletter"
+          {% if newsletter %}checked="checked"{% endif %}
+          style="display: block; position: relative; top: 1px; float: left; margin-right: 5px; margin-bottom: 30px; font-size: 20px;"
+        />
+        <label for="input-newsletter">
+          Subscribe to our monthly newsletter with tips on improving your marketing emails.
+        </label>
+      </p>
+      <button type="submit" class="btn btn-main btn-wide mb-3">
+        Create my account
+      </button>
+      <p class="text-center">
+        Already have an account? <a href="{{ path('login') }}">Sign In</a>
+      </p>
+      <input type="hidden" name="checker" value="" />
+    {{ form_end(form) }}
+  </section>
+  <script>
+    let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (timezone) {
+      $('#signup_timezone').val(timezone);
+    }
+
+    let checker = document.querySelector('input[name="checker"]');
+    checker.value = 42;
+  </script>
+{% endblock %}

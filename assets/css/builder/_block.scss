@@ -1,0 +1,197 @@
+@import "../vars";
+
+.builder-block {
+  position: absolute;
+  width: 100%;
+  border: 1px solid transparent;
+  user-select: none;
+  z-index: 0;
+  cursor: pointer;
+  transition: border #{$duration-menus}ms;
+}
+
+.builder-block-dropzone {
+  opacity: 0;
+  position: absolute;
+}
+
+.builder-block-dropzone-section:not(.empty) {
+  border-top: 2px dashed $color-drop-zone-section;
+  transition: border 25ms ease-in-out;
+
+  &.active {
+    border-top: 2px solid $color-drop-zone-section-active;
+  }
+
+  .builder-canvas-dragging-section & {
+    opacity: 1;
+  }
+}
+
+.builder-block-dropzone-component:not(.empty) {
+  border-top: 1px dashed $color-drop-zone-component;
+
+  &.active {
+    border-top: 1px dashed $color-drop-zone-component-active;
+  }
+
+  .builder-canvas-dragging-component & {
+    opacity: 1;
+  }
+}
+
+.builder-block-empty {
+  position: absolute;
+  min-height: 250px;
+  width: 100%;
+  display: block;
+  border: 1px dashed grey;
+
+  &::before {
+    content: "Click edit to add in content components";
+    height: 1.1rem;
+    font-size: 1.1rem;
+    color: grey;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .builder-canvas-overlay-ready & {
+    border: 1px dashed $color-block-active;
+
+    &::before {
+      color: $color-block-active;
+      content: "Drag and drop section here";
+    }
+  }
+
+  &.block-section-empty-editing {
+    border: 1px dashed #0faad1;
+
+    &::before {
+      color: #0faad1;
+      content: "Drag and drop section here";
+    }
+  }
+}
+
+.builder-block-empty-hover {
+  border-style: solid !important;
+}
+
+.builder-block-grid-type {
+  text-transform: capitalize;
+  color: $color-block-grid;
+  font-size: $font-size-sm;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+}
+
+.builder-block-outline {
+  border-style: solid;
+  position: absolute;
+  transition: all 50ms;
+
+  &.builder-block-grid {
+    border-color: $color-block-grid;
+  }
+
+  &.builder-block-b-edit,
+  &.builder-block-b-background {
+    border-style: dashed;
+    border-color: $color-b-edit-hover;
+
+    &.hover {
+      border-color: $color-b-edit-hover;
+    }
+
+    &.active {
+      border: 1px solid $color-b-edit-active;
+    }
+  }
+
+  &.builder-block-b-section {
+    border-color: $color-b-section-hover;
+
+    &.hover {
+      border-color: $color-b-section-hover;
+    }
+
+    &.active {
+      border: 1px solid $color-b-section-active;
+    }
+  }
+
+  &.builder-block-b-region {
+    border-color: $color-b-region-hover;
+
+    &.hover {
+      border-style: dashed;
+      border-color: $color-b-region-hover;
+    }
+
+    &.active {
+      border: 1px dashed $color-b-region-active;
+    }
+  }
+
+  &.builder-block-b-component {
+    border-color: $color-b-component-hover;
+
+    &.hover {
+      border-color: $color-b-component-hover;
+    }
+
+    &.active {
+      border: 1px solid $color-b-component-active;
+    }
+  }
+
+  &.builder-block-b-bgcolor {
+    border-color: transparent;
+
+    &.hover {
+      border-color: transparent;
+    }
+
+    &.active {
+      border: 1px solid transparent;
+    }
+  }
+}
+
+.builder-code-block-arrow {
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  pointer-events: none;
+
+  .icon {
+    height: 14px;
+    width: 14px;
+    margin-top: -4px;
+    @include icon-color(#FFF);
+  }
+}
+
+.builder-code-block-label {
+  position: absolute;
+  color: #FFF;
+  font-size: 14px;
+  height: 20px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  margin-left: -2px;
+  text-transform: uppercase;
+  background-color: $color-b-section-hover;
+}

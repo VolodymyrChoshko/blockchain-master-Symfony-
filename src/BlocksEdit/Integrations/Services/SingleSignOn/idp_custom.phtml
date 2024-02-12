@@ -1,0 +1,80 @@
+<h2>
+    Service Provider SAML
+</h2>
+<div>
+    <p class="text-muted">
+        Provide these values to your identity provider. See
+        the <a href="https://blocksedit.com/help/integrations/single-sign-on-setup/" target="_blank">setup instructions</a> for
+        more information.
+    </p>
+    <?php $copyBox(
+        $this->form['sp_entity_id']['label'],
+        'input-sp-entity-id',
+        $this->form['sp_entity_id']['value']
+    ); ?>
+
+    <?php $copyBox(
+        $this->form['sp_acs']['label'],
+        'input-sp-acs',
+        $this->form['sp_acs']['value']
+    ); ?>
+
+    <?php $copyBox(
+        $this->form['sp_metadata_url']['label'],
+        'input-sp-metadata-url',
+        $this->form['sp_metadata_url']['value']
+    ); ?>
+
+    <div class="pb-4">
+        <a href="<?=esc($this->form['sp_metadata_url']['value'])?>?download" class="btn btn-alt">
+            Download metadata
+        </a>
+        <a href="<?=esc($this->form['sp_cert_url']['value'])?>" class="btn btn-alt">
+            Download certificate
+        </a>
+    </div>
+</div>
+
+<h2>
+    Identity Provider SAML
+</h2>
+<div>
+    <p class="text-muted">
+        Get these values from your identity provider. Add the metadata file or URL, or
+        enter the values in the second box.
+    </p>
+    <fieldset class="form-fieldset">
+        <?=formWidget(
+            'idp_metadata_url_custom',
+            $this->form['idp_metadata_url_custom'],
+            ['class' => 'form-control'],
+            $this->errors
+        )?>
+        <?=formWidget(
+            'idp_metadata_file_custom',
+            $this->form['idp_metadata_file_custom'],
+            ['class' => 'form-control'],
+            $this->errors
+        )?>
+    </fieldset>
+    <fieldset class="form-fieldset">
+        <?=formWidget(
+            'idp_entity_id',
+            $this->form['idp_entity_id'],
+            ['class' => 'form-control'],
+            $this->errors
+        )?>
+        <?=formWidget(
+            'idp_acs',
+            $this->form['idp_acs'],
+            ['class' => 'form-control'],
+            $this->errors
+        )?>
+        <?=formWidget(
+            'idp_metadata_cert',
+            $this->form['idp_metadata_cert'],
+            ['class' => 'form-control'],
+            $this->errors
+        )?>
+    </fieldset>
+</div>

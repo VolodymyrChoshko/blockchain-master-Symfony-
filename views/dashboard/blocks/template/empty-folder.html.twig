@@ -1,0 +1,23 @@
+<form
+  method="post"
+  action="{{ path('index') }}"
+  style="display: none;"
+  class="db-template-folder-empty-form"
+  enctype="multipart/form-data"
+>
+  <div class="db-template-folder db-template-folder-empty d-flex align-items-center justify-content-between border-top p-2">
+    <div class="d-flex flex-grow-1 align-items-center mr-3 p-1">
+      <span class="btn-icon btn-icon-folder icon-folder mr-2"></span>
+      {% set id = 0 %}
+      {% include "dashboard/blocks/template/title-input.html.twig" with {
+        "placeholder": "Folder name",
+        "display":     "flex"
+      } %}
+      <input type="hidden" name="action" value="add_folder" />
+      <input type="hidden" name="parent_id" value="0" />
+      <input type="hidden" name="template" value="0" />
+      {# I don't know what this next hidden input does #}
+      <input type="hidden" class="layout" name="layout" value="0" />
+    </div>
+  </div>
+</form>

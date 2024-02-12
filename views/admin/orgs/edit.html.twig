@@ -1,0 +1,229 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <div class="card-header mb-2 p-0">
+      <h2 class="font-size">
+        #{{ org.org_id }} &middot; {{ org.org_name }}
+      </h2>
+    </div>
+
+    <form
+      action="{{ path("admin_orgs_edit", { id: org.org_id }) }}"
+      method="post"
+    >
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-name">
+            Name
+          </label>
+          <input
+            name="name"
+            id="input-name"
+            class="form-control"
+            value="{{ org.org_name }}"
+            required
+          />
+        </div>
+
+        <div class="form-widget w-100"></div>
+      </div>
+
+      <button type="submit" class="btn-main d-block mr-2">
+        Update
+      </button>
+    </form>
+  </div>
+
+  <div class="container container-wide card mb-2" style="overflow: visible">
+    <h2 class="font-size">
+      Members
+    </h2>
+    <div class="form-help mb-2">
+      Uncheck to remove users from the org.
+    </div>
+
+    <form action="{{ path("admin_orgs_members", { id: org.org_id }) }}" method="post">
+      {% for access in accesses %}
+      <div class="form-widget w-50 p-2 mb-2 border rounded-normal">
+        <label class="d-flex mb-0" for="input-org-{{ access.user.id }}">
+          <input
+            type="checkbox"
+            name="orgs[{{ access.user.id }}]"
+            id="input-org-{{ access.user.id }}"
+            class="form-control mr-1"
+            checked
+          />
+          {{ access.user.name }} ({{ access.user.email }})
+          <div class="d-flex pt-2">
+            <label for="input-access-{{ access.user.id }}-1" class="mb-0" style="margin-left: -6px">
+              <input
+                type="radio"
+                name="accesses[{{ access.user.id }}]"
+                value="1"
+                id="input-access-{{ access.user.id }}-1"
+                {% if access.isOwner %}checked{% endif %}
+              />
+              Owner
+            </label>
+            <label for="input-access-{{ access.user.id }}-2" class="mb-0 ml-2">
+              <input
+                type="radio"
+                name="accesses[{{ access.user.id }}]"
+                value="2"
+                id="input-access-{{ access.user.id }}-2"
+                {% if access.isAdmin %}checked{% endif %}
+              />
+              Admin
+            </label>
+            <label for="input-access-{{ access.user.id }}-3" class="mb-0 ml-2">
+              <input
+                type="radio"
+                name="accesses[{{ access.user.id }}]"
+                value="3"
+                id="input-access-{{ access.user.id }}-3"
+                {% if access.isEditor %}checked{% endif %}
+              />
+              Editor
+            </label>
+          </div>
+        </label>
+      </div>
+      {% endfor %}
+
+      <h2 class="font-size mb-2">
+        Add Member
+      </h2>
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label class="d-block" for="input-email">
+            Email address
+          </label>
+          <input
+            type="search"
+            name="email"
+            id="input-email"
+            class="form-control auto-complete-users mr-4"
+          />
+        </div>
+        <div class="form-widget w-100">
+          <label class="d-block" for="input-access">
+            Access
+          </label>
+          <select name="access" id="input-access" class="form-control">
+            <option value="1">Owner</option>
+            <option value="2">Admin</option>
+            <option value="3">Editor</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-main d-block mb-2">
+        Update
+      </button>
+    </form>
+  </div>
+
+  <div class="container container-wide card mb-2">
+    <h2 class="font-size mb-2">
+      Templates
+    </h2>
+    {% if templates|length == 0 %}
+      <p>No templates found.</p>
+    {% else %}
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+        <tr>
+          <th style="width: 75px">ID</th>
+          <th>Title</th>
+          <th>Date Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for template in templates %}
+          <tr class="tr-template" data-template-id="{{ template.tmp_id }}" style="cursor: pointer;">
+            <td>{{ template.tmp_id }}</td>
+            <td>{{ template.tmp_title }}</td>
+            <td>{{ template.tmp_created_at|date('F j, Y') }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+  <script>
+    $(function() {
+      $('.tr-template').on('click', function(e) {
+        let tid = e.currentTarget.getAttribute('data-template-id');
+        document.location.href = '/admin/templates/' + tid;
+      });
+    });
+  </script>
+
+  <div class="container container-wide card mb-2">
+    <h2 class="font-size mb-2">
+      Integrations
+    </h2>
+    {% if sources|length == 0 %}
+      <p>No integrations found.</p>
+    {% else %}
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>
+            Integration
+          </th>
+          <th>
+            Display Name
+          </th>
+          <th>
+            Home Dir
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for source in sources %}
+          <tr>
+            <td>
+              <img
+                src="{{ source.integration.iconURL }}"
+                alt=""
+                style="height: 22px; vertical-align: middle;" class="mr-1"
+              />
+              {{ source.integration.displayName }}
+            </td>
+            <td>
+              {{ source.name }}
+            </td>
+            <td>
+              {{ source.homeDir }}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+
+  <div class="container container-wide card mb-2 d-flex">
+    <form id="form-delete-org" class="ml-auto" action="{{ path("admin_orgs_delete", { id: org.org_id }) }}" method="post">
+      <button type="submit" class="btn btn-danger">
+        DELETE ORGANIZATION
+      </button>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      $('#form-delete-org').on('submit', function(e) {
+        e.preventDefault();
+        jConfirmSimple(
+          '<h2>DELETE ORGANIZATION</h2>Are you sure you want to delete this organization? This action cannot be undone.',
+          { 'Yes': 'btn-danger', 'No': 'btn-alt' }
+        )
+          .then(function() {
+            e.target.submit();
+          });
+      });
+    });
+  </script>
+{% endblock %}

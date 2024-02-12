@@ -1,0 +1,51 @@
+@import "breakpoints";
+
+/* ==========================================================================
+ Mixins
+ ========================================================================= */
+$create-breakpoints-size: "sm";
+@mixin create-breakpoints {
+  @each $size, $breakpoint in $breakpoints {
+    @media (min-width: #{$breakpoint}) {
+      $create-breakpoints-size: $size !global;
+      @content;
+    }
+  }
+}
+
+$create-sizes-i: 0;
+@mixin create-sizes {
+  @for $i from 1 through 5 {
+    $create-sizes-i: $i !global;
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (min-width: 320px) and (max-width: #{map-get($breakpoints, "sm") - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-handheld {
+  @media (min-width: #{map-get($breakpoints, "sm")}) and (max-width: #{map-get($breakpoints, "md") - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (min-width: #{map-get($breakpoints, "md")}) and (max-width: #{map-get($breakpoints, "lg") - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-laptop {
+  @media (min-width: #{map-get($breakpoints, "lg")}) and (max-width: #{map-get($breakpoints, "xl") - 1px}) {
+    @content;
+  }
+}
+
+@mixin icon-color($color) {
+  color: $color;
+  fill: $color;
+}

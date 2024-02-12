@@ -1,0 +1,31 @@
+{% extends "layout/guest.html.twig" %}
+{% block body %}
+  <section class="container container-narrow card p-4 mt-5">
+    {{ form_start(form) }}
+      <div class="mb-2">
+        {% if organization %}
+          <h1>{{ organization.org_name }}</h1>
+        {% else %}
+          <h1>Sign In</h1>
+        {% endif %}
+      </div>
+      {{ form_row(form.email) }}
+      {{ form_row(form.password) }}
+      <div class="text-left mb-3">
+        <a href="{{ path('forgot_password') }}">I forgot my password</a>
+      </div>
+      <button type="submit" class="btn btn-main btn-wide mb-3">
+        Sign In
+      </button>
+      {% for provider in idProviders %}
+        {% set integration = provider.integration %}
+        <a href="{{ integration.getLoginPath(request) }}" class="btn-main w-100 text-center" style="background: #3D7DC1; margin-bottom: 8px;">
+          {{ integration.loginButtonLabel }}
+        </a>
+      {% endfor %}
+      <p class="text-center">
+        Don't have an account yet? <a href="{{ path('signup', {}, 'absolute') }}">Sign Up</a>
+      </p>
+    {{ form_end(form) }}
+  </section>
+{% endblock %}

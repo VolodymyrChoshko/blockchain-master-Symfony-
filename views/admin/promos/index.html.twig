@@ -1,0 +1,42 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4">
+    <h2 class="d-flex align-items-center mb-2">
+      Promotions
+      <a href="{{ path("admin_promos_create") }}" class="btn btn-main ml-auto">
+        Create
+      </a>
+    </h2>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Date Created</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for promo in billingPromos %}
+        <tr class="tr-promo" data-promo-id="{{ promo.id }}" style="cursor: pointer;">
+          <td>{{ promo.code }}</td>
+          <th>
+            {{ promo.name }}
+          </th>
+          <th>
+            {{ promo.dateCreated|date('F j, Y') }}
+          </th>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    $(function() {
+      $('.tr-promo').on('click', function(e) {
+        let id = e.currentTarget.getAttribute('data-promo-id');
+        document.location = '/admin/promos/' + id;
+      });
+    });
+  </script>
+{% endblock %}

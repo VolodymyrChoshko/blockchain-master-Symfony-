@@ -1,0 +1,42 @@
+{{ html|raw }}
+<script src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function ($) {
+    Array.prototype.contains = function ( needle ) {
+      for (i in this) {
+        if (this[i] === needle) return true;
+      }
+      return false;
+    }
+    var sectionVariables = [];
+    $('.block-section').each(function() {
+      var sectionVariable = $(this).attr('data-style');
+      if (typeof sectionVariable !== typeof undefined && sectionVariable !== '') {
+        if (sectionVariables.contains(sectionVariable) && ! $(this).hasClass('froala-dropped')) {
+          $(this).remove();
+        } else {
+          sectionVariables.push(sectionVariable);
+          var sectionId = $(this).attr('data-id');
+          if(typeof sectionId === typeof undefined || sectionId === '') {
+            $(this).attr('data-id', '1');
+          }
+        }
+      }
+      var componentVariables = [];
+      $('.block-component').each(function() {
+        var componentVariable = $(this).attr('data-style');
+        if (typeof componentVariable !== typeof undefined && componentVariable !== '') {
+          if (componentVariables.contains(componentVariable)  && ! $(this).hasClass('froala-dropped')) {
+            $(this).remove();
+          } else {
+            componentVariables.push(componentVariable);
+            var componentId = $(this).attr('data-id');
+            if(typeof componentId === typeof undefined || componentId === '') {
+              $(this).attr('data-id', '1');
+            }
+          }
+        }
+      });
+    });
+  });
+</script>

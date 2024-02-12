@@ -1,0 +1,14 @@
+[Unit]
+Description=SocketServer
+
+[Service]
+ExecStart=/usr/local/bin/node /var/www/app.blocksedit.com/workers/build/socketserver.js
+Restart=always
+User=www-data
+Group=www-data
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/www/app.blocksedit.com
+
+[Install]
+WantedBy=multi-user.target

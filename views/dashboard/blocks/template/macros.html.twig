@@ -1,0 +1,27 @@
+{#
+  Swaps a template/email/title with an input to change the title
+#}
+{% macro renameableTitle(title, id, route = "", args = {}) %}
+  <div class="db-template-renameable w-100">
+    {# Title #}
+    <div class="db-template-renameable-wrap d-flex align-items-center justify-content-between pointer p-1">
+      <h3>
+        {% if route != "" %}
+          <a class="db-template-title" href="{{ path(route, args) }}">
+            {{ title }}
+          </a>
+        {% else %}
+          <span class="db-template-title">
+            {{ title }}
+          </span>
+        {% endif %}
+      </h3>
+      <span class="db-template-renameable-btn-rename pointer">
+          Rename
+      </span>
+    </div>
+
+    {# Inputs #}
+    {% include "dashboard/blocks/template/title-input.html.twig" %}
+  </div>
+{% endmacro %}

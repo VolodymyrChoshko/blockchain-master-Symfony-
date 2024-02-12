@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blocks Edit</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-language" content="en">
+  <meta name="apple-mobile-web-app-title" content="Blocks Edit">
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
+  <link rel="apple-touch-icon" href="{{ asset('images/appicon.png') }}">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+  <link href="{{ asset('css/jquery.fancybox.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('jquery-confirm/jquery-confirm.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('build/css/builder.css') }}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{% include "layout/blocks/icons.html.twig" %}
+<div id="mount"></div>
+<script>
+  window.initialState   = {{ initialState|json_encode|raw }};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=ResizeObserver"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{{ asset('jquery-confirm/jquery-confirm.min.js') }}"></script>
+<script src="{{ asset('build/js/builder.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<div>
+  <div class="form-widget">
+    <label for="input-name">
+      Name
+    </label>
+    <input
+      id="input-name"
+      name="name"
+      class="form-control"
+      value="{{ formValues.name }}"
+    />
+  </div>
+  {% if isFileSystemIntegration(integration) and integration.homeDirectoryPlaceholder %}
+    <div class="form-widget">
+      <label for="input-home-dir">
+        {{ integration.homeDirectoryPlaceholder }}
+      </label>
+      <input
+        id="input-home-dir"
+        name="home_dir"
+        class="form-control"
+        value="{{ formValues.home_dir }}"
+      />
+    </div>
+  {% endif %}
+
+  {% for name, item in form %}
+    {{ formWidget(name, item, { class: 'form-control' }, errors) }}
+  {% endfor %}
+
+  <button type="submit" class="btn btn-main btn-wide">
+    Save Settings
+  </button>
+  {% if integration.requiresOauthRedirect and integration.isOauthAuthenticated %}
+    <button type="button" class="btn btn-alt btn-block btn-integration-authenticate mt-2">
+      Re-Authenticate with {{ integration.displayName }}
+    </button>
+  {% endif %}
+</div>

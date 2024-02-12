@@ -1,0 +1,17 @@
+<a href="{{ path("admin_templates_edit", { id: template.tmp_id }) }}" class="admin-template-card">
+  <div class="admin-template-card-thumb">
+    {% set access = 0 %}
+    {% include "dashboard/blocks/template/template-thumbnail.html.twig" %}
+  </div>
+  <div class="p-2 pb-0 text-center font-weight-bold font-size">
+    {{ template.tmp_title }}
+  </div>
+  <div class="p-1 pt-0 text-center font-size-sm">
+    {% if orgs[template.tmp_org_id] is defined %}
+      #{{ orgs[template.tmp_org_id].org_id }} &middot; {{ orgs[template.tmp_org_id].org_name }}
+    {% endif %}
+  </div>
+  <div class="p-1 pb-2 pt-0 text-center font-size-sm">
+    {{ template.tmp_created_at|date('F j, Y') }}
+  </div>
+</a>

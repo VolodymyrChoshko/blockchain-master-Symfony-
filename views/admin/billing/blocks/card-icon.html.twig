@@ -1,0 +1,14 @@
+{% set height = cardIconHeight|default(26) %}
+{% if "master" in brand %}
+  <img src="/assets/images/cards/mastercard.svg" class="mr-2" style="height: {{ height }}px;vertical-align: middle" alt="visa" />
+{% elseif "discover" in brand %}
+  <img src="/assets/images/cards/discover.svg" class="mr-2" style="height: {{ height }}px;vertical-align: middle" alt="visa" />
+{% elseif "amex" in brand or "american express" in brand %}
+  <img src="/assets/images/cards/amex.svg" class="mr-2" style="height: {{ height }}px;vertical-align: middle" alt="visa" />
+{% elseif "jcb" in brand %}
+  <img src="/assets/images/cards/jcb.svg" class="mr-2" style="height: {{ height }}px;vertical-align: middle" alt="visa" />
+{% elseif "visa" in brand %}
+  <img src="/assets/images/cards/visa.svg" class="mr-2" style="height: {{ height }}px;vertical-align: middle" alt="visa" />
+{% else %}
+  {{ brand }}
+{% endif %}

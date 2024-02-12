@@ -1,0 +1,78 @@
+@import "../vars";
+
+/* ==========================================================================
+ Text align
+
+ text-left, text-xl-left, text-center, text-justify, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/text/
+ ========================================================================= */
+
+$text-align-types: "left", "center", "right", "justify";
+
+// text-center, text-right, text-justify
+@each $type in $text-align-types {
+  .text-#{$type} {
+    text-align: #{$type} !important;
+  }
+}
+
+// text-sm-center, text-xl-right, text-md-justify
+@include create-breakpoints {
+  @each $type in $text-align-types {
+    .text-#{$create-breakpoints-size}-#{$type} {
+      text-align: #{$type} !important;
+    }
+  }
+}
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.font-size {
+  font-size: $font-size !important;
+}
+
+.font-size-sm {
+  font-size: $font-size-sm !important;
+}
+
+.font-size-lg {
+  font-size: $font-size-lg !important;
+  line-height: 1.5rem !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400 !important;
+}
+
+.font-weight-light {
+  font-weight: 300 !important;
+}
+
+.font-italic {
+  font-style: italic !important;
+}

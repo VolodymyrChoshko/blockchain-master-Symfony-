@@ -1,0 +1,137 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% if billingPlan.isSolo and billingPlan.isTrialComplete == false %}
+    <section class="container billing-alert mb-2">
+      <p>Inviting team members will upgrade you to Blocks Edit Team and start your 30 day trial.</p>
+    </section>
+  {% endif %}
+  {% if showUpgradeError %}
+    <section class="container billing-alert mb-2">
+      <p>
+        <a href="{{ path("billing") }}" style="color: #444; text-decoration: underline;">Upgrade to Blocks Edit Team to add team members</a>.
+      </p>
+    </section>
+  {% endif %}
+  <section class="container card mt-4 p-0">
+    {% if is_allowed %}
+      <header class="border-bottom">
+        <h1>{{ tmp_title}} template team members</h1>
+        <p class="m-0">
+          People who can make changes to this template's emails
+        </p>
+      </header>
+
+      {% if accountUsers|length > 0 %}
+        <form action="{{ path('people', { id: tid }) }}" method="post">
+          <div class="card-footer p-3">
+            <h2>Add team member:</h2>
+            <div class="form-widget form-widget-flex">
+              <div>
+                <label for="input-select" class="sr-only">Select User</label>
+                <select id="input-select" name="uid" class="form-control">
+                  {% for user in accountUsers %}
+                    <option value="{{ user.usr_id }}">
+                      {{ user.usr_name }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <button type="submit" class="btn btn-main">
+                Invite
+              </button>
+            </div>
+          </div>
+        </form>
+      {% endif %}
+      <form action="{{ path('people', { id: tid }) }}" method="post">
+        <div class="card-footer p-3">
+          <h2>Invite a new team member</h2>
+          <div class="form-widget form-widget-flex">
+            <div>
+              <label for="input-name" class="sr-only">Name</label>
+              <input
+                id="input-name"
+                name="name"
+                type="text"
+                class="form-control"
+                placeholder="Name"
+                value="{{ invite.usr_name }}"
+              />
+            </div>
+            <div>
+              <label for="input-email" class="sr-only">Email</label>
+              <input
+                id="input-email"
+                name="email"
+                type="text"
+                class="form-control"
+                placeholder="Email"
+                value="{{ invite.usr_email }}"
+              />
+            </div>
+            <button type="submit" class="btn btn-main">Invite</button>
+          </div>
+        </div>
+      </form>
+
+      <table class="border-top w-100">
+        {% for user in users %}
+          <tr{% if not user.acc_responded %} class="opacity-50"{% endif %}>
+            <td class="p-2 pl-3 border-bottom">
+              {{ user|avatar }}
+              {{ user.usr_name }}
+            </td>
+            <td class="p-2 border-bottom">
+              {% if user.usr_job %}{{ user.usr_job }}, {% endif %}
+              {{ user.usr_organization }}
+              <br />
+              {{ user.usr_email }}
+            </td>
+            <td class="p-2 pr-3 border-bottom text-right">
+              {% if not user.isOwner|default %}
+                <a
+                  href="#"
+                  title="Remove"
+                  class="btn-icon remove remove_invite"
+                  data-rid="{{ user.usr_id }}"
+                  data-tid="{{ tid }}"
+                  data-is-owner="0"
+                >
+                  Remove
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+
+        {% for invite in invited %}
+          <tr class="opacity-50">
+            <td class="p-2 pl-3 border-bottom">
+              {{ { usr_name: invite.name }|avatar }}
+              {{ invite.name }}
+            </td>
+            <td class="p-2 border-bottom">
+              {{ invite.email }}
+            </td>
+            <td class="p-2 pr-3 border-bottom text-right">
+              <a
+                href="#"
+                title="Remove"
+                class="btn-icon remove remove_invite"
+                data-iid="{{ invite.id }}"
+                data-tid="{{ tid }}"
+              >
+                Remove
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <header>
+        <h1>Not allowed</h1>
+        <h2>You are not allowed to view this template.</h2>
+      </header>
+    {% endif %}
+  </section>
+{% endblock %}

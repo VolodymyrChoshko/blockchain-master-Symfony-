@@ -1,0 +1,8 @@
+services:
+    BlocksEdit\Email\MailerInterface:
+        class: BlocksEdit\Email\DevMailer
+        arguments:
+            - '@Repository\DevEmailRepository'
+            - '%email%'
+        calls:
+            - [setLogger, ['@Psr\Log\LoggerInterface']]

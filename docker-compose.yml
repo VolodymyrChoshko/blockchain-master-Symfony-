@@ -1,0 +1,45 @@
+version: '3'
+services:
+  web:
+    build: .
+    image: 783209329702.dkr.ecr.us-east-2.amazonaws.com/blocksedit:0.0.1
+    ports:
+      - "9109:80"
+      - "9110:443"
+    volumes:
+      - ".:/var/www/blocksedit"
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: b0N7m48Z1CR3Vr
+      MYSQL_DATABASE: blocksedit_dev
+      MYSQL_USER: blocksedit
+      MYSQL_PASSWORD: b0N7m48Z1CR3Vr
+    ports:
+      - "9306:3306"
+    volumes:
+      - "mysqldbvolume:/var/lib/mysql"
+
+  certs:
+    image: 783209329702.dkr.ecr.us-east-2.amazonaws.com/cert-server:0.0.1
+    ports:
+      - "9119:80"
+
+  screenshots:
+    image: 783209329702.dkr.ecr.us-east-2.amazonaws.com/screenshot-server:0.0.1
+    ports:
+      - "9111:8080"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "9379:6379"
+
+volumes:
+  mysqldbvolume:

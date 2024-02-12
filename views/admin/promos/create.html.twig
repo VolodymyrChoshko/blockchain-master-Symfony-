@@ -1,0 +1,334 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4" data-billing-promotion="1">
+    <h2{% if not billingPromo%} class="mb-2"{% endif %}>
+      Create Promotion
+    </h2>
+    {% if billingPromo %}
+      <small class="font-size-sm d-block mb-2">
+        Promos cannot be changed once they created.
+      </small>
+    {% endif %}
+
+    <form id="form-promo" method="post">
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-name">
+            Name
+          </label>
+          <input
+            name="name"
+            id="input-name"
+            class="form-control"
+            required
+            {% if billingPromo %}
+              value="{{ billingPromo.name }}"
+              readonly
+            {% endif %}
+          />
+          <div class="form-help">
+            Displayed as line item in invoices.
+          </div>
+        </div>
+
+        <div class="form-widget w-100">
+          <label for="input-code">
+            Code
+          </label>
+          <input
+            name="code"
+            id="input-code"
+            class="form-control"
+            required
+            {% if billingPromo %}
+              value="{{ billingPromo.code }}"
+              readonly
+            {% endif %}
+          />
+          <div class="form-help">
+            Alpha-numeric code used to redeem the promotion.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget w-100 mr-4">
+          <label for="input-type">
+            Type
+          </label>
+          <select
+            name="type"
+            id="input-type"
+            class="form-control"
+            {% if billingPromo %}style="pointer-events: none;"{% endif %}
+          >
+            <option value="discount"{% if billingPromo and billingPromo.type == "discount" %} selected{% endif %}>
+              Discount
+            </option>
+            <option value="fixed"{% if billingPromo and billingPromo.type == "fixed_dollar" %} selected{% endif %}>
+              Fixed Price
+            </option>
+            <option value="fixed"{% if billingPromo and billingPromo.type == "fixed_percent" %} selected{% endif %}>
+              Fixed Percent
+            </option>
+            <option value="fixed"{% if billingPromo and billingPromo.type == "free" %} selected{% endif %}>
+              Free
+            </option>
+          </select>
+          <div class="form-help">
+            A discount of dollars/percent off or a fixed rate plan.
+          </div>
+        </div>
+
+        <div class="form-widget w-100">
+          <label for="input-period-months">
+            Time Period
+          </label>
+          <select
+            name="periodMonths"
+            id="input-period-months"
+            class="form-control"
+            {% if billingPromo %}style="pointer-events: none;"{% endif %}
+          >
+            <option value="0"{% if billingPromo and billingPromo.periodMonths == "0" %} selected{% endif %}>
+              Forever
+            </option>
+            <option value="1"{% if billingPromo and billingPromo.periodMonths == "1" %} selected{% endif %}>
+              1 Month
+            </option>
+            <option value="2"{% if billingPromo and billingPromo.periodMonths == "2" %} selected{% endif %}>
+              2 Months
+            </option>
+            <option value="3"{% if billingPromo and billingPromo.periodMonths == "3" %} selected{% endif %}>
+              3 Months
+            </option>
+            <option value="4"{% if billingPromo and billingPromo.periodMonths == "4" %} selected{% endif %}>
+              4 Months
+            </option>
+            <option value="5"{% if billingPromo and billingPromo.periodMonths == "5" %} selected{% endif %}>
+              5 Months
+            </option>
+            <option value="6"{% if billingPromo and billingPromo.periodMonths == "6" %} selected{% endif %}>
+              6 Months
+            </option>
+            <option value="7"{% if billingPromo and billingPromo.periodMonths == "7" %} selected{% endif %}>
+              7 Months
+            </option>
+            <option value="8"{% if billingPromo and billingPromo.periodMonths == "8" %} selected{% endif %}>
+              8 Months
+            </option>
+            <option value="9"{% if billingPromo and billingPromo.periodMonths == "9" %} selected{% endif %}>
+              9 Months
+            </option>
+            <option value="10"{% if billingPromo and billingPromo.periodMonths == "10" %} selected{% endif %}>
+              10 Months
+            </option>
+            <option value="11"{% if billingPromo and billingPromo.periodMonths == "11" %} selected{% endif %}>
+              11 Months
+            </option>
+            <option value="12"{% if billingPromo and billingPromo.periodMonths == "12" %} selected{% endif %}>
+              12 Months
+            </option>
+          </select>
+          <div class="form-help">
+            How long is the promotion applied?
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-value">
+            Amount
+          </label>
+          <input
+            name="value"
+            id="input-value"
+            class="form-control"
+            placeholder="0.00"
+            required
+            {% if billingPromo %}
+              {% if billingPromo.valueType == "dollar" %}
+                value="{{ (billingPromo.value / 100)|number_format(2) }}"
+              {% else %}
+                value="{{ billingPromo.value }}"
+              {% endif %}
+              readonly
+            {% endif %}
+          />
+          <div class="form-help">
+            A value in dollars or percentage.
+          </div>
+        </div>
+
+        <div class="form-widget w-100">
+          <label for="input-value-type">
+            Amount Type
+          </label>
+          <select
+            id="input-value-type"
+            class="form-control"
+            name="valueType"
+            {% if billingPromo %} style="pointer-events: none;"{% endif %}
+          >
+            <option
+              value="dollar"
+              {% if billingPromo and billingPromo.valueType == "dollar" %} selected{% endif %}
+            >
+              Dollars
+            </option>
+            <option
+              value="percent"
+              {% if billingPromo and billingPromo.valueType == "percent" %} selected{% endif %}
+            >
+              Percentage
+            </option>
+          </select>
+          <div class="form-help">
+            Whether the value is dollars or percentage.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-50">
+          <label class="mb-0" for="input-is-new-user">
+            <input
+              type="checkbox"
+              name="isNewUser"
+              id="input-is-new-user"
+              class="form-control mr-1"
+              {% if billingPromo and billingPromo.isNewUser %}
+                checked
+              {% endif %}
+              {% if billingPromo %}
+                onclick="return false;"
+              {% endif %}
+            />
+            New Accounts Only
+          </label>
+          <div class="form-help">
+            Can only be applied when starting a new billing plan.
+          </div>
+        </div>
+
+        <div class="form-widget w-50">
+          <label class="mb-0" for="input-is-team-plan">
+            <input
+              type="checkbox"
+              name="isTeamPlan"
+              id="input-is-team-plan"
+              class="form-control mr-1"
+              {% if billingPromo and billingPromo.isTeamPlan %}
+                checked
+              {% endif %}
+              {% if billingPromo %}
+                onclick="return false;"
+              {% endif %}
+            />
+            Team Plan Only
+          </label>
+          <div class="form-help">
+            Can only be applied when the organization has a team plan.
+          </div>
+        </div>
+      </div>
+
+      <h2>
+        Targets
+      </h2>
+      <div class="form-help mb-2">
+        Type of service the promotion applies to. Check multiple targets to create bundled packages.
+      </div>
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label class="font-weight-bold">
+            Memberships
+          </label>
+          <table class="table table-striped table-bordered">
+            <tr>
+              <td>
+                <label class="mb-0" for="input-target-membership-team">
+                  <input
+                    type="checkbox"
+                    name="targets[membership:team]"
+                    id="input-target-membership-team"
+                    class="form-control input-target-membership mr-1"
+                    data-target="Blocks Edit Team"
+                    data-price="{{ prices['membership:team'] }}"
+                    {% if billingPromo and "membership:team" in billingPromo.targets %}
+                      checked
+                    {% endif %}
+                    {% if billingPromo %}
+                      onclick="return false;"
+                    {% endif %}
+                  />
+                  Blocks Edit Team
+                </label>
+              </td>
+              <td class="text-right">
+                ${{ (prices['membership:team'] / 100)|number_format(2) }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="form-widget w-100">
+          <label class="font-weight-bold">
+            Integrations
+          </label>
+          <table class="table table-striped table-bordered">
+            {% for int in integrations %}
+            <tr>
+              <td>
+                  <label class="d-block mb-0" for="input-target-integration-{{ int.slug }}">
+                    <input
+                      type="checkbox"
+                      name="targets[integration:{{ int.slug }}]"
+                      id="input-target-integration-{{ int.slug }}"
+                      class="form-control mr-1"
+                      data-target="{{ int.displayName }} Integration"
+                      data-price="{{ prices['integration:' ~ int.slug] }}"
+                      {% if billingPromo and 'integration:' ~ int.slug in billingPromo.targets %}
+                        checked
+                      {% endif %}
+                      {% if billingPromo %}
+                        onclick="return false;"
+                      {% endif %}
+                    />
+                    {{ int.displayName }}
+                  </label>
+              </td>
+              <td class="text-right">
+                ${{ (prices['integration:' ~ int.slug] / 100)|number_format(2) }}
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+
+      <div class="form-widget">
+        <label for="input-description">
+          Description
+        </label>
+        <textarea
+          id="input-description"
+          name="description"
+          class="form-control"
+          {% if billingPromo %}readonly{% endif %}
+        >{% if billingPromo %}{{ billingPromo.description }}{% endif %}</textarea>
+        <div class="form-help">
+          Short description describing the promotion. (Not shown in invoices.)
+        </div>
+      </div>
+
+      {% if not billingPromo %}
+        <button type="submit" class="btn btn-main">
+          Submit
+        </button>
+      {% endif %}
+    </form>
+  </div>
+{% endblock %}

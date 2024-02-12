@@ -1,0 +1,10 @@
+{# This partial template is rendered by Dashboard/IndexController. Do not remove. #}
+{% set isDisabled = false %}
+{% if not isInitialOwner and billingPlan.isSolo and billingPlan.isTrialComplete %}
+  {% set isDisabled = true %}
+{% endif %}
+<div class="db-templates{% if isDisabled %} disabled{% endif %}">
+  {% for templateIndex, template in templates %}
+    {% include "dashboard/blocks/template/template.html.twig" %}
+  {% endfor %}
+</div>

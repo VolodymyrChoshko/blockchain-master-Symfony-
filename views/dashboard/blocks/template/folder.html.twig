@@ -1,0 +1,30 @@
+{% import "dashboard/blocks/template/macros.html.twig" as macros %}
+<div
+  class="db-template-folder d-flex align-items-center justify-content-between border-top p-2"
+  data-fid="{{ folder.id }}"
+  data-title="{{ folder.name }}"
+  data-indentation="{{ indentation }}"
+>
+  <div class="d-flex flex-grow-1 align-items-center mr-3 p-1">
+    <span class="btn-icon btn-icon-folder icon-folder pointer mr-1"></span>
+    {{ macros.renameableTitle(folder.name, folder.id) }}
+  </div>
+  <div class="db-template-author text-left ml-auto"> </div>
+  <div class="db-template-actions">
+    <button class="btn btn-transparent btn-icon btn-icon-remove" title="Delete"></button>
+  </div>
+</div>
+<div class="db-template-folder-emails" style="display: none;">
+  {% for email in folder.emails %}
+    {% include "dashboard/blocks/template/email.html.twig" %}
+  {% endfor %}
+</div>
+<div class="db-template-folder-folders" style="display: none;">
+  {% set indentation = indentation + 1 %}
+  {% for child in folder.children %}
+    {% include "dashboard/blocks/template/folder.html.twig" with {
+      folder: child
+    } %}
+  {% endfor %}
+  {% set indentation = indentation - 1 %}
+</div>

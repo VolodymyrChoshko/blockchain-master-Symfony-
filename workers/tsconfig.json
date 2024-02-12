@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "isolatedModules": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+    ],
+    "target": "esnext",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "sourceMap": true,
+    "rootDirs": [
+      "src",
+      "../assets/js",
+    ],
+    "outDir": "build",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@src/*": [
+        "*"
+      ],
+      "@assets/*": [
+        "../../assets/js/*"
+      ],
+      "utils/*": [
+        "../../assets/js/utils/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "../assets/js"
+  ],
+  "exclude": [
+    "./node_modules/",
+    "./build/"
+  ]
+}

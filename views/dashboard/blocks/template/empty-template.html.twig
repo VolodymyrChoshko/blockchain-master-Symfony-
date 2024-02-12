@@ -1,0 +1,27 @@
+{% set template = {
+  tmp_id: 0
+} %}
+<form
+  method="post"
+  style="display: none;"
+  action="{{ path('index') }}"
+  class="db-template-empty-form"
+  enctype="multipart/form-data"
+>
+  <div class="db-template db-template-empty mx-auto rounded-normal mb-3">
+    <div class="db-template-head d-flex">
+      {% include "dashboard/blocks/template/template-thumbnail.html.twig" %}
+      <div class="db-template-head-info d-flex flex-column flex-grow-2 p-2">
+        <div class="h-50 pt-1">
+          <div class="db-template-renameable w-100">
+            {% set id = 0 %}
+            {% include "dashboard/blocks/template/title-input.html.twig" with {
+              "display": "flex"
+            } %}
+            <input type="hidden" name="temporary_template" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

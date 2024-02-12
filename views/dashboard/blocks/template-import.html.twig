@@ -1,0 +1,37 @@
+<section class="container container-wide db-template-import d-flex align-items-center p-0 mb-3">
+  <form method="post" action="{{ path('index') }}" enctype="multipart/form-data">
+    <button
+      type="button"
+      class="btn btn-transparent text-link font-size btn-icon btn-icon-export mr-3"
+    >
+      Upload new template
+    </button>
+    {% if hasSources and not isIntegrationsDisabled %}
+      <button
+        type="button"
+        class="btn btn-transparent btn-icon btn-icon-sources text-link font-size show-import"
+        data-oid="{{ oid }}"
+      >
+        Import from source
+      </button>
+    {% else %}
+      <a href="{{ path('account') }}#integrations" class="btn-icon btn-icon-sources font-size text-link">
+        Import from source
+      </a>
+    {% endif %}
+    <input
+      type="file"
+      name="template"
+      class="db-template-upload-input"
+      value=""
+      accept=".html,.zip"
+    />
+  </form>
+  <a
+    href="https://blocksedit.com/developer/"
+    class="btn-icon btn-icon-guide d-block text-light ml-auto"
+    target="_blank"
+  >
+    Editable tags guide
+  </a>
+</section>

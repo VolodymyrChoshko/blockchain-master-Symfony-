@@ -1,0 +1,252 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <style>
+    .db-template-head-thumb {
+      border-right: 0;
+    }
+  </style>
+  <div class="container container-wide card mb-2">
+    <div class="card-header mb-2 p-0 position-relative">
+      <h2 class="font-size">
+        #{{ template.tmp_id }} &middot; {{ template.tmp_title }}
+      </h2>
+    </div>
+
+    <form
+      action="{{ path("admin_templates_edit", { id: template.tmp_id }) }}"
+      method="post"
+    >
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-title">
+            Title
+          </label>
+          <input
+            name="title"
+            id="input-title"
+            class="form-control"
+            value="{{ template.tmp_title }}"
+            required
+          />
+        </div>
+
+        <div class="form-widget w-100"></div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-oid">
+            Organization
+          </label>
+          <input
+            name="oid"
+            id="input-oid"
+            class="form-control"
+            value="{{ template.tmp_org_id }}"
+            required
+          />
+        </div>
+
+        <div class="form-widget w-100">
+          <label id="input-owner-label" for="input-owner">
+            Owner
+          </label>
+          <div class="d-flex">
+            <input
+              name="owner"
+              id="input-owner"
+              class="form-control"
+              value="{% if owner %}{{ owner.usr_name }} ({{ owner.usr_email }}){% endif %}"
+              data-orig="{% if owner %}{{ owner.usr_name }} ({{ owner.usr_email }}){% endif %}"
+              placeholder="Email address"
+              readonly
+              required
+            />
+            <button type="button" class="btn btn-alt btn-change-owner">Change</button>
+          </div>
+        </div>
+      </div>
+
+      <input id="input-owner-changed" type="hidden" name="ownerChanged" value="0" />
+
+      <button type="submit" class="btn-main mr-1">
+        Update
+      </button>
+      <a href="{{ path("admin_templates_html") }}?type=template&id={{ template.tmp_id }}" class="btn btn-alt btn-sm mr-1">
+        Edit HTML
+      </a>
+      <a href="{{ previewUrl }}" class="btn btn-alt" target="_blank" rel="noopener noreferrer">
+        Preview
+      </a>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      let $btnOwner = $('.btn-change-owner');
+
+      $btnOwner.on('click', function(e) {
+        let $owner = $('#input-owner');
+        if ($owner.prop('readonly')) {
+          $owner.prop('readonly', false);
+          $owner.val('');
+          $owner.focus();
+          $btnOwner.text('Cancel');
+          $('#input-owner-changed').val('1');
+        } else {
+          $owner.prop('readonly', true);
+          $owner.val($owner.data('orig'));
+          $btnOwner.text('Change');
+          $('#input-owner-changed').val('0');
+        }
+      });
+    })
+  </script>
+
+  <div class="container container-wide card mb-2" style="overflow: visible;">
+    <h2 class="font-size">
+      Editors
+    </h2>
+    <div class="form-help mb-2">
+      Uncheck to remove users from the template.
+    </div>
+
+    <form action="{{ path("admin_templates_members", { id: template.tmp_id }) }}" method="post">
+      <div class="mb-3">
+        {% for editor in editors %}
+          <div class="form-widget w-50 p-2 mb-2 border rounded-normal">
+            <label class="d-flex mb-0" for="input-editor-{{ editor.usr_id }}">
+              <input
+                type="checkbox"
+                name="editors[{{ editor.usr_id }}]"
+                id="input-editor-{{ editor.usr_id }}"
+                class="form-control mr-1"
+                checked
+              />
+              {{ editor.usr_name }} ({{ editor.usr_email }})
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+
+      <h2 class="font-size">
+        Add Editor
+      </h2>
+      <div class="form-help mb-2">
+        Invitation will be sent to user.
+      </div>
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label class="d-block" for="input-email">
+            Email address
+          </label>
+          <input
+            type="search"
+            name="email"
+            id="input-email"
+            class="form-control auto-complete-users"
+            data-users-name-target="#input-name"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-widget w-100">
+          <label class="d-block" for="input-name">
+            Name
+          </label>
+          <input
+            name="name"
+            id="input-name"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-main d-block">
+        Update
+      </button>
+    </form>
+  </div>
+
+  <div class="container container-wide card mb-2">
+    <h2 class="font-size">
+      Emails
+    </h2>
+    {% if emails|length == 0 %}
+      <p>No emails found.</p>
+    {% else %}
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Date Updated</th>
+            <th>Date Created</th>
+            <th style="width: 240px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for email in emails %}
+            <tr class="row-email" data-room="email-{{ email.ema_token }}">
+              <td>{{ email.ema_id }}</td>
+              <td>{{ email.ema_title }}</td>
+              <td>{{ email.ema_updated_at|date('F j, Y') }}</td>
+              <td>{{ email.ema_created_at|date('F j, Y') }}</td>
+              <td class="text-right row-email-buttons">
+                <a href="{{ path("admin_templates_html") }}?type=email&id={{ email.ema_id }}" class="btn btn-alt btn-sm">
+                  Edit HTML
+                </a>
+                <a href="{{ email.previewUrl }}" class="btn btn-alt btn-sm" target="_blank" rel="noopener noreferrer">
+                  Preview
+                </a>
+                <a
+                  href="{{ path("admin_templates_delete_email", { id: template.tmp_id, eid: email.ema_id }) }}"
+                  class="btn btn-danger btn-sm btn-delete-email"
+                >
+                  Delete
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+  <script>
+    $(function() {
+      $('.btn-delete-email').on('click', function(e) {
+        e.preventDefault();
+
+        jConfirmSimple('Are you sure you want to delete this email?', { 'Yes': 'btn-danger', 'No': 'btn-alt' })
+          .then(() => {
+            document.location.href = e.target.getAttribute('href');
+          });
+      })
+    })
+  </script>
+
+  <div class="container container-wide card mb-2 d-flex">
+    <form
+      id="form-delete-template"
+      class="ml-auto" action="{{ path("admin_templates_delete", { id: template.tmp_id }) }}"
+      method="post"
+    >
+      <button type="submit" class="btn btn-danger">
+        DELETE TEMPLATE
+      </button>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      $('#form-delete-template').on('submit', function(e) {
+        e.preventDefault();
+        jConfirmSimple(
+          '<h2>DELETE TEMPLATE</h2>Are you sure you want to delete this template? This action cannot be undone.',
+          { 'Yes': 'btn-danger', 'No': 'btn-alt' }
+        )
+          .then(function() {
+            e.target.submit();
+          });
+      });
+    });
+  </script>
+{% endblock %}

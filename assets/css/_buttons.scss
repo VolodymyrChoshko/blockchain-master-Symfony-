@@ -1,0 +1,136 @@
+@import "vars";
+
+.btn {
+  margin: 0;
+  border: 0;
+  color: #FFF;
+  cursor: pointer;
+  padding: 0 $gutter-3 2px $gutter-3;
+  font-size: $font-size-sm;
+  line-height: 30px;
+  font-weight: 400;
+  border-radius: 50px;
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  border-bottom-width: 2px;
+  white-space: nowrap;
+
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+}
+
+.btn-lg {
+  padding: $gutter-2 $gutter-3;
+}
+
+.btn-sm {
+  padding: 0 $gutter-2;
+}
+
+.btn-wide {
+  font-size: 16px;
+  width: 100%;
+  padding: 4px 8px;
+  display: block;
+}
+
+/* Standard button */
+
+.btn-main {
+  @extend .btn;
+  background-color: #009bcb;
+
+  &.disabled,
+  &:disabled {
+    color: #777;
+    cursor: default;
+    background: linear-gradient(#aaa, #ddd) !important;
+    text-shadow: rgba(255,255,255,0.4) 1px 1px 0;
+  }
+}
+
+.btn-alt {
+  @extend .btn;
+  color: #fff !important;
+  background: #414141 !important;
+
+  &.darkmode {
+    color: #222 !important;
+    background: linear-gradient(#ececec, #a8a8a8)!important;
+    text-shadow: rgba(255, 255, 255, 0.4) -0.5px -0.5px 0;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: #777;
+    background: linear-gradient(#aaa, #ddd) !important;
+    text-shadow: rgba(255,255,255,0.4) 1px 1px 0;
+  }
+}
+
+.btn-transparent {
+  @extend .btn;
+  background-color: transparent;
+  padding: 0 5px 2px;
+}
+
+/* The edit button */
+
+.btn-edit {
+  @extend .btn;
+  background: -webkit-linear-gradient(#ec3557, #D34A7E) !important;
+
+  &.disabled,
+  &:disabled {
+    color: #777 !important;
+    background: -webkit-linear-gradient(#aaa, #ddd) !important;
+  }
+}
+
+/* The save button */
+
+.btn-save {
+  @extend .btn-main;
+}
+
+/* Other */
+
+.btn-danger {
+  @extend .btn;
+  background: -webkit-linear-gradient(#ee2f29, #dd1712) !important;
+
+  &.disabled,
+  &:disabled {
+    color: #aaa;
+    background: none;
+  }
+}
+
+.btn-link {
+  border: 0;
+  color: #000;
+  padding: 0 !important;
+  background: transparent;
+  font-size: 24px !important;
+
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+}
+
+.btn-group {
+  .btn,
+  button,
+  a {
+    margin-right: $gutter-2;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

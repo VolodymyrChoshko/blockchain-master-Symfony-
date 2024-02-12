@@ -1,0 +1,145 @@
+{% extends "layout/root.html.twig" %}
+{% macro dateSelect(prefix, selected) %}
+  {% set day = selected.format('j') %}
+  {% set month = selected.format('n') %}
+  {% set year = selected.format('Y') %}
+  <div class="d-flex">
+    <label class="sr-only" for="input-period-{{ prefix }}-day">
+      Day
+    </label>
+    <select name="{{ prefix }}[day]" id="input-period-{{ prefix }}-day" class="form-control mr-1">
+      {% for i in range(1, 31) %}
+        <option value="{{ i }}"{% if i == day %} selected{% endif %}>{{ i }}</option>
+      {% endfor %}
+    </select>
+    <label class="sr-only" for="input-period-{{ prefix }}-month">
+      Month
+    </label>
+    <select name="{{ prefix }}[month]" id="input-period-{{ prefix }}-month" class="form-control mr-1">
+      {% for i in range(1, 12) %}
+        <option value="{{ i }}"{% if i == month %} selected{% endif %}>{{ i|toLongMonth }}</option>
+      {% endfor %}
+    </select>
+    <label class="sr-only" for="input-period-{{ prefix }}-year">
+      Year
+    </label>
+    <select name="{{ prefix }}[year]" id="input-period-{{ prefix }}-year" class="form-control">
+      {% for i in range(2021, 2030) %}
+        <option value="{{ i }}"{% if i == year %} selected{% endif %}>{{ i }}</option>
+      {% endfor %}
+    </select>
+  </div>
+{% endmacro %}
+
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <h2 class="mb-2">
+      Create Invoice &middot; #{{ org.org_id }} {{ org.org_name }}
+    </h2>
+
+    <form method="post">
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-50">
+          <label for="input-description">
+            Description
+          </label>
+          <input
+            name="description"
+            id="input-description"
+            class="form-control"
+            maxlength="255"
+            required
+          />
+          <div class="form-help">
+            Displayed on the organization billing page.
+          </div>
+        </div>
+
+        <div class="form-widget w-50">
+          <label>
+            Date Created
+          </label>
+          {{ _self.dateSelect('created', invoice.dateCreated) }}
+          <div class="form-help">
+            Displayed on the organization billing page.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-50">
+          <label>
+            Period Start
+          </label>
+          {{ _self.dateSelect('start', invoice.datePeriodStart) }}
+          <div class="form-help">
+            Displayed in the invoice PDF.
+          </div>
+        </div>
+
+        <div class="form-widget w-50">
+          <label>
+            Period End
+          </label>
+          {{ _self.dateSelect('end', invoice.datePeriodEnd) }}
+          <div class="form-help">
+            Displayed in the invoice PDF.
+          </div>
+        </div>
+      </div>
+
+      <h2 class="mb-2">
+        Line Items
+      </h2>
+
+      {% set lineItems = invoice.items %}
+      {% for i in range(0, 6) %}
+        <div class="d-flex">
+          <div class="form-widget mr-4 w-75">
+            <label for="input-item-description-{{ i }}">
+              Description
+            </label>
+            <input
+              name="descriptions[{{ i }}]"
+              id="input-item-description-{{ i }}"
+              class="form-control"
+              value="{% if lineItems[i] is defined %}{{ lineItems[i].description }}{% endif %}"
+            />
+          </div>
+
+          <div class="form-widget w-25">
+            <label for="input-item-amount-{{ i }}">
+              Amount
+            </label>
+            <input
+              name="amounts[{{ i }}]"
+              id="input-item-amount-{{ i }}"
+              class="form-control"
+              placeholder="0.00"
+              value="{% if lineItems[i] is defined %}{{ (lineItems[i].amountCents * 100)|number_format(2) }}{% endif %}"
+            />
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="mb-4">
+        <label for="input-notes">
+          Notes
+        </label>
+        <textarea
+          name="notes"
+          class="form-control"
+          id="input-notes"
+          maxlength="500"
+        >{{ invoice.notes }}</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-main">
+        Review
+      </button>
+      <input type="hidden" name="action" value="create" />
+      <input type="hidden" name="id" value="{{ invoice.id }}" />
+    </form>
+  </div>
+{% endblock %}

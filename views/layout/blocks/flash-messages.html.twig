@@ -1,0 +1,10 @@
+<script>
+  document.addEventListener('be-modals-loaded', function() {
+    {% for message in flasher.getMessages('success') %}
+    window.jNotice('success', '{{ message }}');
+    {% endfor %}
+    {% for message in flasher.getMessages('error') %}
+    window.jNotice('error', '{{ message }}');
+    {% endfor %}
+  });
+</script>

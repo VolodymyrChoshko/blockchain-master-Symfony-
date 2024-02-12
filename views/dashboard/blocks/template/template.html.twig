@@ -1,0 +1,33 @@
+<div
+  class="db-template mx-auto rounded-normal mb-3"
+  data-tid="{{ template.tmp_id }}"
+  data-title="{{ template.tmp_title }}"
+>
+  {# Template #}
+  <div class="db-template-head d-flex">
+    {% include "dashboard/blocks/template/template-thumbnail.html.twig" %}
+    {% include "dashboard/blocks/template/template-info.html.twig" %}
+    {% include "dashboard/blocks/template/template-actions.html.twig" %}
+  </div>
+
+  {% set indentation = 0 %}
+
+  {# Emails #}
+  {% if template.emails|default %}
+    <div class="db-template-emails d-flex flex-column">
+      {% for email in template.emails %}
+        {% include "dashboard/blocks/template/email.html.twig" %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# Folders #}
+  {% if template.folders|default %}
+    <div class="db-template-folders d-flex flex-column">
+      {% set indentation = 1 %}
+      {% for folder in template.folders %}
+        {% include "dashboard/blocks/template/folder.html.twig" %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

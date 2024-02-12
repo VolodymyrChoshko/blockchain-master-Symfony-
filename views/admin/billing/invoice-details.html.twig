@@ -1,0 +1,103 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <h2>
+      Invoice #{{ invoice.id }} {{ invoice.dateCreated|date("F j, Y") }}
+    </h2>
+    <div class="mb-2">
+      {{ invoice.datePeriodStart|date("F j, Y") }} - {{ invoice.datePeriodEnd|date("F j, Y") }}
+    </div>
+
+    <table class="table table-bordered table-striped mb-2">
+      <tfoot>
+        <tr style="background-color: #BBBBBB;">
+          <td class="text-right" colspan="2">
+            ${{ (invoice.amountCents / 100)|number_format(2) }}
+          </td>
+        </tr>
+      </tfoot>
+      <tbody>
+      {% for item in invoice.items %}
+        <tr>
+          <td>{{ item.description }}</td>
+          <td class="text-right">
+            {% if item.amountCents < 0 or item.type == "discount" %}
+              -${{ (item.amountCents / 100)|replace({ '-': '' })|number_format(2) }}
+            {% else %}
+              ${{ (item.amountCents / 100)|number_format(2) }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    {% if invoice.notes %}
+      <div class="mb-2">
+        <h2>Notes</h2>
+        <p>{{ invoice.notes }}</p>
+      </div>
+    {% endif %}
+
+    <h2>
+      Credit Card Transaction
+    </h2>
+    {% if billingTransaction %}
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Org</th>
+            <th>Amount</th>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ billingTransaction.id }}</td>
+            <td>{{ billingTransaction.orgId }}</td>
+            <td>${{ (billingTransaction.amountCents / 100)|number_format(2) }}</td>
+            <td>{{ billingTransaction.transactionId }}</td>
+            <td>{{ billingTransaction.dateCreated|date("F j, Y") }}</td>
+            <td class="text-right">
+              <a
+                href="{{ path("admin_billing_transactions_refund", { id: invoice.id }) }}"
+                class="btn btn-alt btn-sm btn-invoice-refund"
+              >
+                Refund
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    {% else %}
+      <div class="mb-2">
+        This invoice did not involve a credit card charge.
+      </div>
+    {% endif %}
+  </div>
+  <script>
+    $(function() {
+      $('.btn-invoice-refund').on('click', function(e) {
+        e.preventDefault();
+        window.jConfirm('', 'Are you sure you want to refund this transaction?', {
+          ok: {
+            text: 'Ok',
+            btnClass: 'btn-danger',
+            action: function() {
+              document.location.href = e.target.getAttribute('href');
+            }
+          },
+          cancel: {
+            text: 'Cancel',
+            btnClass: 'btn-alt',
+            action: function() {}
+          }
+        });
+      })
+    });
+  </script>
+{% endblock %}

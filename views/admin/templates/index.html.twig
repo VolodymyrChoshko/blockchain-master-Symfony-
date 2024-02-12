@@ -1,0 +1,49 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4">
+    <h2>
+      Templates
+    </h2>
+    <small class="d-block font-size-sm mb-2">
+      Found {{ total|number_format }} templates. Showing page {{ page|number_format }} of {{ totalPages|number_format }}.
+    </small>
+
+    <form action="{{ path("admin_templates_index") }}" method="get">
+      <div class="form-widget d-flex align-items-center">
+        <label class="sr-only" for="input-search">
+          Template Title or ID
+        </label>
+        <input
+          type="text"
+          name="search"
+          id="input-search"
+          class="form-control mr-2"
+          placeholder="Template Title or ID"
+          value="{{ search }}"
+        />
+        <label class="sr-only" for="input-org">
+          Organization ID
+        </label>
+        <input
+          type="text"
+          name="org"
+          id="input-org"
+          class="form-control mr-2"
+          placeholder="Organization ID"
+          value="{{ searchOrg }}"
+        />
+        <button class="btn btn-alt">Search</button>
+      </div>
+    </form>
+
+    {% include "admin/blocks/table-templates.html.twig" %}
+  </div>
+  <div class="container container-wide text-center mb-4 p-0" style="background-color: transparent">
+    {% include "layout/blocks/pagination.html.twig" with {
+      "current": page,
+      "total": totalPages,
+      "url": "/admin/templates?page="
+    } %}
+  </div>
+{% endblock %}

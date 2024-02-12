@@ -1,0 +1,34 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4">
+    <h2 class="mb-2">
+      Log Record
+    </h2>
+    <table class="table table-bordered table-striped mb-2">
+      <tr>
+        <td style="width: 10%">Date</td>
+        <td>{{ logRecord.dateCreated|date('Y-m-d H:i:s') }}</td>
+      </tr>
+      <tr>
+        <td style="width: 10%">Level</td>
+        <td>{{ logRecord.level|logLevelName }}</td>
+      </tr>
+      <tr>
+        <td style="width: 10%">Channel</td>
+        <td>{{ logRecord.channel }}</td>
+      </tr>
+    </table>
+    <h2 class="mb-2">
+      Message
+    </h2>
+    <div class="admin-log-message">{{ logRecord.message|trim }}</div>
+
+    {% if logRecord.context %}
+      <h2 class="mb-2 mt-2">
+        Context
+      </h2>
+      <div class="admin-log-message">{{ logRecord.context|jsonFormat|trim }}</div>
+    {% endif %}
+  </div>
+{% endblock %}

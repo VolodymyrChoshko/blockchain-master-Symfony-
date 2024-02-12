@@ -1,0 +1,132 @@
+{
+    "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb"],
+    "env": {
+        "browser": true,
+        "mocha": true,
+        "node": true,
+        "jest": true,
+        "jasmine": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "max-len": [
+            1,
+            {
+                "code": 120,
+                "ignoreComments": true,
+                "ignoreUrls": true,
+                "ignorePattern": "^import\\s.+"
+            }
+        ],
+        "camelcase": 0,
+        "quote-props": 0,
+        "object-curly-newline": 0,
+        "default-case": 0,
+        "arrow-body-style": 0,
+        "no-unreachable": 0,
+        "import/no-cycle": 0,
+        "no-underscore-dangle": 0,
+        "import/no-named-as-default-member": 0,
+        "no-return-assign": 0,
+        "dot-notation": 0,
+        "prefer-destructuring": 0,
+        "no-confusing-arrow": 0,
+        "no-restricted-globals": 0,
+        "template-curly-spacing": 0,
+        "react/no-find-dom-node": 0,
+        "react/no-multi-comp": 0,
+        "react/prop-types": 0,
+        "react/no-danger": 0,
+        "react/button-has-type": 0,
+        "react/require-default-props": 0,
+        "react/no-array-index-key": 0,
+        "react/no-did-update-set-state": 0,
+        "jsx-a11y/label-has-for": 0,
+        "jsx-a11y/no-noninteractive-tabindex": 0,
+        "jsx-a11y/media-has-caption": 0,
+        "jsx-a11y/iframe-has-title": 0,
+        "jsx-a11y/label-has-associated-control": 0,
+        "jsx-a11y/no-noninteractive-element-interactions": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/anchor-is-valid": 0,
+        "jsx-a11y/href-no-hash": 0,
+        "jsx-quotes": [
+            2,
+            "prefer-double"
+        ],
+        "key-spacing": 0,
+        "no-multi-spaces": [
+            0,
+            {
+                "exceptions": {
+                    "VariableDeclarator": true
+                }
+            }
+        ],
+        "react/prefer-stateless-function": 0,
+        "react/jsx-one-expression-per-line": 0,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2,
+        "arrow-parens": 0,
+        "no-var": 2,
+        "vars-on-top": 0,
+        "comma-dangle": 0,
+        "new-cap": 0,
+        "no-console": 0,
+        "no-plusplus": 0,
+        "indent": [
+            0,
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "valid-jsdoc": 0,
+        "import/no-unresolved": 0,
+        "import/extensions": 0,
+        "import/no-extraneous-dependencies": ["off"],
+        "jsx-a11y/no-static-element-interactions": 0,
+        "react/forbid-foreign-prop-types": 0,
+        "react/forbid-prop-types": [
+            "error",
+            {"forbid": ["any"]}
+        ],
+        "import/prefer-default-export": "off",
+        "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
+        "class-methods-use-this": 0,
+        "jsx-a11y/tabindex-no-positive": 0,
+        "strict": 0,
+        "no-param-reassign": 0,
+        "no-mixed-operators": "off"
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y"
+    ],
+    "settings": {
+        "import/resolver": {
+            "babel-module": {  }
+        },
+        "import/extensions": [".js", ".jsx"],
+        "react": {
+            "version": "16.3.1"
+            // React version, default to the latest React stable release
+        }
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "legacyDecorators": true
+        }
+    },
+    "globals": {
+        "$": true,
+        "jQuery": true,
+        "oid": true,
+        "__ENV__": true,
+        "Cookies": true,
+        "Stripe": true,
+        "clients": true
+    }
+}

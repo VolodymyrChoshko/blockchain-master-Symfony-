@@ -1,0 +1,284 @@
+imports:
+    - { resource: config.yaml }
+
+services:
+    _defaults:
+        autowire: true
+        public: true
+    BlocksEdit\:
+        resource: '../src/BlocksEdit/*'
+        exclude:
+            - '../src/BlocksEdit/{Integrations,View,Command,Http,Storage,Annotations}'
+            - '../src/BlocksEdit/Twig/TwigFilesystemCache.php'
+            - '../src/BlocksEdit/Html/HtmlData.php'
+            - '../src/BlocksEdit/Html/JSLikeHTMLElement.php'
+            - '../src/BlocksEdit/Service/Message.php'
+            - '../src/BlocksEdit/Database/Where*'
+            - '../src/BlocksEdit/Database/Annotations/*'
+            - '../src/BlocksEdit/Database/ArrayEntity.php'
+            - '../src/BlocksEdit/Database/Query.php'
+            - '../src/BlocksEdit/Database/Update.php'
+            - '../src/BlocksEdit/Database/Select.php'
+            - '../src/BlocksEdit/Database/Insert.php'
+            - '../src/BlocksEdit/Database/ReflectionPropertyAccessor.php'
+            - '../src/BlocksEdit/Cache/CacheTag.php'
+            - '../src/BlocksEdit/Media/AmazonCDN.php'
+            - '../src/BlocksEdit/Util/UploadExtract.php'
+            - '../src/BlocksEdit/Controller/Forward.php'
+            - '../src/BlocksEdit/System/RequiredCompilerPass.php'
+    Repository\:
+        resource: '../src/Repository/*'
+    Command\:
+        resource: '../src/Command/*'
+    Service\:
+        resource: '../src/Service/*'
+        exclude:
+            - '../src/Service/Export/ExportResults.php'
+    ## ################################
+    ## Repositories
+    ## ################################
+    BlocksEdit\Database\Repository:
+        abstract: true
+        calls:
+            - ['setFiles']
+            - ['setPaths']
+            - ['setLogger']
+    Repository\OrganizationsRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\TemplatesRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\EmailRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\ImagesRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\UserRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\AccessRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\BillingAdjustmentRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\BillingLogRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\BillingPlanRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\BillingPromoRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\BillingTransactionRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\ComponentsRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\SectionsRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\OrganizationAccessRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\CredentialsRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\CreditCardRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\DevEmailRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\EmailHistoryRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\EmailLinkParamRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\EmailTemplateRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\FoldersRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\InvitationsRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\InvoiceItemRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\InvoiceRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\LogRecordRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\NoSendRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\NoticeRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\NoticeSeenRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\OnboardingSentRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\SectionLibraryRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\SourcesRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\TemplateHistoryRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\TemplateLinkParamRepository:
+        parent: BlocksEdit\Database\Repository
+    Repository\TemplateSourcesRepository:
+        parent: BlocksEdit\Database\Repository
+    ## ################################
+    ## Twig Extensions
+    ## ################################
+    BlocksEdit\Twig\Extensions\AssetsExtension:
+        arguments:
+            - '@BlocksEdit\Config\Config'
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\AvatarExtension:
+        arguments:
+            - '@BlocksEdit\Config\Config'
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\GrantsExtension:
+        arguments:
+            - '@BlocksEdit\Http\SessionInterface'
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\NonceExtension:
+        arguments:
+            - '@BlocksEdit\Html\NonceGeneratorInterface'
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\RouteExtension:
+        arguments:
+            - '@BlocksEdit\Http\RouteGenerator'
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\StringExtension:
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\IntegrationsExtension:
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\FormExtension:
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\FileSystemExtension:
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\DateExtension:
+        tags: ['twig.extension']
+    BlocksEdit\Twig\Extensions\DumpExtension:
+        tags: ['twig.extension']
+    ## ################################
+    ## Commands
+    ## ################################
+    Command\CdnCleanCommand:
+
+    ## ################################
+    ## Blocks Edit
+    ## ################################
+    BlocksEdit\Http\Request:
+        factory: ['BlocksEdit\Http\Request', 'createFromGlobals']
+        arguments:
+            - '@BlocksEdit\Http\SessionInterface'
+    BlocksEdit\Config\Config:
+        factory: [BlocksEdit\Config\ConfigFactory, create]
+        arguments:
+            - '%env%'
+            - '%be.cacheDir%'
+            - '%be.configDir%'
+            - '%be.projectDir%'
+    BlocksEdit\Database\PDO:
+        arguments:
+            - '%pdo%'
+    BlocksEdit\Security\OpenSSL:
+        arguments:
+            - '%certs%'
+    BlocksEdit\Http\RouteGenerator:
+        arguments:
+            - '%env%'
+            - '%be.cacheDir%'
+    BlocksEdit\Http\Router:
+        arguments:
+            - '@BlocksEdit\Http\RouteGenerator'
+    BlocksEdit\Html\NonceGeneratorInterface:
+        class: BlocksEdit\Html\NonceGenerator
+    BlocksEdit\Html\FlasherInterface:
+        class: BlocksEdit\Html\Flasher
+    BlocksEdit\Http\RouteGeneratorInterface:
+        class: BlocksEdit\Http\RouteGenerator
+        arguments:
+            - '%env%'
+            - '%be.cacheDir%'
+    BlocksEdit\Controller\ControllerInvokerInterface:
+        class: BlocksEdit\Controller\ControllerInvoker
+    BlocksEdit\Service\ChromeServiceInterface:
+        class: BlocksEdit\Service\ChromeService
+        arguments:
+            - '%chromeServiceUrl%'
+    BlocksEdit\Email\MailerInterface:
+        class: BlocksEdit\Email\SmtpMailer
+        arguments:
+            - '@Repository\DevEmailRepository'
+            - '%email%'
+        calls:
+            - [setLogger, ['@Psr\Log\LoggerInterface']]
+    BlocksEdit\System\ClassFinderInterface:
+        class: BlocksEdit\System\ClassFinder
+    SessionHandlerInterface:
+        class: BlocksEdit\Http\SessionHandler
+        arguments:
+            - '@=service("BlocksEdit\\Database\\PDO").instance()'
+    BlocksEdit\Http\SessionInterface:
+        class: BlocksEdit\Http\Session
+        arguments:
+            - '@SessionHandlerInterface'
+    BlocksEdit\Twig\TwigRender:
+        arguments:
+            - '@BlocksEdit\Config\Config'
+    BlocksEdit\Command\CommandMatcherInterface:
+        class: BlocksEdit\Command\CommandMatcher
+    Service\LayoutUpgradeMessageQueue:
+        arguments:
+            - '@BlocksEdit\Config\Config'
+    Service\LibraryThumbnailsMessageQueue:
+        arguments:
+            - '@BlocksEdit\Config\Config'
+    Service\Export\HtmlToText:
+        class: Service\Export\HtmlToText
+    Service\Export\ExportService:
+        arguments:
+            - '@Service\Export\HtmlToText'
+            - '@=service("Service\\AuthService").getLoginId()'
+            - '@=service("BlocksEdit\\Http\\Request").getOrgSubdomain()'
+    BlocksEdit\Integrations\HookDispatcher:
+        arguments:
+            - '@Repository\SourcesRepository'
+            - '@Repository\TemplateSourcesRepository'
+            - '@=service("Service\\AuthService").getLoginId()'
+            - '@=service("BlocksEdit\\Http\\Request").getOrgSubdomain()'
+        calls:
+            - ['setLogger']
+    BlocksEdit\Media\CDNInterface:
+        class: BlocksEdit\Media\AmazonCDN
+        factory: [BlocksEdit\Media\CDNFactory, createInstance]
+    BlocksEdit\Service\WorkerInterface:
+        class: BlocksEdit\Service\Worker
+    BlocksEdit\Security\PasswordGeneratorInterface:
+        class: BlocksEdit\Security\Sha1PasswordGenerator
+    BlocksEdit\Html\Imagify:
+        calls:
+            - ['setAuth', ['@=service("Service\\AuthService").getLoginId()', '@=service("BlocksEdit\\Http\\Request").getOrgSubdomain()']]
+            - ['setDisplayService']
+            - ['setSourcesRepository']
+    BlocksEdit\Cache\CacheInterface:
+        class: BlocksEdit\Cache\RedisCache
+    BlocksEdit\Email\EmailSender:
+        calls:
+            - ['setExportService']
+            - ['setLogger']
+    BlocksEdit\Database\CacheTagInvalidator:
+        calls:
+            - ['setCache']
+    BlocksEdit\IO\Paths:
+        calls:
+            - ['setModifiableDirs', [['templates', 'screenshots', 'avatars', 'tmpUploads', 'downloads', 'cache', '/tmp', 'config']]]
+    BlocksEdit\IO\Files:
+        calls:
+            - ['setModifiableDirs', [['templates', 'screenshots', 'avatars', 'tmpUploads', 'downloads', 'cache', '/tmp', 'config']]]
+    ## ################################
+    ## Third Party
+    ## ################################
+    Redis:
+        class: Redis
+        factory: [BlocksEdit\System\RedisFactory, create]
+        arguments:
+            - '%redis%'
+    PDO:
+        class: PDO
+        factory: [BlocksEdit\Database\PDOFactory, create]
+    Psr\Log\LoggerInterface:
+        class: Psr\Log\LoggerInterface
+        factory: [BlocksEdit\Logging\LoggerFactory, create]
+    Symfony\Component\Form\FormFactoryInterface:
+        factory: [BlocksEdit\Html\FormBuilderFactory, create]
+    Aws\S3\S3Client:
+        class: Aws\S3\S3Client
+        factory: [BlocksEdit\System\S3ClientFactory, create]

@@ -1,0 +1,29 @@
+@import "vars";
+
+.pagination {
+  border-radius: $border-radius;
+  background-color: $color-light;
+  width: auto;
+  display: inline-block;
+  text-align: center;
+
+  .page-numbers {
+    padding: $gutter-2 $gutter-3;
+    border-right: 1px solid #d6d6d6;
+    color: $color-link;
+    display: inline-block;
+    min-width: 34px;
+
+    &.current {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}

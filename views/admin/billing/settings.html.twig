@@ -1,0 +1,66 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <h2 class="mb-2">
+      Plan Prices
+    </h2>
+
+    <form method="post">
+      {% for i, price in membershipPrices %}
+        <div class="d-flex align-items-center mb-1">
+          <label class="mr-2 w-25" for="input-membership-{{ price.id }}">
+            {{ price.label }}
+          </label>
+          <input
+            id="input-membership-{{ price.id }}"
+            name="membership[{{ price.id }}]"
+            class="form-control w-25"
+            value="{{ (price.amountCents / 100)|number_format(2) }}"
+          />
+        </div>
+      {% endfor %}
+
+      <h2 class="mb-2">
+        Integration Prices
+      </h2>
+      {% for i, price in integrationPrices %}
+        <div class="d-flex align-items-center mb-1">
+          <label class="mr-2 w-25" for="input-integration-{{ price.id }}">
+            {{ price.label }}
+          </label>
+          <input
+            id="input-integration-{{ price.id }}"
+            name="integration[{{ price.id }}]"
+            class="form-control w-25"
+            value="{{ (price.amountCents / 100)|number_format(2) }}"
+          />
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn-main d-block mr-1 mt-1">
+        Update
+      </button>
+    </form>
+  </div>
+
+  {#<div class="container container-wide card mb-2">
+    <h2>
+      Promo Codes
+    </h2>
+
+    <div class="d-flex mb-2">
+      <div class="form-widget mr-4 w-100">
+        <label for="input-code">
+          Code
+        </label>
+        <input
+          name="code"
+          id="input-code"
+          class="form-control"
+          value=""
+        />
+      </div>
+    </div>
+  </div>#}
+{% endblock %}

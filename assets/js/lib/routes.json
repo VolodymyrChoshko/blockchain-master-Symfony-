@@ -1,0 +1,1060 @@
+{
+    "admin_orgs_index": {
+        "path": "\/admin\/orgs",
+        "keys": []
+    },
+    "admin_orgs_create": {
+        "path": "\/admin\/orgs\/create",
+        "keys": []
+    },
+    "admin_orgs_edit": {
+        "path": "\/admin\/orgs\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_orgs_members": {
+        "path": "\/admin\/orgs\/{id}\/members",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_orgs_delete": {
+        "path": "\/admin\/orgs\/{id}\/delete",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_templates_index": {
+        "path": "\/admin\/templates",
+        "keys": []
+    },
+    "admin_templates_html": {
+        "path": "\/admin\/templates\/html",
+        "keys": []
+    },
+    "admin_templates_edit": {
+        "path": "\/admin\/templates\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_templates_members": {
+        "path": "\/admin\/templates\/{id}\/members",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_templates_delete": {
+        "path": "\/admin\/templates\/{id}\/delete",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_templates_delete_email": {
+        "path": "\/admin\/templates\/{id}\/emails\/{eid}",
+        "keys": {
+            "id": "*",
+            "eid": "*"
+        }
+    },
+    "admin_dashboard_index": {
+        "path": "\/admin",
+        "keys": []
+    },
+    "admin_dashboard_notices": {
+        "path": "\/admin\/notices",
+        "keys": []
+    },
+    "admin_dashboard_notices_create": {
+        "path": "\/admin\/notices\/create",
+        "keys": []
+    },
+    "admin_dashboard_notices_preview": {
+        "path": "\/admin\/notices\/preview",
+        "keys": []
+    },
+    "admin_dashboard_notices_edit": {
+        "path": "\/admin\/notices\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_dashboard_notices_remove": {
+        "path": "\/admin\/notices\/{id}\/remove",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_index": {
+        "path": "\/admin\/users",
+        "keys": []
+    },
+    "admin_users_edit": {
+        "path": "\/admin\/users\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_orgs": {
+        "path": "\/admin\/users\/{id}\/orgs",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_password_reset": {
+        "path": "\/admin\/users\/{id}\/password",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_2fa": {
+        "path": "\/admin\/users\/{id}\/2fa",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_login": {
+        "path": "\/admin\/users\/{id}\/login",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_delete": {
+        "path": "\/admin\/users\/{id}\/delete",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_users_": {
+        "path": "\/admin\/users\/email\/match",
+        "keys": []
+    },
+    "admin_promos_index": {
+        "path": "\/admin\/promos",
+        "keys": []
+    },
+    "admin_promos_create": {
+        "path": "\/admin\/promos\/create",
+        "keys": []
+    },
+    "admin_promos_view": {
+        "path": "\/admin\/promos\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_auth_login": {
+        "path": "\/admin\/login",
+        "keys": []
+    },
+    "admin_auth_login_verify": {
+        "path": "\/admin\/login\/verify",
+        "keys": []
+    },
+    "admin_billing_index": {
+        "path": "\/admin\/billing",
+        "keys": []
+    },
+    "admin_billing_create": {
+        "path": "\/admin\/billing\/create",
+        "keys": []
+    },
+    "admin_billing_settings": {
+        "path": "\/admin\/billing\/settings",
+        "keys": []
+    },
+    "admin_billing_plan": {
+        "path": "\/admin\/billing\/plan\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_adjustment": {
+        "path": "\/admin\/billing\/adjustment\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_adjustment_remove": {
+        "path": "\/admin\/billing\/adjustment\/{id}\/remove",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_invoice_create": {
+        "path": "\/admin\/billing\/invoices\/{id}\/create",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_invoice_preview_iframe": {
+        "path": "\/admin\/billing\/invoices\/{id}\/preview",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_invoice_details": {
+        "path": "\/admin\/billing\/invoices\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_card_remove": {
+        "path": "\/admin\/billing\/card\/{id}\/remove",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_transactions_refund": {
+        "path": "\/admin\/billing\/transactions\/{id}\/refund",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_billing_crons": {
+        "path": "\/admin\/billing\/crons",
+        "keys": []
+    },
+    "admin_email_index": {
+        "path": "\/admin\/email",
+        "keys": []
+    },
+    "admin_email_templates": {
+        "path": "\/admin\/email\/templates",
+        "keys": []
+    },
+    "admin_email_template_edit": {
+        "path": "\/admin\/email\/templates\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_email_template_test": {
+        "path": "\/admin\/email\/templates\/{id}\/test",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_email_view": {
+        "path": "\/admin\/email\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_email_iframe": {
+        "path": "\/admin\/email\/{id}\/iframe",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "admin_logs_index": {
+        "path": "\/admin\/logs",
+        "keys": []
+    },
+    "admin_logs_view": {
+        "path": "\/admin\/logs\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_checklist_check": {
+        "path": "\/build\/checklist\/{id}\/{key}",
+        "keys": {
+            "id": "\\d+",
+            "key": "*"
+        }
+    },
+    "build_export_email": {
+        "path": "\/build\/export\/email\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_export_email_img_base": {
+        "path": "\/build\/export\/email\/imgBase\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_export_zip_email": {
+        "path": "\/build\/export\/email\/{id}\/zip",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_export_html_email": {
+        "path": "\/build\/export\/email\/{id}\/html",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_export_pdf_email": {
+        "path": "\/build\/export\/email\/{id}\/pdf",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_export_send_link": {
+        "path": "\/build\/export\/send_link",
+        "keys": []
+    },
+    "build_export_text": {
+        "path": "\/build\/export\/text\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_export_rtf": {
+        "path": "\/build\/export\/rtf\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_notifications_status": {
+        "path": "\/build\/notifications\/{id}\/status",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_notifications_all_status": {
+        "path": "\/build\/notifications\/status",
+        "keys": []
+    },
+    "build_notifications_delete": {
+        "path": "\/build\/notifications\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_layout": {
+        "path": "\/build\/layout\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_layout_settings": {
+        "path": "\/build\/layout\/{id}\/settings",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_layout_get_html": {
+        "path": "\/build\/layout\/{id}\/html",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_layout_get_htmls": {
+        "path": "\/build\/layout\/htmls",
+        "keys": []
+    },
+    "build_layout_save_html": {
+        "path": "\/build\/layout\/{id}\/html",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_layout_load": {
+        "path": "\/build\/layout\/{id}\/{lid}",
+        "keys": {
+            "id": "*",
+            "lid": "*"
+        }
+    },
+    "build_layout_delete": {
+        "path": "\/build\/layout\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_images_upload": {
+        "path": "\/build\/images",
+        "keys": []
+    },
+    "build_images_crop": {
+        "path": "\/build\/images\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_images_delete": {
+        "path": "\/build\/images\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "image": {
+        "path": "\/imagify\/{token}\/{image}",
+        "keys": {
+            "token": "*",
+            "image": "*"
+        }
+    },
+    "build_images_transfer_progress": {
+        "path": "\/build\/images\/transfer\/{uuid}\/progress",
+        "keys": {
+            "uuid": "*"
+        }
+    },
+    "build_images_transfer": {
+        "path": "\/build\/images\/transfer\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_comments_redirect": {
+        "path": "\/build\/comments\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_comments_add": {
+        "path": "\/build\/comments\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_comments_reply": {
+        "path": "\/build\/comments\/{id}\/replies\/{cid}",
+        "keys": {
+            "id": "\\d+",
+            "cid": "\\d+"
+        }
+    },
+    "build_comments_update": {
+        "path": "\/build\/comments\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_comments_delete": {
+        "path": "\/build\/comments\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_comments_add_emoji": {
+        "path": "\/build\/comments\/{id}\/emojis",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_comments_delete_emoji": {
+        "path": "\/build\/comments\/{id}\/emojis\/{uuid}",
+        "keys": {
+            "id": "\\d+",
+            "uuid": "*"
+        }
+    },
+    "build_email_get_html": {
+        "path": "\/build\/email\/{id}\/html",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_email": {
+        "path": "\/build\/email\/{tid}\/{id}",
+        "keys": {
+            "tid": "\\d+",
+            "id": "\\d+"
+        }
+    },
+    "build_email_version": {
+        "path": "\/build\/email\/{tid}\/{id}\/versions\/{version}",
+        "keys": {
+            "tid": "\\d+",
+            "id": "\\d+",
+            "version": "\\d+"
+        }
+    },
+    "build_save": {
+        "path": "\/build\/email\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_email_html": {
+        "path": "\/build\/email\/{id}\/html",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_email_preview": {
+        "path": "\/preview\/e\/{tid}\/{id}\/{token}",
+        "keys": {
+            "tid": "\\d+",
+            "id": "\\d+",
+            "token": "*"
+        }
+    },
+    "build_email_preview_version": {
+        "path": "\/preview\/e\/{tid}\/{id}\/{token}\/{version}",
+        "keys": {
+            "tid": "\\d+",
+            "id": "\\d+",
+            "version": "\\d+",
+            "token": "*"
+        }
+    },
+    "build_email_settings": {
+        "path": "\/build\/email\/{id}\/settings",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_email_upgrade": {
+        "path": "\/build\/email\/{id}\/upgrade",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_email_history": {
+        "path": "\/build\/email\/{id}\/history",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_duplicate_email": {
+        "path": "\/build\/email\/{id}\/duplicate",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "builder_delete_email": {
+        "path": "\/build\/email\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_library": {
+        "path": "\/build\/library",
+        "keys": []
+    },
+    "build_libraries": {
+        "path": "\/build\/libraries",
+        "keys": []
+    },
+    "build_library_get_htmls": {
+        "path": "\/build\/library\/htmls",
+        "keys": []
+    },
+    "build_library_update": {
+        "path": "\/build\/library\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_library_delete": {
+        "path": "\/build\/library\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "build_libraries_pin_groups_save": {
+        "path": "\/build\/libraries\/{id}\/pinGroups",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_libraries_pin_groups_update": {
+        "path": "\/build\/libraries\/pinGroups\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_libraries_pin_groups_delete": {
+        "path": "\/build\/libraries\/pinGroups\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_filter_html": {
+        "path": "\/build\/template\/filterHtml",
+        "keys": []
+    },
+    "build_template": {
+        "path": "\/build\/template\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_version": {
+        "path": "\/build\/template\/{id}\/versions\/{version}",
+        "keys": {
+            "id": "\\d+",
+            "version": "\\d+"
+        }
+    },
+    "build_template_preview": {
+        "path": "\/preview\/t\/{id}\/{token}",
+        "keys": {
+            "id": "\\d+",
+            "token": "*"
+        }
+    },
+    "build_template_html": {
+        "path": "\/build\/template\/{id}\/html",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_save": {
+        "path": "\/build\/template\/{id}\/save",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_upload": {
+        "path": "\/build\/template",
+        "keys": []
+    },
+    "build_template_upload_new_version": {
+        "path": "\/build\/template\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_templates_layout_upload": {
+        "path": "\/build\/template\/{id}\/layouts",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_templates_uploading_status": {
+        "path": "\/build\/uploadingStatus\/{uuid}",
+        "keys": {
+            "uuid": "*"
+        }
+    },
+    "build_template_download": {
+        "path": "\/build\/template\/{id}\/download",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_delete": {
+        "path": "\/build\/template\/{id}",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_preview_version": {
+        "path": "\/preview\/t\/{id}\/{token}\/{version}",
+        "keys": {
+            "id": "\\d+",
+            "version": "\\d+",
+            "token": "*"
+        }
+    },
+    "build_template_upgrade": {
+        "path": "\/build\/template\/{id}\/upgrade",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_upgrade_status": {
+        "path": "\/build\/template\/{id}\/upgradeStatus",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_upgrade_check": {
+        "path": "\/build\/template\/{id}\/upgradeCheck",
+        "keys": {
+            "id": "\\d+"
+        }
+    },
+    "build_template_rules_edit_start": {
+        "path": "\/build\/template\/rulesEditor\/start",
+        "keys": []
+    },
+    "build_template_fetch": {
+        "path": "\/build\/template\/out\/fetch",
+        "keys": []
+    },
+    "api_v1_auth_login": {
+        "path": "\/api\/v1\/auth\/login",
+        "keys": []
+    },
+    "api_v1_auth_id_providers": {
+        "path": "\/api\/v1\/auth\/idProviders",
+        "keys": []
+    },
+    "api_v1_auth_forgot_password": {
+        "path": "\/api\/v1\/auth\/forgotpassword",
+        "keys": []
+    },
+    "api_v1_auth_reset_password": {
+        "path": "\/api\/v1\/auth\/resetpassword",
+        "keys": []
+    },
+    "login": {
+        "path": "\/login",
+        "keys": []
+    },
+    "logout": {
+        "path": "\/logout",
+        "keys": []
+    },
+    "reset_password": {
+        "path": "\/resetpassword\/{token}",
+        "keys": {
+            "token": "*"
+        }
+    },
+    "signup": {
+        "path": "\/signup",
+        "keys": []
+    },
+    "api_v1_signup": {
+        "path": "\/api\/v1\/account\/signup",
+        "keys": []
+    },
+    "integrations_index": {
+        "path": "\/integrations",
+        "keys": []
+    },
+    "api_v1_integrations": {
+        "path": "\/api\/v1\/integrations",
+        "keys": []
+    },
+    "integrations_add": {
+        "path": "\/integrations\/{slug}\/add",
+        "keys": {
+            "slug": "*"
+        }
+    },
+    "integrations_settings": {
+        "path": "\/integrations\/{sid}\/settings",
+        "keys": {
+            "sid": "*"
+        }
+    },
+    "integrations_oauth_redirect": {
+        "path": "\/integrations\/{slug}\/oauth_redirect",
+        "keys": {
+            "slug": "*"
+        }
+    },
+    "integrations_remove": {
+        "path": "\/integrations\/{iid}\/remove",
+        "keys": {
+            "iid": "*"
+        }
+    },
+    "integrations_test": {
+        "path": "\/integrations\/test",
+        "keys": []
+    },
+    "integrations_authenticate": {
+        "path": "\/integrations\/authenticate",
+        "keys": []
+    },
+    "integrations_settings_get": {
+        "path": "\/integrations\/{oid}\/{sid}\/settings",
+        "keys": {
+            "oid": "*",
+            "sid": "*"
+        }
+    },
+    "integrations_settings_update": {
+        "path": "\/integrations\/{sid}\/settings",
+        "keys": {
+            "sid": "*"
+        }
+    },
+    "integrations_enabled": {
+        "path": "\/integrations\/enabled",
+        "keys": []
+    },
+    "integrations_email_hook": {
+        "path": "\/integrations\/hook\/email\/{id}\/{name}",
+        "keys": {
+            "id": "*",
+            "name": "*"
+        }
+    },
+    "integrations_sources": {
+        "path": "\/integrations\/sources",
+        "keys": []
+    },
+    "index": {
+        "path": "\/",
+        "keys": []
+    },
+    "webpush": {
+        "path": "\/webpush",
+        "keys": []
+    },
+    "index_template": {
+        "path": "\/t\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "api_v1_templates": {
+        "path": "\/api\/v1\/templates",
+        "keys": []
+    },
+    "templates_search": {
+        "path": "\/api\/v1\/templates\/search",
+        "keys": []
+    },
+    "templates_update": {
+        "path": "\/api\/v1\/templates\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "templates_delete": {
+        "path": "\/api\/v1\/templates\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "templates_emails": {
+        "path": "\/api\/v1\/templates\/{id}\/emails",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "templates_emails_create": {
+        "path": "\/api\/v1\/templates\/{id}\/emails",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "templates_emails_update": {
+        "path": "\/api\/v1\/templates\/{id}\/emails\/{eid}",
+        "keys": {
+            "id": "*",
+            "eid": "*"
+        }
+    },
+    "templates_fu_notice": {
+        "path": "\/api\/v1\/templates\/notices\/firstUse",
+        "keys": []
+    },
+    "templates_last": {
+        "path": "\/api\/v1\/templates\/settings\/last",
+        "keys": []
+    },
+    "template_settings": {
+        "path": "\/api\/v1\/templates\/{id}\/settings",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "template_settings_save": {
+        "path": "\/api\/v1\/templates\/{id}\/settings",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "people": {
+        "path": "\/people\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "api_v1_people": {
+        "path": "\/api\/v1\/people\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "api_v1_people_invite": {
+        "path": "\/api\/v1\/people\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "api_v1_people_invite_remove": {
+        "path": "\/api\/v1\/people\/{id}\/invites\/{rid}",
+        "keys": {
+            "id": "*",
+            "rid": "*"
+        }
+    },
+    "stats": {
+        "path": "\/stats\/export-email",
+        "keys": []
+    },
+    "templates_folders_update": {
+        "path": "\/api\/v1\/templates\/{id}\/folders\/{fid}",
+        "keys": {
+            "id": "*",
+            "fid": "*"
+        }
+    },
+    "templates_folders_create": {
+        "path": "\/api\/v1\/templates\/{id}\/folders",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "templates_folders_move": {
+        "path": "\/api\/v1\/templates\/{id}\/folders",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "templates_folder_delete": {
+        "path": "\/api\/v1\/templates\/{id}\/folders\/{fid}",
+        "keys": {
+            "id": "*",
+            "fid": "*"
+        }
+    },
+    "templates_folder_collapse": {
+        "path": "\/api\/v1\/templates\/{id}\/folders\/{fid}\/collapse",
+        "keys": {
+            "id": "*",
+            "fid": "*"
+        }
+    },
+    "unsubscribe": {
+        "path": "\/unsubscribe\/{base64_email}",
+        "keys": {
+            "base64_email": "*"
+        }
+    },
+    "profile_index": {
+        "path": "\/profile",
+        "keys": []
+    },
+    "api_v1_profile": {
+        "path": "\/api\/v1\/profile",
+        "keys": []
+    },
+    "api_v1_profile_save_notifications": {
+        "path": "\/api\/v1\/profile\/notifications",
+        "keys": []
+    },
+    "profile_upload_avatar": {
+        "path": "\/api\/v1\/profile\/avatar",
+        "keys": []
+    },
+    "change_password": {
+        "path": "\/api\/v1\/profile\/changepassword",
+        "keys": []
+    },
+    "profile_set_webpush": {
+        "path": "\/api\/v1\/profile\/webpush",
+        "keys": []
+    },
+    "profile_set_skin_tone": {
+        "path": "\/api\/v1\/profile\/skinTone",
+        "keys": []
+    },
+    "account": {
+        "path": "\/account",
+        "keys": []
+    },
+    "api_v1_account": {
+        "path": "\/api\/v1\/account",
+        "keys": []
+    },
+    "api_v1_account_organization": {
+        "path": "\/api\/v1\/account\/organization",
+        "keys": []
+    },
+    "api_v1_account_organization_revoke": {
+        "path": "\/api\/v1\/account\/organization\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "api_v1_account_organization_invite": {
+        "path": "\/api\/v1\/account\/organization",
+        "keys": []
+    },
+    "api_v1_account_cancel": {
+        "path": "\/api\/v1\/account",
+        "keys": []
+    },
+    "invite": {
+        "path": "\/invite\/{tid}\/{token}",
+        "keys": {
+            "tid": "\\d+",
+            "token": "*"
+        }
+    },
+    "invite_organization": {
+        "path": "\/invite\/organization\/{token}",
+        "keys": {
+            "token": "*"
+        }
+    },
+    "timezone": {
+        "path": "\/timezone",
+        "keys": []
+    },
+    "billing": {
+        "path": "\/billing",
+        "keys": []
+    },
+    "api_v1_billing": {
+        "path": "\/api\/v1\/billing",
+        "keys": []
+    },
+    "billing_upgrade": {
+        "path": "\/billing\/upgrade",
+        "keys": []
+    },
+    "api_v1_billing_upgrade": {
+        "path": "\/api\/v1\/billing\/upgrade",
+        "keys": []
+    },
+    "billing_downgrade": {
+        "path": "\/billing\/downgrade",
+        "keys": []
+    },
+    "api_v1_billing_downgrade": {
+        "path": "\/api\/v1\/billing\/downgrade",
+        "keys": []
+    },
+    "billing_extend": {
+        "path": "\/billing\/extend",
+        "keys": []
+    },
+    "billing_cards_remove": {
+        "path": "\/billing\/cards\/remove",
+        "keys": []
+    },
+    "api_v1_billing_cards_remove": {
+        "path": "\/api\/v1\/billing\/cards\/remove",
+        "keys": []
+    },
+    "billing_cc_update": {
+        "path": "\/billing\/cc_update",
+        "keys": []
+    },
+    "billing_invoice": {
+        "path": "\/billing\/invoice\/{id}",
+        "keys": {
+            "id": "*"
+        }
+    },
+    "integration_sso_login": {
+        "path": "\/sso\/login",
+        "keys": []
+    },
+    "integration_sso_acs": {
+        "path": "\/sso",
+        "keys": []
+    },
+    "integration_sso_metadata": {
+        "path": "\/sso\/metadata.xml",
+        "keys": []
+    },
+    "integration_sso_sls": {
+        "path": "\/sso\/sls",
+        "keys": []
+    },
+    "integration_sso_cert": {
+        "path": "\/sso\/cert",
+        "keys": []
+    }
+}

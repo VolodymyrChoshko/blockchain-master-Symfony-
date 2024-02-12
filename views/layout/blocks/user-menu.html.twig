@@ -1,0 +1,59 @@
+{% if user is defined and user.usr_id|default %}
+  <div class="user-menu-toggle pointer">
+    {{ user|avatar(60, { class: "mr-0" }) }}
+    <ul class="user-menu">
+      {% if user.usr_is_site_admin %}
+        <li>
+          <a href="{{ path('admin_dashboard_index') }}">
+            Admin Tools
+          </a>
+        </li>
+      {% endif %}
+      <li>
+        <a href="{{ path('profile') }}">
+          My profile
+        </a>
+      </li>
+      {% if organizations|default and organizations|length > 1 %}
+        <li>
+          My accounts
+        </li>
+        {% for organization in organizations %}
+          {% if organization.org_is_owner|default %}
+            <li class="user-menu-organization-li">
+              <a href="{{ path('account', [], 'absolute', organization.org_id) }}">
+                {{ organization.org_name }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% for organization in organizations %}
+          {% if not organization.org_is_owner|default %}
+            <li class="user-menu-organization-li">
+              <a href="{{ path('account', [], 'absolute', organization.org_id) }}">
+                {{ organization.org_name }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      {% elseif organizations|default and organizations|length == 1 %}
+        <li>
+          <a href="{{ path('account', [], 'absolute', organizations[0].org_id) }}">
+            My account
+          </a>
+        </li>
+      {% endif %}
+      <li>
+        {% if user.usr_parent_id %}
+          <a href="{{ path('logout') }}">
+            Log out
+          </a>
+        {% else %}
+          <a href="{{ config.uri }}{{ path('logout') }}">
+            Log out
+          </a>
+        {% endif %}
+      </li>
+    </ul>
+  </div>
+{% endif %}

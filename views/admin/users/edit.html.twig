@@ -1,0 +1,291 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <div class="d-flex align-items-center mb-3">
+      {{ user|avatar(60, { class: 'admin-user-avatar' }) }}
+      <div>
+        <h2 class="font-size mb-1" style="line-height: 1rem;">
+          {{ user.usr_name }} ({{ user.usr_email }})
+        </h2>
+        <small class="d-block font-size-sm">
+          Joined {{ user.usr_created_at|date('F j, Y') }}
+        </small>
+      </div>
+    </div>
+
+    <form
+      action="{{ path("admin_users_edit", { id: user.usr_id }) }}"
+      method="post"
+    >
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-name">
+            Name
+          </label>
+          <input
+            name="name"
+            id="input-name"
+            class="form-control"
+            value="{{ user.usr_name }}"
+            required
+          />
+        </div>
+
+        <div class="form-widget w-100">
+          <label for="input-email">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="input-email"
+            class="form-control"
+            value="{{ user.usr_email }}"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label for="input-job">
+            Role
+          </label>
+          <input
+            name="job"
+            id="input-job"
+            class="form-control"
+            value="{{ user.usr_job }}"
+          />
+        </div>
+
+        <div class="form-widget w-100">
+          <label for="input-organization">
+            Organization
+          </label>
+          <input
+            name="organization"
+            id="input-organization"
+            class="form-control"
+            value="{{ user.usr_organization }}"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-50">
+          <label for="input-timezone">
+            Timezone
+          </label>
+          <select id="input-timezone" name="timezone" class="form-control">
+            {% for key, name in timezones %}
+              <option value="{{ key }}"{% if key == user.usr_timezone %} selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-widget w-50">
+          <label for="input-referral">
+            Referral
+          </label>
+          <input
+            name="referral"
+            id="input-referral"
+            class="form-control"
+            value="{{ user.usr_join_ref }}"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-50">
+          <label for="input-is-site-admin">
+            <input
+              type="checkbox"
+              name="isSiteAdmin"
+              id="input-is-site-admin"
+              class="form-control"
+              {% if user.usr_is_site_admin %}checked="checked"{% endif %}
+              {% if parent %}disabled{% endif %}
+            />
+            Site Admin
+          </label>
+          <div class="form-help">
+            You will be prompted to set 2FA after submitting this form.
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-main d-block mr-2">
+        Update
+      </button>
+    </form>
+  </div>
+
+  <div class="container container-wide card mb-2">
+    <form action="{{ path("admin_users_password_reset", { id: user.usr_id }) }}" method="post">
+      <div class="d-flex w-50">
+        <div class="form-widget mr-4 w-100">
+          <label class="d-block" for="input-password">
+            Reset Password
+          </label>
+          <input
+            type="text"
+            name="password"
+            id="input-password"
+            class="form-control mr-4"
+            {% if parent %}disabled{% endif %}
+          />
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn-main mr-2"{% if parent %} disabled{% endif %}>
+          Reset
+        </button>
+        {% if not parent %}
+          <a href="{{ path("admin_users_2fa", { id: user.usr_id }) }}" class="btn btn-alt">
+            Set 2FA
+          </a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
+  <div class="container container-wide card mb-2">
+    <h2 class="font-size">
+      Organizations
+    </h2>
+    <div class="form-help mb-2">
+      Uncheck to remove the user from the org.
+    </div>
+
+    <form action="{{ path("admin_users_orgs", { id: user.usr_id }) }}" method="post">
+      {% for org in orgs %}
+        <div class="form-widget w-100 p-2 mb-2 border rounded-normal">
+          <label class="d-flex align-items-center mb-0" for="input-org-{{ org.org_id }}">
+            <input
+              type="checkbox"
+              name="{% if parent %}{% else %}orgs[{{ org.org_id }}]{% endif %}"
+              id="input-org-{{ org.org_id }}"
+              class="form-control mr-2"
+              {% if parent %}disabled{% endif %}
+              checked
+            />
+            {% if parent %}
+              <input type="hidden" name="orgs[{{ org.org_id }}]" value="on" />
+            {% endif %}
+            <div class="flex-grow-1">
+              #{{ org.org_id }} &middot; {{ org.org_name }}
+            </div>
+            <div class="d-flex pt-2">
+              <label for="input-access-{{ org.org_id }}-1" class="mb-0" style="margin-left: -6px">
+                <input
+                  type="radio"
+                  name="accesses[{{ org.org_id }}]"
+                  value="1"
+                  id="input-access-{{ org.org_id }}-1"
+                  {% if org.rba_access == "1" %}checked{% endif %}
+                />
+                Owner
+              </label>
+              <label for="input-access-{{ org.org_id }}-2" class="mb-0 ml-2">
+                <input
+                  type="radio"
+                  name="accesses[{{ org.org_id }}]"
+                  value="2"
+                  id="input-access-{{ org.org_id }}-2"
+                  {% if org.rba_access == "2" %}checked{% endif %}
+                />
+                Admin
+              </label>
+              <label for="input-access-{{ org.org_id }}-3" class="mb-0 ml-2">
+                <input
+                  type="radio"
+                  name="accesses[{{ org.org_id }}]"
+                  value="3"
+                  id="input-access-{{ org.org_id }}-3"
+                  {% if org.rba_access == "3" %}checked{% endif %}
+                />
+                Editor
+              </label>
+            </div>
+          </label>
+        </div>
+      {% endfor %}
+
+      <h2 class="font-size mb-2">
+        Add To Organization
+      </h2>
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-100">
+          <label class="d-block" for="input-oid">
+            Organization ID
+          </label>
+          <input
+            type="number"
+            name="oid"
+            id="input-oid"
+            class="form-control mr-4"
+            {% if parent %}disabled{% endif %}
+          />
+        </div>
+        <div class="form-widget w-100">
+          <label class="d-block" for="input-access">
+            Access
+          </label>
+          <select name="access" id="input-access" class="form-control"{% if parent %} disabled{% endif %}>
+            <option value="1">Owner</option>
+            <option value="2">Admin</option>
+            <option value="3">Editor</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-main d-block mb-2">
+        Update
+      </button>
+    </form>
+  </div>
+
+  <script>
+    $(function() {
+      $('.tr-template').on('click', function(e) {
+        let tid = e.currentTarget.getAttribute('data-template-id');
+        document.location.href = '/admin/templates/' + tid;
+      });
+    });
+  </script>
+
+  <div class="container container-wide card mb-2 d-flex">
+    <a href="{{ path("admin_users_login", { id: user.usr_id }) }}" class="btn btn-main btn-login-as-user">
+      Login as User
+    </a>
+    <form id="form-delete-user" class="ml-auto" action="{{ path("admin_users_delete", { id: user.usr_id }) }}" method="post">
+      <button type="submit" class="btn btn-danger">
+        DELETE USER
+      </button>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      $('#form-delete-user').on('submit', function(e) {
+        e.preventDefault();
+        jConfirmSimple(
+          '<h2>DELETE USER</h2>Are you sure you want to delete this user? This action cannot be undone.',
+          { 'Yes': 'btn-danger', 'No': 'btn-alt' }
+        )
+          .then(function() {
+            e.target.submit();
+          });
+      });
+
+      $('.btn-login-as-user').on('click', function(e) {
+        e.preventDefault();
+
+        if (confirm('Are you sure you want to login as this user?')) {
+          document.location.href = e.target.getAttribute('href');
+        }
+      });
+    });
+  </script>
+{% endblock %}

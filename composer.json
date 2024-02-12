@@ -1,0 +1,75 @@
+{
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "BlocksEdit\\": "src/BlocksEdit/",
+      "Controller\\": "src/Controller",
+      "Entity\\": "src/Entity",
+      "Command\\": "src/Command",
+      "Repository\\": "src/Repository",
+      "Middleware\\": "src/Middleware",
+      "Tag\\": "src/Tag",
+      "Service\\": "src/Service",
+      "Tests\\BlocksEdit\\": "./tests/BlocksEdit"
+    }
+  },
+  "scripts": {
+    "post-deploy": "bin/version.sh && bin/console cache:clear --env=prod",
+    "tests": "phpunit --colors=always --verbose",
+    "lint": "phpstan analyse -c phpstan.neon"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Youpie/simple-html-dom"
+    }
+  ],
+  "require": {
+    "sunra/php-simple-html-dom-parser": "1.5.2",
+    "zaininnari/html-minifier": "0.4.2",
+    "stripe/stripe-php": "4.5.1",
+    "microweber/screen": "^1.0",
+    "ext-pdo": "*",
+    "ext-zip": "*",
+    "ext-json": "*",
+    "monolog/monolog": "^1.24",
+    "sabberworm/php-css-parser": "^8.3",
+    "phpseclib/phpseclib": "^2.0",
+    "nicolab/php-ftp-client": "^1.5",
+    "aws/aws-sdk-php": "^3.93",
+    "gumlet/php-image-resize": "^1.9",
+    "guzzlehttp/guzzle": "^6.3",
+    "symfony/property-access": "^5.0",
+    "swiftmailer/swiftmailer": "^6.0",
+    "onelogin/php-saml": "3.4.1",
+    "soundasleep/html2text": "^1.1",
+    "doctrine/annotations": "^1.10",
+    "symfony/routing": "^5.0",
+    "symfony/dependency-injection": "^5.0",
+    "symfony/config": "^5.0",
+    "symfony/yaml": "^5.0",
+    "symfony/expression-language": "^5.0",
+    "symfony/error-handler": "^5.0",
+    "google/apiclient": "^2.7",
+    "twig/twig": "^3.1",
+    "symfony/form": "^5.1",
+    "symfony/security-csrf": "^5.1",
+    "symfony/twig-bridge": "^5.1",
+    "symfony/validator": "^5.1",
+    "klaviyo/php-sdk": "^2.2",
+    "phpgangsta/googleauthenticator": "dev-master",
+    "wa72/url": "dev-master",
+    "minishlink/web-push": "^v6.0.7",
+    "ext-redis": "*",
+    "ext-dom": "*",
+    "ext-gmp": "*",
+    "spomky-labs/base64url": "v2.x-dev",
+    "jstewmc/rtf": "0.4.3",
+    "ezyang/htmlpurifier": "dev-master",
+    "neitanod/forceutf8": "dev-master"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.0",
+    "phpunit/phpunit": "^8"
+  }
+}

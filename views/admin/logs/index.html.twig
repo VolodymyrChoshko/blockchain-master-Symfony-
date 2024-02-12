@@ -1,0 +1,52 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4">
+    <h2>
+      Logs
+    </h2>
+    <small class="d-block font-size-sm mb-2">
+      Found {{ total|number_format }} logs. Showing page {{ page|number_format }} of {{ totalPages|number_format }}.
+    </small>
+
+    <form action="{{ path("admin_logs_index") }}" method="get">
+      <div class="form-widget d-flex align-items-center">
+        <label class="sr-only" for="input-search">
+          Message
+        </label>
+        <input
+          type="text"
+          name="search"
+          id="input-search"
+          class="form-control mr-2"
+          placeholder="Message"
+          value="{{ search }}"
+        />
+        <label class="sr-only" for="input-level">
+          Level
+        </label>
+        <select name="level" id="input-level" class="form-control mr-2">
+          <option value=""{% if not searchLevel %} selected{% endif %}>Level</option>
+          <option value="100"{% if searchLevel == "100" %} selected{% endif %}>DEBUG</option>
+          <option value="200"{% if searchLevel == "200" %} selected{% endif %}>INFO</option>
+          <option value="250"{% if searchLevel == "250" %} selected{% endif %}>NOTICE</option>
+          <option value="300"{% if searchLevel == "300" %} selected{% endif %}>WARNING</option>
+          <option value="400"{% if searchLevel == "400" %} selected{% endif %}>ERROR</option>
+          <option value="500"{% if searchLevel == "500" %} selected{% endif %}>CRITICAL</option>
+          <option value="550"{% if searchLevel == "550" %} selected{% endif %}>ALERT</option>
+          <option value="600"{% if searchLevel == "600" %} selected{% endif %}>EMERGENCY</option>
+        </select>
+        <button class="btn btn-alt">Search</button>
+      </div>
+    </form>
+
+    {% include "admin/blocks/table-log-records.html.twig" %}
+  </div>
+  <div class="container container-wide text-center mb-4 p-0" style="background-color: transparent">
+    {% include "layout/blocks/pagination.html.twig" with {
+      "current": page,
+      "total": totalPages,
+      "url": "/admin/logs?page="
+    } %}
+  </div>
+{% endblock %}

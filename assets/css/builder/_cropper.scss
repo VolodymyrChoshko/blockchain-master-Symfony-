@@ -1,0 +1,50 @@
+@import "~cropperjs/dist/cropper.css";
+@import "../vars";
+
+.cropper-view-box {
+  opacity: 1 !important;
+  outline: 1px solid #1297be !important;
+}
+
+.cropper-point {
+  height: 10px !important;
+  width: 10px !important;
+  opacity: 1 !important;
+  background-color: #1297be !important;
+
+  &.point-e {
+    right: -5px;
+  }
+
+  &.point-n {
+    top: -5px;
+  }
+
+  &.point-s {
+    bottom: -5px;
+  }
+
+  &.point-w {
+    left: -5px;
+  }
+
+  &.point-sw {
+    bottom: -5px;
+    left: -5px;
+  }
+
+  &.point-nw {
+    left: -5px;
+    top: -5px;
+  }
+
+  &.point-ne {
+    right: -5px;
+    top: -5px;
+  }
+
+  &.point-se {
+    bottom: -5px;
+    right: -5px;
+  }
+}

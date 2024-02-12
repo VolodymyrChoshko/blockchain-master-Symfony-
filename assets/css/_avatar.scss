@@ -1,0 +1,24 @@
+@import "vars";
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 5px;
+  border-radius: 100%;
+  font-weight: 500;
+  color: #fff;
+  font-size: $font-size-sm;
+  vertical-align: middle;
+  text-align: center;
+  background: linear-gradient(#67CF96, #91CF5C);
+}
+
+.avatar-lg {
+  width: 120px;
+  height: 120px;
+  font-size: 60px;
+  line-height: 117px;
+}

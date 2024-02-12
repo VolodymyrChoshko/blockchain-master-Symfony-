@@ -1,0 +1,185 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4">
+    <h2 class="mb-2">{{ template.name }}</h2>
+
+    <form method="post">
+      <div class="float-right" style="width: 45%">
+        <div class="font-weight-bold mb-2">
+          Variables
+        </div>
+        <ul class="list-style-none">
+          {% for var in template.variables|split(",") %}
+            <li>
+              <code style="font-family: monospace">{{ '{{ ' ~ var ~ ' }}' }}</code>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="form-widget w-50">
+        <label for="input-subject">
+          Subject
+        </label>
+        <input
+          type="text"
+          name="subject"
+          id="input-subject"
+          class="form-control"
+          value="{{ template.subject }}"
+          required
+        />
+      </div>
+
+      <div class="form-widget mr-4 w-50">
+        <label for="input-no-send-check">
+          <input
+            type="checkbox"
+            name="noSendCheck"
+            id="input-no-send-check"
+            class="form-control"
+            {% if template.noSendCheck %}checked="checked"{% endif %}
+          />
+          No Send Check
+        </label>
+        <div class="form-help">
+          When checked don't send this email to users who have opted out of receiving emails.
+        </div>
+      </div>
+
+      <label class="d-block mb-2">Location</label>
+      <div class="mb-4">
+        <div class="mb-2">
+          <label for="input-location-disk">
+            <input
+              type="radio"
+              name="location"
+              value="disk"
+              id="input-location-disk"
+              {% if template.location == "disk" %}checked{% endif %}
+            />
+            Disk
+          </label>
+          <div class="form-help">
+            Template committed to source code.
+          </div>
+        </div>
+        <div class="mb-2">
+          <label for="input-location-database">
+            <input
+              type="radio"
+              name="location"
+              value="database"
+              id="input-location-database"
+              {% if template.location == "database" %}checked{% endif %}
+            />
+            Database
+          </label>
+          <div class="form-help">
+            Template saved in the database.
+          </div>
+        </div>
+        <div>
+          <label for="input-location-builder">
+            <input
+              type="radio"
+              name="location"
+              value="builder"
+              id="input-location-builder"
+              {% if template.location == "builder" %}checked{% endif %}
+            />
+            Builder
+          </label>
+          <div class="form-help">
+            Template created in the builder.
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap-location" id="wrap-location-database"{% if template.location != "database" %} style="display: none;"{% endif %}>
+        <div class="form-widget">
+          <label for="input-content">
+            Content
+          </label>
+          <textarea name="content" id="input-content" class="form-control" style="height: 300px;">{{ template.content }}</textarea>
+        </div>
+      </div>
+
+      <div class="wrap-location" id="wrap-location-builder"{% if template.location != "builder" %} style="display: none;"{% endif %}>
+        <div class="form-widget">
+          <label for="input-builder-id">
+            Email ID
+          </label>
+          <input
+            type="number"
+            name="emaId"
+            id="input-builder-id"
+            class="form-control"
+            value="{{ template.emaId }}"
+          />
+          <div class="form-help">
+            The email ID as seen in the builder address bar.
+          </div>
+          <div
+            id="ema-id-check-image-wrap"
+            class="border mb-2 mt-2"
+            style="max-height: 200px; width: 200px; overflow: hidden; {% if not screenshot %}display: none;{% endif %}"
+          >
+            <img src="{{ screenshot }}" id="ema-id-check-image" alt="" />
+          </div>
+          <div id="ema-id-check-title" class="text-center" style="width: 200px">
+            {{ title }}
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-main mr-1">
+        Save
+      </button>
+      <button type="button" class="btn btn-alt btn-send-test">
+        Send Test
+      </button>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      $('input[name="location"]').on('change', function(e) {
+        $('.wrap-location').slideUp('fast');
+        let $form = $('#wrap-location-' + e.target.value);
+        $form.slideDown('fast');
+      });
+
+      $('.btn-send-test').on('click', function(e) {
+        showEmailTemplateTestModal({
+          id:        {{ template.id }},
+          variables: '{{ template.variables }}',
+          subject:   document.getElementById('input-subject').value,
+          location:  $('input[name=location]:checked').val(),
+          content:   document.getElementById('input-content').value,
+          emaId:     document.getElementById('input-builder-id').value
+        });
+      });
+
+      $('#input-builder-id').on('input', function(e) {
+        let $title = $('#ema-id-check-title');
+        let $image = $('#ema-id-check-image');
+        let $wrap  = $('#ema-id-check-image-wrap');
+
+        $.ajax({
+          url: '/admin/email/templates/{{ template.id }}?emaIdCheck=' + e.target.value
+        }).done(function(resp) {
+          if (!resp) {
+            $title.html('');
+            $wrap.hide();
+            $image.attr('src', '');
+          } else {
+            $title.html(resp.title);
+            $image.attr('src', resp.screenshot);
+            $wrap.show();
+          }
+        });
+      })
+    });
+  </script>
+{% endblock %}

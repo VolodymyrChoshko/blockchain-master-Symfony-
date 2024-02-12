@@ -1,0 +1,119 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <h2>
+      {% if adjustment.id == 0 %}Create{% else %}Edit{% endif %}
+      Adjustment for Organization #{{ billingPlan.orgId }} {{ org.org_name }}
+    </h2>
+    <small class="d-block font-size-sm {% if adjustment.status == "pending" %}mb-4{% else %}mb-2{% endif %}">
+      Adds a line item to the customer's next invoice to charge or credit their account.
+    </small>
+    {% if adjustment.status != "pending" %}
+      <small class="d-block font-size-sm mb-4 text-danger">
+        Adjustment cannot be changed because it has already been applied.
+      </small>
+    {% endif %}
+
+    {% set action = path("admin_billing_adjustment", { id: billingPlan.orgId }) %}
+    {% if aid %}
+      {% set action = path("admin_billing_adjustment", { id: billingPlan.orgId }) ~ "?aid=" ~ aid %}
+    {% endif %}
+
+    <form id="form-adjustment" action="{{ action }}" method="post">
+      <div class="d-flex mb-2">
+        <div class="form-widget mr-4 w-75">
+          <label for="input-description">
+            Description
+          </label>
+          <input
+            name="description"
+            id="input-description"
+            class="form-control"
+            maxlength="500"
+            value="{{ adjustment.description }}"
+            required
+          />
+          <div class="form-help">
+            Displayed on the invoice as a line item.
+          </div>
+        </div>
+
+        <div class="form-widget w-25{% if adjustment.status == "applied_partially" %} mr-2{% endif %}">
+          <label for="input-amount">
+            Amount
+          </label>
+          <div class="d-flex">
+            <input
+              name="amount"
+              id="input-amount"
+              class="form-control"
+              placeholder="0.00"
+              value="{{ (adjustment.amountCents / 100)|number_format(2) }}"
+              required
+            />
+          </div>
+          <div class="form-help">
+            Positive or negative amount.
+          </div>
+        </div>
+
+        {% if adjustment.status == "applied_partially" %}
+          <div class="form-widget w-25">
+            <label for="input-remaining">
+              Amount Remaining
+            </label>
+            <div class="d-flex">
+              <input
+                name="remaining"
+                id="input-remaining"
+                class="form-control"
+                placeholder="0.00"
+                value="{{ (adjustment.remainingCents / 100)|number_format(2) }}"
+                required
+              />
+            </div>
+            <div class="form-help">
+              Amount remaining to be applied.
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="d-flex mb-2">
+        <div class="form-widget w-100">
+          <label for="input-reason">
+            Reason
+          </label>
+          <textarea
+            name="reason"
+            id="input-reason"
+            class="form-control"
+            maxlength="500"
+          >{{ adjustment.reason }}</textarea>
+          <div class="form-help">
+            For internal records, not seen by the customer.
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-main d-block"{% if adjustment.status != "pending" %} disabled{% endif %}>
+        Save
+      </button>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      $('#form-adjustment').on('submit', function(e) {
+        let amount = parseFloat($('#input-amount').val());
+        if (amount > 0) {
+          e.preventDefault();
+          jConfirmSimple('Amount is not negative which charges the customer more on their next invoice. Are you sure?')
+            .then(() => {
+              e.target.submit();
+            });
+        }
+      });
+    })
+  </script>
+{% endblock %}

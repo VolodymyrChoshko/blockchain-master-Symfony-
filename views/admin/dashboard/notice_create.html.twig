@@ -1,0 +1,106 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <h2 class="d-flex mb-2">
+      Create Notice
+    </h2>
+    {% set action = path("admin_dashboard_notices_create") %}
+    {% if isEditing %}
+      {% set action = path("admin_dashboard_notices_edit", { id: notice.id }) %}
+    {% endif %}
+    <form id="form-create-notice" action="{{ action }}" method="post">
+      <div class="d-flex mb-2">
+        <div class="form-widget w-100">
+          <label for="input-name">
+            Name
+          </label>
+          <input
+            name="name"
+            id="input-name"
+            class="form-control"
+            value="{{ notice.name }}"
+            required
+          />
+          <div class="form-help">
+            For internal records, not seen by the customer.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <div class="form-widget w-100">
+          <label for="input-content">
+            Content
+          </label>
+          <textarea
+            name="content"
+            id="input-content"
+            class="form-control"
+            style="height: 300px"
+            required
+          >{{ notice.content }}</textarea>
+          <div class="form-help">
+            Text or HTML is allowed.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex mb-2">
+        <div class="form-widget w-100">
+          <label for="input-location">
+            Location
+          </label>
+          <select name="location" id="input-location" class="form-control">
+            <option value="dashboard"{% if notice.location == "dashboard" %} selected{% endif %}>Dashboard</option>
+          </select>
+          <div class="form-help">
+            The page where the notice is displayed.
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <button type="submit" class="btn-main d-block mr-2">
+          {% if isEditing %}Update{% else %}Save{% endif %}
+        </button>
+        <button type="button" class="btn-alt d-block btn-preview">
+          Preview
+        </button>
+        {% if isEditing %}
+          <button type="button" class="btn-danger d-block btn-delete-notice ml-auto" data-id="{{ notice.id }}">
+            Delete
+          </button>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+  <script>
+    $(function() {
+      $('.btn-delete-notice').on('click', function(e) {
+        e.stopPropagation();
+
+        if (confirm('Are you sure you want to delete this notice?')) {
+          let id = e.target.getAttribute('data-id');
+          document.location = '/admin/notices/' + id + '/remove';
+        }
+      });
+
+      $('.btn-preview').on('click', function() {
+        let content = $('#input-content').val();
+        let req = $.ajax({
+          url: '/admin/notices/preview',
+          type: 'POST',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify({
+            content: content
+          })
+        });
+        req.done(function(resp) {
+          window.open(resp.redirect);
+        });
+      });
+    });
+  </script>
+{% endblock %}

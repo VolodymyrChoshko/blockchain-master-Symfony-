@@ -1,0 +1,59 @@
+@import "vars";
+
+table {
+  border-collapse: collapse;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+
+  td,
+  th {
+    padding: $gutter-2;
+  }
+}
+
+.table-striped {
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
+
+.table-hover {
+  tbody {
+    tr {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.18);
+      }
+    }
+  }
+
+  &.table-striped {
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.20);
+          }
+        }
+
+        &:nth-child(even) {
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.18);
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-bordered {
+  border-style: hidden;
+  box-shadow: 0 0 0 1px #d2d2d2;
+  border-radius: $border-radius;
+}

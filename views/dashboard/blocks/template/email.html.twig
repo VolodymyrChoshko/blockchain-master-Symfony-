@@ -1,0 +1,20 @@
+{% import "dashboard/blocks/template/macros.html.twig" as macros %}
+<div
+  class="db-template-email d-flex justify-content-between align-items-center border-top p-2"
+  data-link="{{ path('build_email_preview', { id: email.ema_id, token: email.ema_token }, 'absolute') }}"
+  data-eid="{{ email.ema_id }}"
+  data-title="{{ email.ema_title }}"
+  data-token="{{ email.ema_token }}"
+  data-indentation="{{ indentation }}"
+>
+  <div class="d-flex flex-grow-1 align-items-center mr-3">
+    {{ macros.renameableTitle(email.ema_title, email.ema_id, "build_email", { id: email.ema_id }) }}
+  </div>
+  {% include "dashboard/blocks/template/email-author.html.twig" %}
+  <div class="db-template-actions">
+    <button type="button" class="btn btn-transparent btn-icon btn-icon-copy" title="Duplicate"></button>
+    <button type="button" class="btn btn-transparent btn-icon btn-icon-share" title="Share"></button>
+    <button type="button" class="btn btn-transparent btn-icon btn-icon-export" title="Export"></button>
+    <button type="button" class="btn btn-transparent btn-icon btn-icon-remove" title="Delete"></button>
+  </div>
+</div>

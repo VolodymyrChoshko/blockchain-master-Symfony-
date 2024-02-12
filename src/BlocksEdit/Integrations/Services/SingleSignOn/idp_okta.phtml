@@ -1,0 +1,42 @@
+<h2>
+    Service Provider SAML
+</h2>
+<div>
+    <p class="text-muted">
+        Provide these values to Okta.
+        See the <a href="https://blocksedit.com/help/integrations/okta-setup/" target="_blank">setup instructions</a> for more
+        information.
+    </p>
+    <?php $copyBox(
+        'Audience URI (SP Entity ID)',
+        'okta-input-sp-entity-id',
+        $this->form['sp_entity_id']['value']
+    ); ?>
+
+    <?php $copyBox(
+        $this->form['sp_acs']['label'],
+        'okta-input-sp-acs',
+        $this->form['sp_acs']['value']);
+    ?>
+</div>
+
+<h2>
+    Okta SAML
+</h2>
+<div>
+    <p class="text-muted">
+        Get this value from Okta.
+    </p>
+    <?=formWidget(
+        'idp_metadata_url_okta',
+        array_merge($this->form['idp_metadata_url_okta'], ['id_suffix' => 'okta']),
+        ['class' => 'form-control'],
+        $this->errors
+    )?>
+    <?=formWidget(
+        'idp_metadata_file_okta',
+        array_merge($this->form['idp_metadata_file_okta'], ['id_suffix' => 'okta']),
+        ['class' => 'form-control'],
+        $this->errors
+    )?>
+</div>

@@ -1,0 +1,179 @@
+@import "../vars";
+
+/* ==========================================================================
+ Margin
+
+ m-0, mb-4, m-xl-0, etc
+
+ @see https://getbootstrap.com/docs/4.0/utilities/spacing/
+ ========================================================================= */
+
+$gutters: $gutter-1, $gutter-2, $gutter-3, $gutter-4, $gutter-5;
+
+$margin-props: (
+  "mt": "top",
+  "mr": "right",
+  "mb": "bottom",
+  "ml": "left"
+);
+
+// m-1, m-2, m-3
+.m-0 {
+  margin: 0 !important;
+}
+
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.my-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+@include create-sizes {
+  .m-#{$create-sizes-i} {
+    margin: nth($gutters, $create-sizes-i) !important;
+  }
+  .mx-#{$create-sizes-i} {
+    margin-right: nth($gutters, $create-sizes-i) !important;
+    margin-left: nth($gutters, $create-sizes-i) !important;
+  }
+  .my-#{$create-sizes-i} {
+    margin-top: nth($gutters, $create-sizes-i) !important;
+    margin-bottom: nth($gutters, $create-sizes-i) !important;
+  }
+}
+
+@each $prefix, $prop in $margin-props {
+  // mb-auto, mt-auto
+  .#{$prefix}-auto {
+    margin-#{$prop}: auto !important;
+  }
+
+  // mb-1, mt-5
+  .#{$prefix}-0 {
+    margin-#{$prop}: 0 !important;
+  }
+  @include create-sizes {
+    .#{$prefix}-#{$create-sizes-i} {
+      margin-#{$prop}: nth($gutters, $create-sizes-i) !important;
+    }
+  }
+}
+
+@include create-breakpoints {
+  // m-sm-1, m-md-2, m-lg-3
+  .m-#{$create-breakpoints-size}-0 {
+    margin: 0 !important;
+  }
+  @include create-sizes {
+    .m-#{$create-breakpoints-size}-#{$create-sizes-i} {
+      margin: nth($gutters, $create-sizes-i) !important;
+    }
+  }
+
+  // mb-sm-auto, mt-xl-auto
+  @each $prefix, $prop in $margin-props {
+    .#{$prefix}-#{$create-breakpoints-size}-auto {
+      margin-#{$prop}: auto !important;
+    }
+
+    // mb-sm-1, ml-xl-2
+    .#{$prefix}-#{$create-breakpoints-size}-0 {
+      margin-#{$prop}: 0 !important;
+    }
+    @include create-sizes {
+      .#{$prefix}-#{$create-breakpoints-size}-#{$create-sizes-i} {
+        margin-#{$prop}: nth($gutters, $create-sizes-i) !important;
+      }
+    }
+  }
+}
+
+.m-auto {
+  margin: auto !important;
+}
+
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+
+/***************************
+ * Padding
+ *
+ * p-0, pb-4, etc
+ ***************************/
+
+$padding-props: (
+  "pt": "top",
+  "pr": "right",
+  "pb": "bottom",
+  "pl": "left"
+);
+
+// p-1, p-2, p-3
+.p-0 { padding: 0 !important; }
+
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+@include create-sizes {
+  .p-#{$create-sizes-i} {
+    padding: nth($gutters, $create-sizes-i) !important;
+  }
+  .px-#{$create-sizes-i} {
+    padding-left: nth($gutters, $create-sizes-i) !important;
+    padding-right: nth($gutters, $create-sizes-i) !important;
+  }
+  .py-#{$create-sizes-i} {
+    padding-top: nth($gutters, $create-sizes-i) !important;
+    padding-bottom: nth($gutters, $create-sizes-i) !important;
+  }
+}
+
+// pt-1, pb-6, pl-3
+@each $prefix, $prop in $padding-props {
+  .#{$prefix}-0 {
+    padding-#{$prop}: 0 !important;
+  }
+  @include create-sizes {
+    .#{$prefix}-#{$create-sizes-i} {
+      padding-#{$prop}: nth($gutters, $create-sizes-i) !important;
+    }
+  }
+}
+
+@include create-breakpoints {
+  // p-sm-1, p-xl-4
+  .p-#{$create-breakpoints-size}-0 {
+    padding: 0 !important;
+  }
+  @include create-sizes {
+    .p-#{$create-breakpoints-size}-#{$create-sizes-i} {
+      padding: nth($gutters, $create-sizes-i) !important;
+    }
+  }
+
+  // pb-md-2, pt-xl-4
+  @each $prefix, $prop in $padding-props {
+    .#{$prefix}-#{$create-breakpoints-size}-0 {
+      padding-#{$prop}: 0 !important;
+    }
+    @include create-sizes {
+      .#{$prefix}-#{$create-breakpoints-size}-#{$create-sizes-i} {
+        padding-#{$prop}: nth($gutters, $create-sizes-i) !important;
+      }
+    }
+  }
+}

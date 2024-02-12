@@ -1,0 +1,51 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card">
+    <h2 class="mb-2">
+      Create Organization
+    </h2>
+    <form method="post">
+      <div class="form-widget">
+        <label for="input-name">
+          Organization Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          id="input-name"
+          class="form-control"
+          value="{{ formValues['name'] }}"
+        />
+      </div>
+
+      <div class="form-widget">
+        <label for="input-owner">
+          Owner Email
+        </label>
+        <input
+          type="text"
+          name="owner"
+          id="input-owner"
+          class="form-control"
+          value="{{ formValues['owner'] }}"
+        />
+      </div>
+      <div class="form-widget">
+        <label for="input-admin">
+          Admin Email (Optional)
+        </label>
+        <input
+          type="text"
+          name="admin"
+          id="input-admin"
+          class="form-control"
+          value="{{ formValues['admin'] }}"
+        />
+      </div>
+      <button type="submit" class="btn-main d-block">
+        Submit
+      </button>
+    </form>
+  </div>
+{% endblock %}

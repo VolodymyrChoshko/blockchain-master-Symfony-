@@ -1,0 +1,24 @@
+<div class="db-template-renameable-wrap d-flex align-items-center" style="display: {{ display|default("none") }};">
+  <div class="mr-2 flex-grow-2">
+    <label for="db-template-renameable-{{ id }}" class="sr-only">
+      Name
+    </label>
+    <input
+      id="db-template-renameable-{{ id }}"
+      class="form-control"
+      type="text"
+      name="title"
+      autocomplete="off"
+      placeholder="{{ placeholder|default("Template name") }}"
+    />
+  </div>
+  <button
+    type="{% if id == 0%}submit{% else %}button{% endif %}"
+    class="btn btn-main db-template-renameable-save mr-1"
+  >
+    Save
+  </button>
+  <button type="button" class="btn btn-alt db-template-renameable-cancel">
+    Cancel
+  </button>
+</div>

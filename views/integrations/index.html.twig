@@ -1,0 +1,96 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% set canRevokePowers = true %}
+  <div
+    class="container container-billing-plan card p-0 mt-4 mb-4"
+    data-billing-plan-type="{{ billingPlan.type }}"
+    data-billing-plan-is-trial-complete="{{ billingPlan.isTrialComplete ? 1 : 0 }}"
+  >
+    <div id="integrations" class="container card p-0">
+      <header class="border-bottom">
+        <h1>Integrations</h1>
+        <p class="m-0">
+          Direct connections to other tools.
+        </p>
+        {% if isIntegrationsDisabled %}
+          {% include "layout/blocks/alerts/billing-integrations-disabled.html.twig" %}
+        {% endif %}
+      </header>
+      <table class="integrations-table w-100 border-bottom">
+        <tbody>
+        {% for source in sources %}
+          <tr data-sid="{{ source.id }}">
+            <td class="integration-col-icon">
+              <img src="{{ source.integration.iconURL }}" alt="Icon" class="integration-icon" />
+              <span>{{ source.name }}</span>
+            </td>
+            <td class="integration-col-name">
+              {{ source.integration.displayName }}
+            </td>
+            <td class="integration-col-actions text-nowrap d-flex align-items-center">
+              {% if isIntegrationsDisabled %}
+                <button type="button" class="btn btn-alt" disabled>Edit</button>
+              {% else %}
+                <a
+                  class="btn-alt"
+                  href="{{ path('integrations_settings', {
+                    oid: organization.org_id,
+                    sid: source.id
+                  }) }}"
+                >
+                  Edit
+                </a>
+              {% endif %}
+              <a
+                class="btn-integration-remove text-muted d-inline-flex align-items-center"
+                href="{{ path('integrations_remove', {
+                  oid: organization.org_id,
+                  iid: source.id
+                }) }}?token={{ generateNonce('remove.' ~ source.id) }}"
+              >
+                <svg width="18" height="18" class="mr-1"><use xlink:href="#be-symbol-delete"></use></svg>
+                Remove
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <div class="card-body">
+        <h2 class="mb-2">
+          Add another integration
+        </h2>
+        <div class="d-flex flex-wrap">
+          {% for int in integrations %}
+            <div class="integration-card">
+              <img src="{{ int.iconURL }}" alt="Icon" class="integration-icon" />
+              <div class="integration-card-name">
+                {{ int.displayName }}<br/>
+                <a href="{{ int.instructionsURL }}" target="_blank">
+                  Setup Instructions &rarr;
+                </a>
+              </div>
+              {% if canEnableIntegration(int, sources) and not isIntegrationsDisabled %}
+                <a
+                  class="btn btn-main btn-integration-add"
+                  data-price="{{ integrationPrices[int.slug] }}"
+                  href="{{ path('integrations_add', {
+                    oid:  organization.org_id,
+                    slug: int.slug
+                  }) }}?token={{ generateNonce('add.' ~ int.slug) }}"
+                >
+                  Add
+                </a>
+              {% else %}
+                <span class="btn btn-main disabled">
+                   Added
+                </span>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div id="lightbox"></div>
+  </div>
+{% endblock %}

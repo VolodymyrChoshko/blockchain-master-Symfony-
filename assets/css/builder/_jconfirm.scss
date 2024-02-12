@@ -1,0 +1,27 @@
+@import "../vars";
+
+.jconfirm.jconfirm-black .jconfirm-box, .jconfirm.jconfirm-dark .jconfirm-box {
+  color: $color-modal;
+  background-color: $color-modal-bg;
+  border-radius: $border-radius-md;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.jconfirm-box {
+  border-top: 0 !important;
+  border-radius: $border-radius !important;
+}
+
+.jconfirm-content {
+  overflow: hidden !important;
+
+  .loading-modal {
+    font-weight: 400;
+    font-size: $font-size-lg;
+    margin-bottom: $gutter-3;
+  }
+}
+
+.jconfirm-title {
+  font-size: 1rem !important;
+}

@@ -1,0 +1,13 @@
+/* ==========================================================================
+ Borders
+ ========================================================================= */
+$border-radius: 0.15rem;
+$border-radius-sm: 0.15rem;
+$border-radius-md: 0.25rem;
+$border-radius-lg: 0.5rem;
+$radiuses: (
+  "normal": $border-radius,
+  "sm":     $border-radius-sm,
+  "md":     $border-radius-md,
+  "lg":     $border-radius-lg
+);

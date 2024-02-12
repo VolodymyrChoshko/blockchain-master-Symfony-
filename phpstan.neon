@@ -1,0 +1,9 @@
+parameters:
+    level: 4
+    paths:
+        - src
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    excludePaths:
+        - src/BlocksEdit/View/View.php
+        - src/BlocksEdit/Html/LayoutUpgrade.php

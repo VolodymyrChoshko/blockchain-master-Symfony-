@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="en">
+    <meta name="apple-mobile-web-app-title" content="Blocks Edit">
+    <link rel="dns-prefetch" href="https://assets.blocksedit.com/" />
+    {% if page_title|default %}
+      <title>{{ page_title }} - Blocks Edit</title>
+    {% else %}
+      <title>Blocks Edit</title>
+    {% endif %}
+    {% block head %}
+      {% include "layout/blocks/head.html.twig" %}
+    {% endblock %}
+  </head>
+  <body>
+    {% include "layout/blocks/icons.html.twig" %}
+    {% if oid is not defined %}
+      {% set oid = 0 %}
+    {% endif %}
+    <script>
+      window.oid = {{ oid }};
+      {% if stripePublicKey|default %}
+      window.stripePublicKey = '{{ stripePublicKey }}';
+      {% endif %}
+      window.initialState = {};
+    </script>
+    {% if initialState|default %}
+      <script>
+        window.initialState = {{ initialState|json_encode|raw }};
+      </script>
+    {% endif %}
+    {% block body %}{% endblock %}
+    {% block foot %}
+      {% include "layout/blocks/foot.html.twig" %}
+    {% endblock %}
+    {% include "layout/blocks/flash-messages.html.twig" %}
+  </body>
+</html>

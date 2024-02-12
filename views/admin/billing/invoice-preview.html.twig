@@ -1,0 +1,45 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <h2 class="mb-2">
+      Invoice Preview &middot; #{{ org.org_id }} {{ org.org_name }}
+    </h2>
+    <iframe src="{{ path("admin_billing_invoice_preview_iframe") }}?encoded={{ encoded }}" class="admin-invoice-preview-iframe mb-2"></iframe>
+
+    <form method="post">
+      <div class="d-flex">
+        <div class="form-widget mr-4 w-75">
+          <label for="input-charge-card">
+            <input
+              type="checkbox"
+              name="chargeCard"
+              id="input-charge-card"
+              class="form-control"
+              {% if not creditCard %}disabled{% endif %}
+            />
+            Charge Card
+          </label>
+          {% if not creditCard %}
+            <div class="form-help text-danger">
+              Organization does not have a credit card on file.
+            </div>
+          {% endif %}
+          <div class="form-help">
+            Check to charge the organization credit card for this invoice.
+            Leave unchecked to do nothing more than add the invoice
+            to the organization billing page.
+          </div>
+        </div>
+
+        <div class="form-widget w-50"></div>
+      </div>
+
+      <input type="hidden" name="encoded" value="{{ encoded }}">
+      <input type="hidden" name="action" value="save" />
+      <button type="submit" class="btn btn-main">
+        Save
+      </button>
+    </form>
+  </div>
+{% endblock %}

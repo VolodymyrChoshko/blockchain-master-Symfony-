@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+	  <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+	<title>Blocks Edit</title>
+	<style type="text/css">
+
+
+		.ReadMsgBody {
+			width: 100%;
+			background-color: #ffffff;
+		}
+
+		.ExternalClass {
+			width: 100%;
+			background-color: #ffffff;
+		}
+
+		.ExternalClass,
+		.ExternalClass p,
+		.ExternalClass span,
+		.ExternalClass font,
+		.ExternalClass td,
+		.ExternalClass div {
+			line-height: 100%;
+		}
+
+		.btn-main, .btn-alt {
+  display: inline-block;
+  margin: 0;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  border: 0;
+  border-bottom-width: 2px;
+  background: -webkit-linear-gradient(#42c3e8, #2895d9);
+  padding: 7px 18px;
+  color: #fff;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+		html {
+			width: 100%;
+		}
+
+		body {
+			-webkit-text-size-adjust: none;
+			-ms-text-size-adjust: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		table {
+			border-spacing: 0;
+			border-collapse: collapse;
+		}
+
+		table td {
+			border-collapse: collapse;
+		}
+
+		.yshortcuts a {
+			border-bottom: none !important;
+		}
+
+		img {
+			display: block !important;
+		}
+
+		a {
+			text-decoration: none;
+			color: #ff2f56;
+		}
+
+		blockquote {
+  background: #ffffff;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #0fadd3;
+  content: open-quote;
+  font-size: 6em;
+  line-height: 0.1em;
+  margin-right: 0.05em;
+  vertical-align: -0.4em;
+}
+
+blockquote:after {
+  color: #0fadd3;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+
+
+input[type=submit] {font-size: 16px; color: #ffffff; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; background-color: #0fadd3; background: linear-gradient(0deg, #4f9fd6, #0fadd3); border: 0px;}
+
+
+		@media only screen and (max-width: 640px) {
+			body {
+				width: auto !important;
+			}
+			table[class="table-main"] {
+				width: 450px !important;
+			}
+			table[class="table-container"] {
+				width: 90% !important;
+			}
+			table[class="container2-2"] {
+				width: 47% !important;
+				text-align: left !important;
+			}
+			table[class="full-width"] {
+				width: 100% !important;
+				text-align: center !important;
+			}
+			img[class="img-full"] {
+				width: 100% !important;
+				height: auto !important;
+			}
+			.mobile-padding-top {padding-top: 20px !important}
+
+			.mobile-padding-bottom {padding-bottom: 20px !important;}
+
+			.mobile-padding-sides {padding-right: 20px !important; padding-left: 20px !important;}
+			.hide {
+				display: none !important;
+			}
+
+			td[class="adjustheight"] {
+				height: auto!important;
+			}
+				td[class="mobilecenter"] {text-align: center !important;}
+
+			td[class="full-width"] {
+				width: 100% !important;
+				text-align: center !important;
+			}
+
+			.addpaddingleft {padding-left: 20px!important;}
+		}
+
+		@media only screen and (max-width: 479px) {
+			body {
+				width: auto !important;
+			}
+			table[class="table-main"] {
+				width: 290px !important;
+			}
+			table[class="table-container"] {
+				width: 82% !important;
+			}
+			table[class="container2-2"] {
+				width: 100% !important;
+				text-align: left !important;
+			}
+			table[class="full-width"] {
+				width: 100% !important;
+				text-align: center !important;
+			}
+
+			td[class="full-width"] {
+				width: 100% !important;
+				text-align: center !important;
+			}
+
+
+			img[class="img-full"] {
+				width: 100% !important;
+
+
+			}
+
+				.mobile-padding-top {padding-top: 20px !important}
+
+			.mobile-padding-bottom {padding-bottom: 20px !important;}
+
+			.mobile-padding-sides {padding-right: 20px !important; padding-left: 20px !important;}
+
+		.hide {
+				display: none !important;
+			}
+			.addpaddingbottom {padding-bottom: 10px !important;}
+
+			.show {width: 10px; display: block!important}
+
+			td[class="adjustheight"] {
+				height: auto!important;
+			}
+			td[class="mobilecenter"] {text-align: center !important;}
+
+			.addpaddingleft {padding-left: 20px!important;}
+		}
+	</style>
+
+</head>
+
+<body class="template-" marginwidth="0" marginheight="0" style="margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; width: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;"
+ offset="0" topmargin="0" leftmargin="0">
+
+		<!-- SEPERATOR FEATURES 3 SECTION -->
+	<table class="" align="center" cellspacing="0" cellpadding="0" border="0" width="100%">
+		<tbody><tr>
+			<!-- Background -->
+			<td style="background-color: #3672A7; background-image: linear-gradient(180deg, #3672A7, #5CC9CF); background-size: cover; background-position: center;" align="center">
+				<table class="table-main" cellspacing="0" cellpadding="0" border="0" width="600">
+
+<tbody><tr>
+												<td style="font-size: 1px; line-height: 60px;" height="60">&nbsp;</td>
+											</tr>
+					<tr>
+						<td>
+
+							<table class="full-width" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" align="left" cellspacing="0" cellpadding="0" border="0" width="183">
+								<tbody><tr>
+									<td>
+										<table class="table-container" align="center" cellspacing="0" cellpadding="0" border="0" width="170">
+
+
+
+											<tbody><tr>
+												<td align="center">
+													<a href="https://blocksedit.com/"><img src="https://blocksedit.com/img/email/Blocks-Edit-Logo-white.png" alt="logo" width="170"></a>
+												</td>
+											</tr>
+
+											<tr>
+												<td style="font-size: 1px; line-height: 20px;" height="20">&nbsp;</td>
+											</tr>
+
+
+										</tbody></table>
+									</td>
+								</tr>
+							</tbody></table>
+
+							<!-- SPACE -->
+							<table class="hide" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" align="left" cellspacing="0" cellpadding="0" border="0" width="10">
+								<tbody><tr>
+									<td class="hide" style="font-size: 40px; line-height: 40px;" width="1" height="40"></td>
+								</tr>
+							</tbody></table>
+							<!-- END SPACE -->
+
+							<table class="full-width" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" align="left" cellspacing="0" cellpadding="0" border="0" width="173">
+								<tbody><tr>
+									<td>
+										<table class="table-container" align="center" cellspacing="0" cellpadding="0" border="0" width="160">
+
+
+
+											<tbody><tr>
+												<td class="adjustheight addpaddingbottom" style="height: 40px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; color: #d6f1ff; line-height: 16px; vertical-align: middle">Billing and payment</td>
+											</tr>
+
+										</tbody></table>
+									</td>
+								</tr>
+							</tbody></table>
+
+							<!-- SPACE -->
+
+							<!-- END SPACE -->
+
+
+
+						</td>
+					</tr>
+
+
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table><div class=""></div><table class="" align="center" cellspacing="0" cellpadding="0" border="0" width="100%">
+		<tbody><tr>
+			<!-- Background -->
+			<td style="background-color: #efefef; background-size: cover; background-position: center;" align="center" bgcolor="#efefef">
+				<table class="table-main" cellspacing="0" cellpadding="0" border="0" width="600">
+
+
+					<tbody><tr>
+						<td style="font-size: 1px; line-height: 40px;" height="40">&nbsp;</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table><div class=""></div><table class="" align="center" cellspacing="0" cellpadding="0" border="0" width="100%">
+		<tbody><tr>
+			<!-- Background -->
+			<td style="background-color: #efefef; background-size: cover; background-position: center;" align="center" bgcolor="#efefef">
+				<table class="table-main" cellspacing="0" cellpadding="0" border="0" width="600">
+
+					<tbody><tr>
+						<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 500; color: #444444; line-height: 32px; letter-spacing: 0px; padding-top: 0px; text-align: center; font-weight: 300;" align="left"> <div class=""> Your payment is due!</div> </td>
+					</tr>
+
+					<tr>
+						<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 300; color: #444444; line-height: 24px; letter-spacing: 0px; padding-top: 20px; text-align: center; font-weight: 300;" align="left"> <div class="">Your next bill is <strong>$398.00</strong> for 8 team members and 1 integration.<br/><br/>There is currently no payment info setup in your account settings. Please add your credit card details in order to continue using Blocks Edit.</div> </td>
+					</tr>
+
+					<tr>
+						<td style="font-size: 1px; line-height: 30px;" height="30">&nbsp;</td>
+					</tr>
+
+					<!-- Button -->
+					<tr>
+						<td align="left">
+							<table style="border-radius: 5px; background-image: linear-gradient(180deg, #42C3E8, #2895D9); background-size: cover; background-position: center;" align="center" cellspacing="0" cellpadding="0" border="0" bgcolor="#5CC9CF">
+								<tbody><tr>
+									<td class="" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 300; color: #ffffff; line-height: 18px; letter-spacing: 0px; padding-top: 2px; padding-left: 25px; padding-right: 25px;" align="center" height="40"><a href="https://app.blocksedit.com/billing" class="" alias="" style="color:#fff;text-decoration:none;">Add payment info</a></td>
+								</tr>
+							</tbody></table>
+						</td>
+					</tr>
+					<!-- End Button -->
+
+
+
+
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table><div class=""></div><table class="" align="center" cellspacing="0" cellpadding="0" border="0" width="100%">
+		<tbody><tr>
+			<!-- Background -->
+			<td style="background-color: #efefef; background-size: cover; background-position: center;" align="center" bgcolor="#efefef">
+				<table class="table-main" cellspacing="0" cellpadding="0" border="0" width="600">
+
+
+					<tbody><tr>
+						<td style="font-size: 1px; line-height: 40px;" height="40">&nbsp;</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table><div class=""></div><table class="" align="center" cellspacing="0" cellpadding="0" border="0" width="100%">
+		<tbody><tr>
+			<!-- Background -->
+			<td align="center" bgcolor="#333333">
+				<table class="table-main" cellspacing="0" cellpadding="0" border="0" width="600">
+
+					<tbody><tr>
+						<td style="font-size: 1px; line-height: 50px;" height="50">&nbsp;</td>
+					</tr>
+
+					<tr>
+						<td>
+
+							<table class="full-width" style="border-radius: 5px; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" align="left" cellspacing="0" cellpadding="0" border="0" bgcolor="#333333" width="600">
+								<tbody><tr>
+									<td>
+										<table class="table-container" align="center" cellspacing="0" cellpadding="0" border="0" width="545">
+
+											<tbody><tr>
+												<td style="font-size: 1px; line-height: 25px;" height="25">&nbsp;</td>
+											</tr>
+
+											<!-- LOGO -->
+											<tr>
+												<td align="center">
+													<a href="https://blocksedit.com/"><img src="https://blocksedit.com/img/email/Blocks-Edit-Logo.png" alt="logo" width="142"></a>
+												</td>
+											</tr>
+
+
+
+
+											<tr>
+												<td style="font-size: 1px; line-height: 10px;" height="10">&nbsp;</td>
+											</tr>
+
+											<tr>
+												<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 300; color: #FFFFFF; line-height: 20px; padding-top: 18px;" align="center">
+													© 2019 Blocks Edit, LLC<br>
+13415 N 20th St #9, Phoenix, AZ 85022
+
+												</td>
+											</tr>
+
+
+
+											<tr>
+												<td style="font-size: 1px; line-height: 25	px;" height="25">&nbsp;</td>
+											</tr>
+
+										</tbody></table>
+									</td>
+								</tr>
+
+							</tbody></table>
+
+						</td>
+					</tr>
+
+					<tr>
+						<td style="font-size: 1px; line-height: 50px;" height="50">&nbsp;</td>
+					</tr>
+
+				</tbody></table>
+			</td>
+		</tr>
+	</tbody></table><div class=""></div>
+	<!-- END SEPERATOR FEATURES 3 SECTION -->
+
+
+			<!-- SEPERATOR FEATURES 3 SECTION -->
+
+	<!-- END SEPERATOR FEATURES 3 SECTION -->
+
+
+			<!-- SEPERATOR FEATURES 3 SECTION -->
+
+	<!-- END SEPERATOR FEATURES 3 SECTION -->
+
+			<!-- SEPARATOR -->
+
+	<!-- END SEPARATOR -->
+
+		<!-- MAIN A SECTION -->
+
+	<!-- END MAIN A SECTION -->
+
+	<!-- MAIN A SECTION -->
+
+	<!-- END MAIN A SECTION -->
+
+<!-- MAIN A SECTION -->
+
+	<!-- END MAIN A SECTION -->
+
+	<!-- SEPERATOR FEATURES 2 SECTION -->
+
+	<!-- END SEPERATOR FEATURES 2 SECTION -->
+
+		<!-- SEPERATOR FEATURES 2 SECTION -->
+
+	<!-- END SEPERATOR FEATURES 2 SECTION -->
+
+	<!-- SEPERATOR FEATURES 2 SECTION -->
+
+	<!-- END SEPERATOR FEATURES 2 SECTION -->
+
+	<!-- FOOTER SECTION -->
+
+	<!-- END FOOTER SECTION -->
+
+</body>
+
+</html>

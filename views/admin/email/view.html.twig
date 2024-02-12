@@ -1,0 +1,40 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-2">
+    <table class="table table-bordered table-striped mb-3">
+      <tbody>
+        <tr>
+          <td style="width: 100px;">ID</td>
+          <td>{{ email.id }}</td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td>{{ email.dateCreated|date('F j, Y g:i a') }}</td>
+        </tr>
+        <tr>
+          <td>To</td>
+          <td>
+            {{ tos[email.id] }}
+          </td>
+        </tr>
+        <tr>
+          <td>From</td>
+          <td>
+            {{ froms[email.id] }}
+          </td>
+        </tr>
+        <tr>
+          <td>Subject</td>
+          <td>{{ email.subject }}</td>
+        </tr>
+        <tr>
+          <td>Response</td>
+          <td>{{ email.hostResponse }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <iframe src="{{ path("admin_email_iframe", { id: email.id }) }}" class="admin-email-iframe"></iframe>
+  </div>
+{% endblock %}

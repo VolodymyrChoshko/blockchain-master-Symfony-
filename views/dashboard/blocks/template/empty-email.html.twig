@@ -1,0 +1,22 @@
+<form
+  method="post"
+  action="{{ path('index') }}"
+  class="db-template-email-empty-form"
+  style="display: none;"
+  enctype="multipart/form-data"
+>
+  <div
+    class="db-template-email db-template-email-empty d-flex justify-content-between align-items-center border-top p-2">
+    <div class="d-flex flex-grow-1 align-items-center mr-3">
+      {% set id = 0 %}
+      {% include "dashboard/blocks/template/title-input.html.twig" with {
+        "placeholder": "Email name",
+        "display":     "flex"
+      } %}
+      <input type="hidden" name="action" value="add_email" />
+      <input type="hidden" name="template" value="0" />
+      {# I don't know what this next hidden input does #}
+      <input type="hidden" class="layout" name="layout" value="0">
+    </div>
+  </div>
+</form>

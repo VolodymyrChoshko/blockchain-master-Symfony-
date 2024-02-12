@@ -1,0 +1,44 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  {% include "admin/blocks/menu.html.twig" %}
+  <div class="container container-wide card mb-4">
+    <h2 class="mb-2">Email Templates</h2>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Location</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for template in templates %}
+        <tr class="tr-template" data-template-id="{{ template.id }}" style="cursor: pointer;">
+          <td>{{ template.name }}</td>
+          <td>{{ template.subject }}</td>
+          <td>
+            {% if template.location == "builder" %}
+              <a href="{{ path("build_email", { id: template.emaId }) }}" target="_blank">
+                Builder #{{ template.emaId }}
+              </a>
+            {% else %}
+              {{ template.location|ucwords }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    $(function() {
+      $('.tr-template').on('click', function(e) {
+        if (e.target.tagName !== 'A') {
+          let id                 = e.currentTarget.getAttribute('data-template-id');
+          document.location.href = '/admin/email/templates/' + id;
+        }
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,48 @@
+@import "vars";
+
+#header-mount {
+  min-height: 65px;
+}
+
+.header-nav-logo {
+  font-size: 0;
+
+  img {
+    width: 40px;
+  }
+}
+
+.header-nav-organizations-list {
+  li {
+    display: inline-block;
+
+    a {
+      white-space: nowrap;
+      color: $color-light;
+      background-color: #333;
+      padding: $gutter-1 $gutter-2;
+      border-radius: $border-radius;
+
+      &.current {
+        color: $color-dark;
+        background-color: #ddd;
+      }
+    }
+  }
+}
+
+.header-nav-link-help {
+  display: block;
+
+  .btn-icon {
+    display: block;
+    @include icon-color($color-muted);
+    height: 22px;
+
+    &:before {
+      font-size: 22px;
+      line-height: 22px;
+    }
+  }
+}
+

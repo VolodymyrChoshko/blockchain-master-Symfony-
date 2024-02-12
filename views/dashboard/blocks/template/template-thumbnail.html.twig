@@ -1,0 +1,26 @@
+{% set screenshotFile = config.dirs.screenshots ~ '/templates/' ~ template.tmp_id ~ '/screenshot-200.jpg' %}
+{% set screenshotUri  = config.uris.screenshots ~ '/templates/' ~ template.tmp_id ~ '/screenshot-200.jpg' %}
+{% set autoScreenshot = (access == 1 and not user.usr_updated) ? 'auto-screenshot' : '' %}
+{% set dateUpdated = '0' %}
+{% if template.tmp_updated_at is defined %}
+  {% set dateUpdated = template.tmp_updated_at ? template.tmp_updated_at|date('YmdHis') : '0' %}
+{% endif %}
+<div class="db-template-head-thumb">
+  {% if template.tmp_id == 0 %}
+    {# Filled in when a new template is uploaded. #}
+    <img src="" alt="screenshot" />
+  {% elseif screenshotFile|file_exists %}
+    {% if templateIndex|default(1) < 5 %}
+      <img src="{{ screenshotUri }}?v={{ dateUpdated }}" alt="screenshot" />
+    {% else %}
+      <img data-src="{{ screenshotUri }}?v={{ dateUpdated }}" src="{{ asset('images/grey-600x600.jpg') }}" class="lazyload" alt="screenshot" />
+    {% endif %}
+  {% else %}
+    {# Fallback to a much ealier time. #}
+    <iframe
+      scrolling="no"
+      class="{{ autoScreenshot }} lazyload"
+      data-src="{{ screenshotUri }}"
+    ></iframe>
+  {% endif %}
+</div>

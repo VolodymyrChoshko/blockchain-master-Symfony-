@@ -1,0 +1,31 @@
+{% extends "layout/root.html.twig" %}
+{% block body %}
+  <header class="header-nav d-flex align-items justify-content-between p-2">
+    <a class="header-nav-logo d-flex align-items-center mr-3" href="/">
+      <img src="/assets/Blocks-Edit-Symbol.svg?v=9169" alt="Blocks Edit">
+    </a>
+  </header>
+  <div class="container mt-4 mb-4 rounded-lg" style="background-color: white;">
+    <div class="card-header p-0 text-center">
+      <img src="{{ integration.iconURL }}" class="integration-card-icon" alt="Icon" />
+      <div>{{ integration.displayName }}</div>
+    </div>
+    <div class="card-body p-0">
+      <form
+        method="post"
+        id="form-integrations"
+        class="form-integrations form-integration-{{ integration.slug }}"
+        enctype="multipart/form-data"
+        data-slug="{{ integration.slug }}"
+        data-name="{{ integration.displayName }}"
+        data-oid="{{ oid }}"
+        data-sid="{{ sid }}"
+      >
+        {% include "integrations/form-body.html.twig" %}
+      </form>
+    </div>
+  </div>
+  <script>
+    {{ integration.settingsScript|raw }}
+  </script>
+{% endblock %}
